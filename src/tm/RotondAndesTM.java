@@ -54,14 +54,14 @@ public class RotondAndesTM {
 	private String connectionDataPath;
 
 	/**
-	 * Atributo que guarda el usuario que se va a usar para conectarse a la base
-	 * de datos.
+	 * Atributo que guarda el usuario que se va a usar para conectarse a la base de
+	 * datos.
 	 */
 	private String user;
 
 	/**
-	 * Atributo que guarda la clave que se va a usar para conectarse a la base
-	 * de datos.
+	 * Atributo que guarda la clave que se va a usar para conectarse a la base de
+	 * datos.
 	 */
 	private String password;
 
@@ -72,8 +72,8 @@ public class RotondAndesTM {
 	private String url;
 
 	/**
-	 * Atributo que guarda el driver que se va a usar para conectarse a la base
-	 * de datos.
+	 * Atributo que guarda el driver que se va a usar para conectarse a la base de
+	 * datos.
 	 */
 	private String driver;
 
@@ -86,8 +86,8 @@ public class RotondAndesTM {
 	 * Metodo constructor de la clase UsuarioAndesMaster, esta clase modela y
 	 * contiene cada una de las transacciones y la logica de negocios que estas
 	 * conllevan. <b>post: </b> Se crea el objeto UsuarioAndesTM, se inicializa el
-	 * path absoluto del archivo de conexion y se inicializa los atributos que
-	 * se usan par la conexion a la base de datos.
+	 * path absoluto del archivo de conexion y se inicializa los atributos que se
+	 * usan par la conexion a la base de datos.
 	 * 
 	 * @param contextPathP
 	 *            - path absoluto en el servidor del contexto del deploy actual
@@ -98,9 +98,9 @@ public class RotondAndesTM {
 	}
 
 	/**
-	 * Metodo que inicializa los atributos que se usan para la conexion a la
-	 * base de datos. <b>post: </b> Se han inicializado los atributos que se
-	 * usan par la conexion a la base de datos.
+	 * Metodo que inicializa los atributos que se usan para la conexion a la base de
+	 * datos. <b>post: </b> Se han inicializado los atributos que se usan par la
+	 * conexion a la base de datos.
 	 */
 	private void initConnectionData() {
 		try {
@@ -124,8 +124,8 @@ public class RotondAndesTM {
 	 * 
 	 * @return Connection - la conexion a la base de datos
 	 * @throws SQLException
-	 *             - Cualquier error que se genere durante la conexion a la base
-	 *             de datos
+	 *             - Cualquier error que se genere durante la conexion a la base de
+	 *             datos
 	 */
 	private Connection darConexion() throws SQLException {
 		System.out.println("Connecting to: " + url + " With user: " + user);
@@ -137,8 +137,8 @@ public class RotondAndesTM {
 	////////////////////////////////////////
 
 	/**
-	 * Metodo que modela la transaccion que retorna todos los usuarios de la base
-	 * de datos.
+	 * Metodo que modela la transaccion que retorna todos los usuarios de la base de
+	 * datos.
 	 * 
 	 * @return ListaUsuarios - objeto que modela un arreglo de usuarios. este
 	 *         arreglo contiene el resultado de la busqueda
@@ -219,8 +219,8 @@ public class RotondAndesTM {
 	}
 
 	/**
-	 * Metodo que modela la transaccion que busca el usuario en la base de datos
-	 * con el id que entra como parametro.
+	 * Metodo que modela la transaccion que busca el usuario en la base de datos con
+	 * el id que entra como parametro.
 	 * 
 	 * @param name
 	 *            - Id del usuario a buscar. name != null
@@ -300,12 +300,12 @@ public class RotondAndesTM {
 
 	/**
 	 * Metodo que modela la transaccion que agrega los usuarios que entran como
-	 * parametro a la base de datos. <b> post: </b> se han agregado los usuarios
-	 * que entran como parametro
+	 * parametro a la base de datos. <b> post: </b> se han agregado los usuarios que
+	 * entran como parametro
 	 * 
 	 * @param usuarios
-	 *            - objeto que modela una lista de usuarios y se estos se
-	 *            pretenden agregar. usuarios != null
+	 *            - objeto que modela una lista de usuarios y se estos se pretenden
+	 *            agregar. usuarios != null
 	 * @throws Exception
 	 *             - cualquier error que se genera agregando los usuarios
 	 */
@@ -347,8 +347,8 @@ public class RotondAndesTM {
 
 	/**
 	 * Metodo que modela la transaccion que actualiza el usuario que entra como
-	 * parametro a la base de datos. <b> post: </b> se ha actualizado el usuario
-	 * que entra como parametro
+	 * parametro a la base de datos. <b> post: </b> se ha actualizado el usuario que
+	 * entra como parametro
 	 * 
 	 * @param usuario
 	 *            - Usuario a actualizar. usuario != null
@@ -422,10 +422,10 @@ public class RotondAndesTM {
 			}
 		}
 	}
-	
+
 	/**
-	 * Metodo que modela la transaccion que retorna todos los usuarios de la base
-	 * de datos.
+	 * Metodo que modela la transaccion que retorna todos los usuarios de la base de
+	 * datos.
 	 * 
 	 * @return ListaUsuarios - objeto que modela un arreglo de usuarios. este
 	 *         arreglo contiene el resultado de la busqueda
@@ -506,8 +506,8 @@ public class RotondAndesTM {
 	}
 
 	/**
-	 * Metodo que modela la transaccion que busca el usuario en la base de datos
-	 * con el id que entra como parametro.
+	 * Metodo que modela la transaccion que busca el usuario en la base de datos con
+	 * el id que entra como parametro.
 	 * 
 	 * @param name
 	 *            - Id del usuario a buscar. name != null
@@ -587,12 +587,12 @@ public class RotondAndesTM {
 
 	/**
 	 * Metodo que modela la transaccion que agrega los usuarios que entran como
-	 * parametro a la base de datos. <b> post: </b> se han agregado los usuarios
-	 * que entran como parametro
+	 * parametro a la base de datos. <b> post: </b> se han agregado los usuarios que
+	 * entran como parametro
 	 * 
 	 * @param usuarios
-	 *            - objeto que modela una lista de usuarios y se estos se
-	 *            pretenden agregar. usuarios != null
+	 *            - objeto que modela una lista de usuarios y se estos se pretenden
+	 *            agregar. usuarios != null
 	 * @throws Exception
 	 *             - cualquier error que se genera agregando los usuarios
 	 */
@@ -634,8 +634,8 @@ public class RotondAndesTM {
 
 	/**
 	 * Metodo que modela la transaccion que actualiza el usuario que entra como
-	 * parametro a la base de datos. <b> post: </b> se ha actualizado el usuario
-	 * que entra como parametro
+	 * parametro a la base de datos. <b> post: </b> se ha actualizado el usuario que
+	 * entra como parametro
 	 * 
 	 * @param usuario
 	 *            - Usuario a actualizar. usuario != null
@@ -711,15 +711,15 @@ public class RotondAndesTM {
 	}
 
 	/**
-	 * Metodo que modela la transaccion que retorna todos los usuarios de la base
-	 * de datos.
+	 * Metodo que modela la transaccion que retorna todos los usuarios de la base de
+	 * datos.
 	 * 
 	 * @return ListaUsuarios - objeto que modela un arreglo de usuarios. este
 	 *         arreglo contiene el resultado de la busqueda
 	 * @throws Exception
 	 *             - cualquier error que se genere durante la transaccion
 	 */
-	public List<Producto> darProductosPorRestaurante(Restaurante restaurante) throws Exception {
+	public List<Producto> buscarProductosPorRestaurante(Restaurante restaurante) throws Exception {
 		List<Producto> productos;
 		DAOTablaProductos daoProductos = new DAOTablaProductos();
 		try {
@@ -751,8 +751,8 @@ public class RotondAndesTM {
 	}
 
 	/**
-	 * Metodo que modela la transaccion que retorna todos los usuarios de la base
-	 * de datos.
+	 * Metodo que modela la transaccion que retorna todos los usuarios de la base de
+	 * datos.
 	 * 
 	 * @return ListaUsuarios - objeto que modela un arreglo de usuarios. este
 	 *         arreglo contiene el resultado de la busqueda
@@ -791,8 +791,8 @@ public class RotondAndesTM {
 	}
 
 	/**
-	 * Metodo que modela la transaccion que retorna todos los usuarios de la base
-	 * de datos.
+	 * Metodo que modela la transaccion que retorna todos los usuarios de la base de
+	 * datos.
 	 * 
 	 * @return ListaUsuarios - objeto que modela un arreglo de usuarios. este
 	 *         arreglo contiene el resultado de la busqueda
@@ -829,18 +829,20 @@ public class RotondAndesTM {
 		}
 		return ingredientes;
 	}
-	
+
 	/**
-	 * Metodo que modela la transaccion que agrega un solo video a la base de datos.
-	 * <b> post: </b> se ha agregado el video que entra como parametro
-	 * @param video - el video a agregar. video != null
-	 * @throws Exception - cualquier error que se genere agregando el video
+	 * Metodo que modela la transaccion que retorna todos los usuarios de la base de
+	 * datos.
+	 * 
+	 * @return ListaUsuarios - objeto que modela un arreglo de usuarios. este
+	 *         arreglo contiene el resultado de la busqueda
+	 * @throws Exception
+	 *             - cualquier error que se genere durante la transaccion
 	 */
 	public void addZona(Zona zona) throws Exception {
 		DAOTablaZonas daoZonas = new DAOTablaZonas();
-		try 
-		{
-			//////transaccion
+		try {
+			////// transaccion
 			this.conn = darConexion();
 			daoZonas.setConn(conn);
 			daoZonas.addZona(zona);
@@ -857,7 +859,7 @@ public class RotondAndesTM {
 		} finally {
 			try {
 				daoZonas.cerrarRecursos();
-				if(this.conn!=null)
+				if (this.conn != null)
 					this.conn.close();
 			} catch (SQLException exception) {
 				System.err.println("SQLException closing resources:" + exception.getMessage());
@@ -866,5 +868,46 @@ public class RotondAndesTM {
 			}
 		}
 	}
+
+
+	/**
+	 * Metodo que modela la transaccion que retorna todos los usuarios de la base de
+	 * datos.
+	 * 
+	 * @return ListaUsuarios - objeto que modela un arreglo de usuarios. este
+	 *         arreglo contiene el resultado de la busqueda
+	 * @throws Exception
+	 *             - cualquier error que se genere durante la transaccion
+	 */
+	public List<Producto> darProductosPorRestaurante(Restaurante restaurante) throws Exception {
+		DAOTablaZonas daoZonas = new DAOTablaZonas();
+		try {
+			////// transaccion
+			this.conn = darConexion();
+			daoZonas.setConn(conn);
+			conn.commit();
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoZonas.cerrarRecursos();
+				if (this.conn != null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		return null;
+	}
+	
 	
 }

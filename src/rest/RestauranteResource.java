@@ -207,6 +207,23 @@ public class RestauranteResource {
 		return Response.status(200).entity(productos).build();
 	}
 	
+	@POST
+	@Path("{id: \\d+}/productos")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public Response addProductos(@PathParam("id")Long id) {
+		
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		List<Producto> productos;
+		Restaurante restaurante;
+		try {
+			restaurante = tm.buscarRestaurantePorId(id);
+			productos = tm.darProductosPorRestaurante(restaurante);
+		} catch (Exception e) {
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+		return Response.status(200).entity(productos).build();
+	}
+	
 	@GET
 	@Path("{id: \\d+}/productos/{idProducto: \\d+}/ingredientes")
 	@Produces({ MediaType.APPLICATION_JSON })
@@ -219,9 +236,12 @@ public class RestauranteResource {
 		try {
 			restaurante = tm.buscarRestaurantePorId(id);
 			productos = tm.darProductosPorRestaurante(restaurante);
-			for(Producto prod : productos) {
-				if(prod.getId()==idProducto) ingredientes = tm.buscarIngredientesPorProductos(prod);
-				break;
+			
+			for(int i =0;i<productos.size();i++) {
+				Long idActual = productos.get(i).getId();
+				if(idActual.equals(idProducto)) {
+					ingredientes = tm.buscarIngredientesPorProductos(productos.get(i));
+				}
 			}
 			
 		} catch (Exception e) {
