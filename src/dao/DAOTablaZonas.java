@@ -76,8 +76,8 @@ public class DAOTablaZonas {
 	 * @throws SQLException - Cualquier error que la base de datos arroje.
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
 	 */
-	public ArrayList<Ingrediente> darIngredientes() throws SQLException, Exception {
-		ArrayList<Ingrediente> ingredientes = new ArrayList<Ingrediente>();
+	public ArrayList<Zona> darZonas() throws SQLException, Exception {
+		ArrayList<Zona> zonas = new ArrayList<Zona>();
 
 		String sql = "SELECT * FROM ZONA";
 
@@ -86,70 +86,37 @@ public class DAOTablaZonas {
 		ResultSet rs = prepStmt.executeQuery();
 
 		while (rs.next()) {
-			Long id = rs.getLong("ID");
 			String nombre = rs.getString("NOMBRE");
-			String descripcion = rs.getString("DESCRIPCION");
-			String traduccion = rs.getString("TRADUCCION");
 			
-			ingredientes.add(new Ingrediente(id, nombre, descripcion, traduccion));
+			zonas.add(new Zona(nombre));
 		}
-		return ingredientes;
+		return zonas;
 	}
 
-
-	/**
-	 * Metodo que busca el/los videos con el nombre que entra como parametro.
-	 * @param name - Nombre de el/los videos a buscar
-	 * @return ArrayList con los videos encontrados
-	 * @throws SQLException - Cualquier error que la base de datos arroje.
-	 * @throws Exception - Cualquier error que no corresponda a la base de datos
-	 */
-	public ArrayList<Ingrediente> buscarIngredientesPorName(String pName) throws SQLException, Exception {
-		ArrayList<Ingrediente> ingredientes = new ArrayList<Ingrediente>();
-
-		String sql = "SELECT * FROM INGREDIENTE WHERE NOMBRE ='" + pName + "'";
-
-		PreparedStatement prepStmt = conn.prepareStatement(sql);
-		recursos.add(prepStmt);
-		ResultSet rs = prepStmt.executeQuery();
-
-		while (rs.next()) {
-			Long id = rs.getLong("ID");
-			String nombre = rs.getString("NOMBRE");
-			String descripcion = rs.getString("DESCRIPCION");
-			String traduccion = rs.getString("TRADUCCION");
-			
-			ingredientes.add(new Ingrediente(id, nombre, descripcion, traduccion));
-		}
-		return ingredientes;
-	}
 	
 	/**
-	 * Metodo que busca el video con el id que entra como parametro.
+	 * Metodo que busca la zona con el nombre que entra por parámetro
 	 * @param name - Id de el video a buscar
 	 * @return Video encontrado
 	 * @throws SQLException - Cualquier error que la base de datos arroje.
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
 	 */
-	public Ingrediente buscarIngredientePorId(Long pId) throws SQLException, Exception 
+	public Zona buscarZonaPorNombre(String nombre) throws SQLException, Exception 
 	{
-		Ingrediente ingrediente = null;
+		Zona zona = null;
 
-		String sql = "SELECT * FROM INGREDIENTE WHERE ID =" + pId;
+		String sql = "SELECT * FROM ZONA WHERE NOMBRE =" + nombre;
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
 		ResultSet rs = prepStmt.executeQuery();
 
 		if (rs.next()) {
-			Long id = rs.getLong("ID");
-			String nombre = rs.getString("NOMBRE");
-			String descripcion = rs.getString("DESCRIPCION");
-			String traduccion = rs.getString("TRADUCCION");
-			
-			ingrediente = new Ingrediente(id, nombre, descripcion, traduccion);
+
+			String name = rs.getString("NOMBRE");
+			zona = new Zona(name);
 		}
-		return ingrediente;
+		return zona;
 	}
 
 	/**
@@ -160,13 +127,13 @@ public class DAOTablaZonas {
 	 * @throws SQLException - Cualquier error que la base de datos arroje. No pudo agregar el video a la base de datos
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
 	 */
-	public void addIngrediente(Ingrediente ingrediente) throws SQLException, Exception {
+	public void addZona(Zona zona) throws SQLException, Exception {
 
 		String sql = "INSERT INTO INGREDIENTE VALUES (";
-		sql += ingrediente.getId() + ",'";
-		sql += ingrediente.getNombre() + "','";		
-		sql += ingrediente.getDescripcion() + "','";
-		sql += ingrediente.getTraduccion() + "')";
+		sql += zona.getId() + ",'";
+		sql += zona.getNombre() + "','";		
+		sql += zona.getDescripcion() + "','";
+		sql += zona.getTraduccion() + "')";
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
