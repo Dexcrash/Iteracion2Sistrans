@@ -15,8 +15,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
-import java.time.LocalTime;
 import java.util.ArrayList;
 
 import vos.*;
@@ -91,7 +89,7 @@ public class DAOTablaProductos {
 			String nombre = rs.getString("NOMBRE");
 			String descripcion = rs.getString("DESCRIPCION");
 			String traduccion = rs.getString("TRADUCCION");
-			Time tiempoPreparacion = rs.getTime("TIEMPOPREPARACION");
+			Long tiempoPreparacion = rs.getLong("TIEMPOPREPARACION");
 			Double costo = rs.getDouble("COSTO");
 			Double precio = rs.getDouble("PRECIO");
 			Integer disponibles = rs.getInt("DISPONIBLES");
@@ -125,7 +123,7 @@ public class DAOTablaProductos {
 			String nombre = rs.getString("NOMBRE");
 			String descripcion = rs.getString("DESCRIPCION");
 			String traduccion = rs.getString("TRADUCCION");
-			Time tiempoPreparacion = rs.getTime("TIEMPOPREPARACION");
+			Long tiempoPreparacion = rs.getLong("TIEMPOPREPARACION");
 			Double costo = rs.getDouble("COSTO");
 			Double precio = rs.getDouble("PRECIO");
 			Integer disponibles = rs.getInt("DISPONIBLES");
@@ -159,7 +157,7 @@ public class DAOTablaProductos {
 			String nombre = rs.getString("NOMBRE");
 			String descripcion = rs.getString("DESCRIPCION");
 			String traduccion = rs.getString("TRADUCCION");
-			Time tiempoPreparacion = rs.getTime("TIEMPOPREPARACION");
+			Long tiempoPreparacion = rs.getLong("TIEMPOPREPARACION");
 			Double costo = rs.getDouble("COSTO");
 			Double precio = rs.getDouble("PRECIO");
 			Integer disponibles = rs.getInt("DISPONIBLES");
@@ -267,7 +265,7 @@ public class DAOTablaProductos {
 			String nombre = rs.getString("NOMBRE");
 			String descripcion = rs.getString("DESCRIPCION");
 			String traduccion = rs.getString("TRADUCCION");
-			Time tiempoPreparacion = rs.getTime("TIEMPOPREPARACION");
+			Long tiempoPreparacion = rs.getLong("TIEMPOPREPARACION");
 			Double costo = rs.getDouble("COSTO");
 			Double precio = rs.getDouble("PRECIO");
 			Integer disponibles = rs.getInt("DISPONIBLES");

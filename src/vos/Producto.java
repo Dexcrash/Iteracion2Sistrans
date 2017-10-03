@@ -1,5 +1,6 @@
 package vos;
 
+
 import java.sql.Time;
 import java.time.LocalTime;
 
@@ -37,7 +38,7 @@ public class Producto {
 	 * Rol del usuario
 	 */
 	@JsonProperty(value = "tiempoPreparacion")
-	private Time tiempoPreparacion;
+	private Long tiempoPreparacion;
 
 	/**
 	 * Pass del usuario
@@ -77,7 +78,7 @@ public class Producto {
 	 * @param duration - Duracion en minutos del video.
 	 */
 	public Producto(@JsonProperty(value="id")Long id, @JsonProperty(value="nombre")String nombre,@JsonProperty(value="tipo")String tipo, 
-			@JsonProperty(value = "disponibles") Integer disponibles, @JsonProperty(value="tiempoPreparacion")Time tiempoPreparacion, 
+			@JsonProperty(value = "disponibles") Integer disponibles, @JsonProperty(value="tiempoPreparacion")Long tiempoPreparacion, 
 			@JsonProperty(value="precio")Double precio, @JsonProperty(value="costo")Double costo, 
 			@JsonProperty(value="descripcion")String descripcion,@JsonProperty(value="traduccionDescripcion")String traduccion,
 			@JsonProperty(value="idRestaurante")Long idRestaurante) {
@@ -135,12 +136,12 @@ public class Producto {
 	}
 
 
-	public Time getTiempoPreparacion() {
+	public Long getTiempoPreparacion() {
 		return tiempoPreparacion;
 	}
 
 
-	public void setTiempoPreparacion(Time tiempoPreparacion) {
+	public void setTiempoPreparacion(Long tiempoPreparacion) {
 		this.tiempoPreparacion = tiempoPreparacion;
 	}
 

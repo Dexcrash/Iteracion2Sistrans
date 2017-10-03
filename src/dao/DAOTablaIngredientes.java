@@ -215,5 +215,32 @@ public class DAOTablaIngredientes {
 		recursos.add(prepStmt);
 		prepStmt.executeQuery();
 	}
+	
+	/**
+	 * Metodo que, usando la conexión a la base de datos, saca todos los videos de la base de datos
+	 * <b>SQL Statement:</b> SELECT * FROM VIDEOS;
+	 * @return Arraylist con los videos de la base de datos.
+	 * @throws SQLException - Cualquier error que la base de datos arroje.
+	 * @throws Exception - Cualquier error que no corresponda a la base de datos
+	 */
+	public ArrayList<Ingrediente> darIngredientesPorProductos(Long idProducto) throws SQLException, Exception {
+		ArrayList<Ingrediente> ingredientes = new ArrayList<Ingrediente>();
+
+		String sql = "SELECT * FROM INGREDIENTE WHERE = (SELECT ID_INGREDIENTE FROM PRODUCTO_INGREDIENTE WHERE ID_PRODUCTO =" + idProducto + ")";
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+
+		while (rs.next()) {
+			Long id = rs.getLong("ID");
+			String nombre = rs.getString("NOMBRE");
+			String descripcion = rs.getString("DESCRIPCION");
+			String traduccion = rs.getString("TRADUCCION");
+			
+			ingredientes.add(new Ingrediente(id, nombre, descripcion, traduccion));
+		}
+		return ingredientes;
+	}
 
 }

@@ -20,10 +20,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 
+import dao.DAOTablaIngredientes;
 import dao.DAOTablaProductos;
 import dao.DAOTablaRestaurantes;
 import dao.DAOTablaUsuarios;
 import dao.DAOTablaUsuarios;
+import vos.Ingrediente;
 import vos.Producto;
 import vos.Restaurante;
 import vos.Usuario;
@@ -746,5 +748,84 @@ public class RotondAndesTM {
 		return productos;
 	}
 
+	/**
+	 * Metodo que modela la transaccion que retorna todos los usuarios de la base
+	 * de datos.
+	 * 
+	 * @return ListaUsuarios - objeto que modela un arreglo de usuarios. este
+	 *         arreglo contiene el resultado de la busqueda
+	 * @throws Exception
+	 *             - cualquier error que se genere durante la transaccion
+	 */
+	public List<Usuario> darClientes() throws Exception {
+		List<Usuario> clientes;
+		DAOTablaUsuarios daoRestaurante = new DAOTablaUsuarios();
+		try {
+			////// transaccion
+			this.conn = darConexion();
+			daoRestaurante.setConn(conn);
+			clientes = daoRestaurante.darClientes();
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoRestaurante.cerrarRecursos();
+				if (this.conn != null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		return clientes;
+	}
+
+	/**
+	 * Metodo que modela la transaccion que retorna todos los usuarios de la base
+	 * de datos.
+	 * 
+	 * @return ListaUsuarios - objeto que modela un arreglo de usuarios. este
+	 *         arreglo contiene el resultado de la busqueda
+	 * @throws Exception
+	 *             - cualquier error que se genere durante la transaccion
+	 */
+	public List<Ingrediente> buscarIngredientesPorProductos(Producto producto) throws Exception {
+		List<Ingrediente> ingredientes;
+		DAOTablaIngredientes daoIngredientes = new DAOTablaIngredientes();
+		try {
+			////// transaccion
+			this.conn = darConexion();
+			daoIngredientes.setConn(conn);
+			ingredientes = daoIngredientes.darIngredientesPorProductos(producto.getId());
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoIngredientes.cerrarRecursos();
+				if (this.conn != null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		return ingredientes;
+	}
 	
 }

@@ -17,6 +17,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import tm.RotondAndesTM;
+import vos.Ingrediente;
 import vos.Producto;
 import vos.Restaurante;
 import vos.Usuario;
@@ -190,22 +191,43 @@ public class RestauranteResource {
 	}
 	
 	@GET
-	@PathParam("{nombre}/productos")
+	@Path("{id: \\d+}/productos")
 	@Produces({ MediaType.APPLICATION_JSON })
-	public Response getProductos(@PathParam("nombre")String name) {
+	public Response getProductos(@PathParam("id")Long id) {
 		
 		RotondAndesTM tm = new RotondAndesTM(getPath());
 		List<Producto> productos;
 		Restaurante restaurante;
 		try {
-			if (name == null || name.length() == 0)
-				throw new Exception("Nombre del usuario no valido");
-			restaurante = tm.buscarRestaurantesPorName(name).get(0);
+			restaurante = tm.buscarRestaurantePorId(id);
 			productos = tm.darProductosPorRestaurante(restaurante);
 		} catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
 		return Response.status(200).entity(productos).build();
+	}
+	
+	@GET
+	@Path("{id: \\d+}/productos/{idProducto: \\d+}/ingredientes")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public Response getIngredientes(@PathParam("id")Long id, @PathParam("idProducto")Long idProducto) {
+		
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		List<Ingrediente> ingredientes = null;
+		List<Producto> productos;
+		Restaurante restaurante;
+		try {
+			restaurante = tm.buscarRestaurantePorId(id);
+			productos = tm.darProductosPorRestaurante(restaurante);
+			for(Producto prod : productos) {
+				if(prod.getId()==idProducto) ingredientes = tm.buscarIngredientesPorProductos(prod);
+				break;
+			}
+			
+		} catch (Exception e) {
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+		return Response.status(200).entity(ingredientes).build();
 	}
 
 	private boolean checkUsuario(String id, String contraseña){

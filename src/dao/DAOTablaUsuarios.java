@@ -207,11 +207,38 @@ public class DAOTablaUsuarios {
 	public void deleteUsuario(Usuario usuario) throws SQLException, Exception {
 
 		String sql = "DELETE FROM USUARIO";
-		sql += " WHERE ID = " + usuario.getIdentificacion();
+		sql += " WHERE ID = '" + usuario.getIdentificacion() + "'";
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
 		prepStmt.executeQuery();
+	}
+	
+	/**
+	 * Metodo que, usando la conexiÃ³n a la base de datos, saca todos los videos de la base de datos
+	 * <b>SQL Statement:</b> SELECT * FROM VIDEOS;
+	 * @return Arraylist con los videos de la base de datos.
+	 * @throws SQLException - Cualquier error que la base de datos arroje.
+	 * @throws Exception - Cualquier error que no corresponda a la base de datos
+	 */
+	public ArrayList<Usuario> darClientes() throws SQLException, Exception {
+		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+
+		String sql = "SELECT * FROM USUARIO WHERE ROL = 'Cliente'";
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+
+		while (rs.next()) {
+			String name = rs.getString("NOMBRE");
+			String correo = rs.getString("CORREOELECTRONICO");
+			String rol = rs.getString("ROL");
+			String identificacion = rs.getString("IDENTIFICACION");
+			String contraseña = rs.getString("PASS");
+			usuarios.add(new Usuario(rol, name, identificacion, correo, contraseña));
+		}
+		return usuarios;
 	}
 
 }
