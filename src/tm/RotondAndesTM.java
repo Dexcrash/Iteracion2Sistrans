@@ -24,11 +24,15 @@ import dao.DAOTablaIngredientes;
 import dao.DAOTablaProductos;
 import dao.DAOTablaRestaurantes;
 import dao.DAOTablaUsuarios;
+import dao.DAOTablaVideos;
+import dao.DAOTablaZonas;
 import dao.DAOTablaUsuarios;
 import vos.Ingrediente;
 import vos.Producto;
 import vos.Restaurante;
 import vos.Usuario;
+import vos.Video;
+import vos.Zona;
 import vos.Usuario;
 
 /**
@@ -826,6 +830,43 @@ public class RotondAndesTM {
 			}
 		}
 		return ingredientes;
+	}
+	
+	/**
+	 * Metodo que modela la transaccion que agrega un solo video a la base de datos.
+	 * <b> post: </b> se ha agregado el video que entra como parametro
+	 * @param video - el video a agregar. video != null
+	 * @throws Exception - cualquier error que se genere agregando el video
+	 */
+	public void addZona(Zona zona) throws Exception {
+		DAOTablaZonas daoZonas = new DAOTablaZonas();
+		try 
+		{
+			//////transaccion
+			this.conn = darConexion();
+			daoZonas.setConn(conn);
+			daoZonas.addZona(zona);
+			conn.commit();
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoZonas.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
 	}
 	
 }

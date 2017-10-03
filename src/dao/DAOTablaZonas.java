@@ -129,11 +129,8 @@ public class DAOTablaZonas {
 	 */
 	public void addZona(Zona zona) throws SQLException, Exception {
 
-		String sql = "INSERT INTO INGREDIENTE VALUES (";
-		sql += zona.getId() + ",'";
-		sql += zona.getNombre() + "','";		
-		sql += zona.getDescripcion() + "','";
-		sql += zona.getTraduccion() + "')";
+		String sql = "INSERT INTO ZONA VALUES (";
+		sql += zona.getName()  + "')";
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
@@ -141,28 +138,6 @@ public class DAOTablaZonas {
 
 	}
 	
-	/**
-	 * Metodo que actualiza el video que entra como parametro en la base de datos.
-	 * @param video - el video a actualizar. video !=  null
-	 * <b> post: </b> se ha actualizado el video en la base de datos en la transaction actual. pendiente que el video master
-	 * haga commit para que los cambios bajen a la base de datos.
-	 * @throws SQLException - Cualquier error que la base de datos arroje. No pudo actualizar el video.
-	 * @throws Exception - Cualquier error que no corresponda a la base de datos
-	 */
-	public void updateIngrediente(Ingrediente ingrediente) throws SQLException, Exception {
-
-		String sql = "UPDATE RESTAURANTE SET ";
-		sql += "ID='" + ingrediente.getId()+ ",";
-		sql += "NOMBRE='" + ingrediente.getNombre() + "',";
-		sql += "DESCRIPCION='" + ingrediente.getDescripcion()+ "',";
-		sql += "TRADUCCION='" + ingrediente.getTraduccion() + "',";
-		sql += " WHERE IDENTIFICACION = " + ingrediente.getId() + ")";
-
-
-		PreparedStatement prepStmt = conn.prepareStatement(sql);
-		recursos.add(prepStmt);
-		prepStmt.executeQuery();
-	}
 
 	/**
 	 * Metodo que elimina el video que entra como parametro en la base de datos.
@@ -172,10 +147,10 @@ public class DAOTablaZonas {
 	 * @throws SQLException - Cualquier error que la base de datos arroje. No pudo actualizar el video.
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
 	 */
-	public void deleteIngrediente(Ingrediente ingrediente) throws SQLException, Exception {
+	public void deleteZona(Zona zona) throws SQLException, Exception {
 
-		String sql = "DELETE FROM INGREDIENTE";
-		sql += " WHERE ID = " + ingrediente.getId();
+		String sql = "DELETE FROM ZONA";
+		sql += " WHERE NOMBRE = " + zona.getName();
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
