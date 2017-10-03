@@ -717,7 +717,7 @@ public class RotondAndesTM {
 	 * @throws Exception
 	 *             - cualquier error que se genere durante la transaccion
 	 */
-	public List<Producto> darProductosPorRestaurante(Restaurante restaurante) throws Exception {
+	public List<Producto> buscarProductosPorRestaurante(Restaurante restaurante) throws Exception {
 		List<Producto> productos;
 		DAOTablaProductos daoProductos = new DAOTablaProductos();
 		try {
@@ -826,6 +826,46 @@ public class RotondAndesTM {
 			}
 		}
 		return ingredientes;
+	}
+	
+	/**
+	 * Metodo que modela la transaccion que retorna todos los usuarios de la base
+	 * de datos.
+	 * 
+	 * @return ListaUsuarios - objeto que modela un arreglo de usuarios. este
+	 *         arreglo contiene el resultado de la busqueda
+	 * @throws Exception
+	 *             - cualquier error que se genere durante la transaccion
+	 */
+	public List<Producto> addProductosPorRestaurante(Restaurante restaurante, Producto producto) throws Exception {
+		List<Producto> productos;
+		DAOTablaProductos daoProductos = new DAOTablaProductos();
+		try {
+			////// transaccion
+			this.conn = darConexion();
+			daoProductos.setConn(conn);
+			productos = daoProductos.addProducto(producto);;
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoProductos.cerrarRecursos();
+				if (this.conn != null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		return productos;
 	}
 	
 }

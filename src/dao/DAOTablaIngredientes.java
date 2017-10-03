@@ -226,7 +226,7 @@ public class DAOTablaIngredientes {
 	public ArrayList<Ingrediente> darIngredientesPorProductos(Long idProducto) throws SQLException, Exception {
 		ArrayList<Ingrediente> ingredientes = new ArrayList<Ingrediente>();
 
-		String sql = "SELECT * FROM INGREDIENTE WHERE = (SELECT ID_INGREDIENTE FROM PRODUCTO_INGREDIENTE WHERE ID_PRODUCTO =" + idProducto + ")";
+		String sql = "SELECT * FROM INGREDIENTE WHERE ID = (SELECT ID_INGREDIENTE FROM PRODUCTO_INGREDIENTE WHERE ID_PRODUCTO = "+idProducto+")";
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
