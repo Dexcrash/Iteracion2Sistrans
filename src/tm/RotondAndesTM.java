@@ -24,14 +24,12 @@ import dao.DAOTablaIngredientes;
 import dao.DAOTablaProductos;
 import dao.DAOTablaRestaurantes;
 import dao.DAOTablaUsuarios;
-import dao.DAOTablaVideos;
 import dao.DAOTablaZonas;
 import dao.DAOTablaUsuarios;
 import vos.Ingrediente;
 import vos.Producto;
 import vos.Restaurante;
 import vos.Usuario;
-import vos.Video;
 import vos.Zona;
 import vos.Usuario;
 
