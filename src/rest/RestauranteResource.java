@@ -17,10 +17,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import tm.RotondAndesTM;
-import vos.Ingrediente;
-import vos.Producto;
-import vos.Restaurante;
-import vos.Usuario;
+import vos.*;
 
 @Path("restaurantes")
 public class RestauranteResource {
@@ -264,5 +261,46 @@ public class RestauranteResource {
 			e.printStackTrace();
 		}
 		return respuesta;
+	}
+	
+	   /**
+     * Metodo que expone servicio REST usando POST que agrega el usuario que recibe en Json
+     * <b>URL: </b> http://"ip o nombre de host":8080/RotondAndes/rest/usuarios/usuario
+     * @param usuario - usuario a agregar
+     * @return Json con el usuario que agrego o Json con el error que se produjo
+     */
+	@POST
+    @Path("menus")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response addMenu(Menu menu) {
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		try {
+			tm.addMenu(menu);
+		} catch (Exception e) {
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+		return Response.status(200).entity(menu).build();
+	}
+	
+	/**
+	 * Metodo que expone servicio REST usando GET que da todos los usuarios de la base de datos.
+	 * <b>URL: </b> http://"ip o nombre de host":8080/RotondAndes/rest/usuarios
+	 * @return Json con todos los usuarios de la base de datos o json con 
+     * el error que se produjo
+	 */
+	@GET
+	@Path("menus")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public Response getMenus() {
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		List<Menu> menus;
+		System.out.println("imprime");
+		try {
+			menus = tm.darMenus();
+		} catch (Exception e) {
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+		return Response.status(200).entity(menus).build();
 	}
 }

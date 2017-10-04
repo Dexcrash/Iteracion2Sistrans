@@ -21,12 +21,14 @@ import java.util.List;
 import java.util.Properties;
 
 import dao.DAOTablaIngredientes;
+import dao.DAOTablaMenus;
 import dao.DAOTablaProductos;
 import dao.DAOTablaRestaurantes;
 import dao.DAOTablaUsuarios;
 import dao.DAOTablaZonas;
 import dao.DAOTablaUsuarios;
 import vos.Ingrediente;
+import vos.Menu;
 import vos.Producto;
 import vos.Restaurante;
 import vos.Usuario;
@@ -976,6 +978,131 @@ public class RotondAndesTM {
 				throw exception;
 			}
 		}
+	}
+	
+	public void addMenu(Menu menu) throws Exception {
+		DAOTablaMenus daoMenus = new DAOTablaMenus();
+		DAOTablaProductos daoProductos = new DAOTablaProductos();
+		ArrayList<Producto> a = new ArrayList<Producto>();
+		try {
+			////// transaccion
+			this.conn = darConexion();
+			daoMenus.setConn(conn);
+			Producto entrada = null;
+			Producto acompa = null;
+			Producto platof = null;
+			Producto postre = null;
+			Producto bebida = null;
+			
+			if(menu.getIdentrada()!=null)
+		    entrada = daoProductos.buscarProductoPorId(menu.getIdentrada());
+			if(menu.getIdacompañamiento()!=null)
+		    acompa = daoProductos.buscarProductoPorId(menu.getIdacompañamiento());
+			if(menu.getIdplatoFuerte()!=null)
+		    platof = daoProductos.buscarProductoPorId(menu.getIdplatoFuerte());
+			if(menu.getIdpostre()!=null)
+		    postre = daoProductos.buscarProductoPorId(menu.getIdpostre());
+			if(menu.getIdbebida()!=null)
+			bebida = daoProductos.buscarProductoPorId(menu.getIdbebida());
+			Long idres = menu.getIdrestaurante();
+
+		    if(entrada!=null)
+		    {
+		    	if(entrada.getIdRestaurante()!=idres)
+		    	{
+		    		throw new Exception("El restaurante no tiene al producto con id " + menu.getIdentrada());
+		    	}
+		    }
+		    if(acompa!=null)
+		    {
+		    	if(acompa.getIdRestaurante()!=idres)
+		    	{
+		    		throw new Exception("El restaurante no tiene al producto con id " + menu.getIdacompañamiento());
+		    	}
+		    }
+		    if(platof!=null)
+		    {
+		    	if(platof.getIdRestaurante()!=idres)
+		    	{
+		    		throw new Exception("El restaurante no tiene al producto con id " + menu.getIdplatoFuerte());
+		    	}
+		    }
+		    if(postre!=null)
+		    {
+		    	if(postre.getIdRestaurante()!=idres)
+		    	{
+		    		throw new Exception("El restaurante no tiene al producto con id " + menu.getIdpostre());
+		    	}
+		    }
+		    if(bebida!=null)
+		    {
+		    	if(bebida.getIdRestaurante()!=idres)
+		    	{
+		    		throw new Exception("El restaurante no tiene al producto con id " + menu.getIdbebida());
+		    	}
+		    }
+			daoMenus.addMenu(menu);
+			conn.commit();
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoMenus.cerrarRecursos();
+				if (this.conn != null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+	}
+	
+	/**
+	 * Metodo que modela la transaccion que retorna todas las zonas de la base de
+	 * datos.
+	 * 
+	 * @return ListaUsuarios - objeto que modela un arreglo de usuarios. este
+	 *         arreglo contiene el resultado de la busqueda
+	 * @throws Exception
+	 *             - cualquier error que se genere durante la transaccion
+	 */
+	public List<Menu> darMenus() throws Exception {
+		List<Menu> menu;
+		DAOTablaMenus daoMenus = new DAOTablaMenus();
+		try {
+			////// transaccion
+			this.conn = darConexion();
+			daoMenus.setConn(conn);
+			menu = daoMenus.darMenus();
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoMenus.cerrarRecursos();
+				if (this.conn != null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		return menu;
 	}
 	
 

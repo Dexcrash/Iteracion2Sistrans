@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import vos.*;
 
-public class DaoTablaMenus {
+public class DAOTablaMenus {
 
 	/**
 	 * Arraylits de recursos que se usan para la ejecuciÃ³n de sentencias SQL
@@ -24,7 +24,7 @@ public class DaoTablaMenus {
 		 * Metodo constructor que crea DAOVideo
 		 * <b>post: </b> Crea la instancia del DAO e inicializa el Arraylist de recursos
 		 */
-	public DaoTablaMenus(){
+	public DAOTablaMenus(){
 			recursos = new ArrayList<Object>();
 	}
 
@@ -64,7 +64,7 @@ public class DaoTablaMenus {
 	 * @throws Exception
 	 *             - Cualquier error que no corresponda a la base de datos
 	 */
-	public ArrayList<Menu> darVideos() throws SQLException, Exception {
+	public ArrayList<Menu> darMenus() throws SQLException, Exception {
 		ArrayList<Menu> menus = new ArrayList<Menu>();
 
 		String sql = "SELECT * FROM MENU";
@@ -149,11 +149,11 @@ public class DaoTablaMenus {
 		sql += menu.getCosto() +  ",";
 		sql += menu.getPrecio() +  ",";
 		sql += menu.getIdrestaurante() +  ",";
-		sql += menu.getEntrada() +  ",";
-		sql += menu.getAcompañamiento() +  ",";
-		sql += menu.getPlatoFuerte() +  ",";
-		sql += menu.getPostre() +  ",";
-		sql += menu.getBebida() + ")";
+		sql += menu.getIdentrada() +  ",";
+		sql += menu.getIdacompañamiento() +  ",";
+		sql += menu.getIdplatoFuerte() +  ",";
+		sql += menu.getIdpostre() +  ",";
+		sql += menu.getIdbebida() + ")";
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);

@@ -32,31 +32,31 @@ public class Menu {
 	 * Identificador del usuario
 	 */
 	@JsonProperty(value = "identrada")
-	private Long entrada;
+	private Long identrada;
 
 	/**
 	 * Identificador del usuario
 	 */
 	@JsonProperty(value = "idplatoFuerte")
-	private Long platoFuerte;
+	private Long idplatoFuerte;
 
 	/**
 	 * Identificador del usuario
 	 */
 	@JsonProperty(value = "idacompañamiento")
-	private Long acompañamiento;
+	private Long idacompañamiento;
 
 	/**
 	 * Identificador del usuario
 	 */
 	@JsonProperty(value = "idpostre")
-	private Long postre;
+	private Long idpostre;
 
 	/**
 	 * Correo electronico del usuario
 	 */
 	@JsonProperty(value = "idbebida")
-	private Long bebida;
+	private Long idbebida;
 
 	/**
 	 * Rol del usuario
@@ -91,11 +91,11 @@ public class Menu {
 		this.precio = precio;
 		this.costo = costo;
 		this.idrestaurante = idrestaurante;
-		this.entrada = entrada;
-		this.platoFuerte = platoFuerte;
-		this.acompañamiento = acompañamiento;
-		this.postre = postre;
-		this.bebida = bebida;
+		this.identrada = entrada;
+		this.idplatoFuerte = platoFuerte;
+		this.idacompañamiento = acompañamiento;
+		this.idpostre = postre;
+		this.idbebida = bebida;
 	}
 
 	public String getId() {
@@ -114,53 +114,46 @@ public class Menu {
 		this.nombre = nombre;
 	}
 
-	public Long getEntrada() {
-		return entrada;
+	public Long getIdentrada() {
+		return identrada;
 	}
 
-	public void setEntrada(Long entrada) {
-		this.entrada = entrada;
+	public void setIdentrada(Long entrada) {
+		this.identrada = entrada;
 	}
 
-	public Long getPlatoFuerte() {
-		return platoFuerte;
+	public Long getIdplatoFuerte() {
+		return idplatoFuerte;
 	}
 
-	public void setPlatoFuerte(Long platoFuerte) {
-		this.platoFuerte = platoFuerte;
+	public void setIdplatoFuerte(Long platoFuerte) {
+		this.idplatoFuerte = platoFuerte;
 	}
 
-	public Long getAcompañamiento() {
-		return acompañamiento;
+	public Long getIdacompañamiento() {
+		return idacompañamiento;
 	}
 
-	public void setAcompañamiento(Long acompañamiento) {
-		this.acompañamiento = acompañamiento;
+	public void setIdacompañamiento(Long acompañamiento) {
+		this.idacompañamiento = acompañamiento;
 	}
 
-	public Long getPostre() {
-		return postre;
+	public Long getIdpostre() {
+		return idpostre;
 	}
 
-	public void setPostre(Long postre) {
-		this.postre = postre;
+	public void setIdpostre(Long postre) {
+		this.idpostre = postre;
 	}
 
-	public Long getBebida() {
-		return bebida;
+	public Long getIdbebida() {
+		return idbebida;
 	}
 
-	public void setBebida(Long bebida) {
-		this.bebida = bebida;
+	public void setIdbebida(Long bebida) {
+		this.idbebida = bebida;
 	}
 
-	public Long getRestaurate() {
-		return idrestaurante;
-	}
-
-	public void setRestaurate(Long restaurate) {
-		this.idrestaurante = restaurate;
-	}
 	public Long getCosto() {
 		return costo;
 	}
