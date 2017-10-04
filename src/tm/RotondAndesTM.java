@@ -1324,10 +1324,47 @@ public class RotondAndesTM {
 			////// transaccion
 			this.conn = darConexion();
 			daoZonas.setConn(conn);
-			if (daoZonas.buscarZonaPorNombre(nombrezona) == null) {
+			String ordensql = null;
+			if(daoZonas.buscarZonaPorNombre(nombrezona)==null)
+			{
 				throw new Exception("La zona no existe");
 			}
-			zonas = daoZonas.darInformacionZona(nombrezona, orden);
+			if(orden.equalsIgnoreCase("nombrezona")){
+				ordensql = "NOMBRE_ZONA";
+			}
+			else if(orden.equalsIgnoreCase("numeroespacios"))
+			{
+				ordensql = "NUMERO_ESPACIOS";
+			}
+			else if(orden.equalsIgnoreCase("capacidadTotal"))
+			{
+				ordensql = "CAPACIDAD";
+			}
+			else if(orden.equalsIgnoreCase("numeroespaciosParaDiscapacitados"))
+			{
+				ordensql = "NUM_ESPACIOS_DISCAPACITADOS";
+			}
+			else if(orden.equalsIgnoreCase("numeroespaciosAbiertos"))
+			{
+				ordensql = "NUM_ESPACIOS_ABIERTOS";
+			}
+			else if(orden.equalsIgnoreCase("idPedidoServido"))
+			{
+				ordensql = "ID_PEDIDO_SERVIDO";
+			}
+			else if(orden.equalsIgnoreCase("fechaServicio"))
+			{
+				ordensql = "FECHAHORA_SERVIDO";
+			}
+			else if(orden.equalsIgnoreCase("nombreProducto"))
+			{
+				ordensql = "NOMBRE_PRODUCTO_SERVIDO";
+			}
+			else if(orden.equalsIgnoreCase("nombreRestaurante"))
+			{
+				ordensql = "NOMBRE_RESTAURANTE_EN_ZONA";
+			}
+			zonas = daoZonas.darInformacionZona(nombrezona, ordensql);
 		} catch (SQLException e) {
 			System.err.println("SQLException:" + e.getMessage());
 			e.printStackTrace();
