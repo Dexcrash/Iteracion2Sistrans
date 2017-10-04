@@ -19,13 +19,13 @@ public class Pedido {
 	 * Identificador del usuario
 	 */
 	@JsonProperty(value = "fecha")
-	private Date fecha;
+	private String fecha;
 
 	/**
 	 * Correo electronico del usuario
 	 */
 	@JsonProperty(value = "servido")
-	private boolean servido;
+	private Long servido;
 	
 	/**
 	 * Nombre del usuario
@@ -40,13 +40,14 @@ public class Pedido {
 	 * @param name - Nombre del video. name != null
 	 * @param duration - Duracion en minutos del video.
 	 */
-	public Pedido(@JsonProperty(value="id")Long id, @JsonProperty(value="hora")Date fecha, 
-			@JsonProperty(value = "servido") boolean servido, @JsonProperty(value="idCliente")Long idCliente) {
+	public Pedido( @JsonProperty(value="hora")String fecha,
+			 @JsonProperty(value="idCliente")Long idCliente, @JsonProperty(value="id")Long id,@JsonProperty(value = "servido") Long servido) {
 		super();
-		this.id = id;
+		
 		this.fecha = fecha;
-		this.servido = servido;
 		this.idCliente = idCliente;
+		this.id = id;
+		this.servido = servido;
 	}
 
 	public Long getId() {
@@ -57,19 +58,19 @@ public class Pedido {
 		this.id = id;
 	}
 
-	public Date getFecha() {
+	public String getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(Date fecha) {
+	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
 
-	public boolean isServido() {
+	public Long isServido() {
 		return servido;
 	}
 
-	public void setServido(boolean servido) {
+	public void setServido(Long servido) {
 		this.servido = servido;
 	}
 

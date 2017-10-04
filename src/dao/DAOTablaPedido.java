@@ -80,16 +80,11 @@ public class DAOTablaPedido {
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
 	 */
 	public void addPedido(Pedido pedido) throws SQLException, Exception {
-		String sql = "INSERT INTO PEDIDO VALUES (TO_DATE(";
-		sql += pedido.getFecha().getYear() + "-";
-		sql += pedido.getFecha().getMonth() + "-";
-		sql += pedido.getFecha().getDay()  + " ";
-		sql += pedido.getFecha().getHours() + ":";
-		sql += pedido.getFecha().getMinutes() + ":";
-		sql += pedido.getFecha().getSeconds() + "', 'YYYY-MM-DD HH24:MI:SS'),";
-		sql += pedido.getIdCliente() + ",";
-		sql += pedido.getId() + ",";		
-		sql += pedido.isServido() + ")";
+		String sql = "INSERT INTO PEDIDO VALUES (TO_DATE('";
+		sql += pedido.getFecha() + "', 'YYYY-MM-DD HH24:MI:SS'),";
+		sql += "' "+pedido.getIdCliente() + "',";
+		sql += " "+pedido.getId() + ",";		
+		sql += " "+pedido.isServido() + ")";
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);

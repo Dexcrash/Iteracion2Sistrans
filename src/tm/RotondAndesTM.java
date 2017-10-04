@@ -1091,65 +1091,64 @@ public class RotondAndesTM {
 	
 	public void addMenu(Menu menu) throws Exception {
 		DAOTablaMenus daoMenus = new DAOTablaMenus();
-		DAOTablaProductos daoProductos = new DAOTablaProductos();
 
 		try {
 			////// transaccion
 			this.conn = darConexion();
 			daoMenus.setConn(conn);
-//			Producto entrada = null;
-//			Producto acompa = null;
-//			Producto platof = null;
-//			Producto postre = null;
-//			Producto bebida = null;
-//
-//			if(menu.getIdentrada()!=null)
-//		    entrada = daoProductos.buscarProductoPorId(menu.getIdentrada());
-//			if(menu.getIdacompañamiento()!=null)
-//		    acompa = daoProductos.buscarProductoPorId(menu.getIdacompañamiento());
-//			if(menu.getIdplatoFuerte()!=null)
-//		    platof = daoProductos.buscarProductoPorId(menu.getIdplatoFuerte());
-//			if(menu.getIdpostre()!=null)
-//		    postre = daoProductos.buscarProductoPorId(menu.getIdpostre());
-//			if(menu.getIdbebida()!=null)
-//			bebida = daoProductos.buscarProductoPorId(menu.getIdbebida());
-//			Long idres = menu.getIdrestaurante();
-//
-//		    if(entrada!=null)
-//		    {
-//		    	if(entrada.getIdRestaurante()!=idres)
-//		    	{
-//		    		throw new Exception("El restaurante no tiene al producto con id " + menu.getIdentrada());
-//		    	}
-//		    }
-//		    if(acompa!=null)
-//		    {
-//		    	if(acompa.getIdRestaurante()!=idres)
-//		    	{
-//		    		throw new Exception("El restaurante no tiene al producto con id " + menu.getIdacompañamiento());
-//		    	}
-//		    }
-//		    if(platof!=null)
-//		    {
-//		    	if(platof.getIdRestaurante()!=idres)
-//		    	{
-//		    		throw new Exception("El restaurante no tiene al producto con id " + menu.getIdplatoFuerte());
-//		    	}
-//		    }
-//		    if(postre!=null)
-//		    {
-//		    	if(postre.getIdRestaurante()!=idres)
-//		    	{
-//		    		throw new Exception("El restaurante no tiene al producto con id " + menu.getIdpostre());
-//		    	}
-//		    }
-//		    if(bebida!=null)
-//		    {
-//		    	if(bebida.getIdRestaurante()!=idres)
-//		    	{
-//		    		throw new Exception("El restaurante no tiene al producto con id " + menu.getIdbebida());
-//		    	}
-//		    }
+			Producto entrada = null;
+			Producto acompa = null;
+			Producto platof = null;
+			Producto postre = null;
+			Producto bebida = null;
+
+			if(menu.getIdentrada()!=null)
+		    entrada = daoMenus.buscarProductoPorId(menu.getIdentrada());
+			if(menu.getIdacompañamiento()!=null)
+		    acompa = daoMenus.buscarProductoPorId(menu.getIdacompañamiento());
+			if(menu.getIdplatoFuerte()!=null)
+		    platof = daoMenus.buscarProductoPorId(menu.getIdplatoFuerte());
+			if(menu.getIdpostre()!=null)
+		    postre = daoMenus.buscarProductoPorId(menu.getIdpostre());
+			if(menu.getIdbebida()!=null)
+			bebida = daoMenus.buscarProductoPorId(menu.getIdbebida());
+			Long idres = menu.getIdrestaurante();
+
+		    if(entrada!=null)
+		    {
+		    	if(entrada.getIdRestaurante()!=idres)
+		    	{
+		    		throw new Exception("El restaurante " +idres+ " no tiene al producto con id " + menu.getIdentrada());
+		    	}
+		    }
+		    if(acompa!=null)
+		    {
+		    	if(acompa.getIdRestaurante()!=idres)
+		    	{
+		    		throw new Exception("El restaurante " +idres+ "  no tiene al producto con id " + menu.getIdacompañamiento());
+		    	}
+		    }
+		    if(platof!=null)
+		    {
+		    	if(platof.getIdRestaurante()!=idres)
+		    	{
+		    		throw new Exception("El restaurante " +idres+ "  no tiene al producto con id " + menu.getIdplatoFuerte());
+		    	}
+		    }
+		    if(postre!=null)
+		    {
+		    	if(postre.getIdRestaurante()!=idres)
+		    	{
+		    		throw new Exception("El restaurante " +idres+ "  no tiene al producto con id " + menu.getIdpostre());
+		    	}
+		    }
+		    if(bebida!=null)
+		    {
+		    	if(bebida.getIdRestaurante()!=idres)
+		    	{
+		    		throw new Exception("El restaurante " +idres+ "  no tiene al producto con id " + menu.getIdbebida());
+		    	}
+		    }
 
 			daoMenus.addMenu(menu);
 			conn.commit();
@@ -1286,7 +1285,7 @@ public class RotondAndesTM {
 			////// transaccion
 			this.conn = darConexion();
 			daoPedidos.setConn(conn);
-			daoPedidos.addPedido(new Pedido(pedido.getId(), pedido.getFecha(), pedido.isServido(),pedido.getIdCliente()));
+			daoPedidos.addPedido(new Pedido(pedido.getFecha(), pedido.getIdCliente(), pedido.getId(), pedido.isServido()));
 			menus = pedido.getIdsMenu();
 			String[] menuIds= menus.split("-");
 			for(String idMenu : menuIds) {
