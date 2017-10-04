@@ -187,6 +187,31 @@ public class DAOTablaMenus {
 		}
 		return producto;
 	}
+	
+	public ArrayList<Long> darProductodeMenu(Long pId) throws SQLException, Exception 
+	{
+		ArrayList<Long> productos = new ArrayList<>();
 
+		String sql = "SELECT * FROM MENU WHERE ID = " + pId;
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+
+		if (rs.next()) {
+			
+			Long id1 = rs.getLong("ID_PRODUCTOENTRADA");
+			if(id1!=null)productos.add(id1);
+			Long id2 = rs.getLong("ID_PRODUCTOACOMPAÑAMIENTO");
+			if(id2!=null)productos.add(id2);
+			Long id3 = rs.getLong("ID_PRODUCTOPLATOFUERTE");
+			if(id3!=null)productos.add(id3);
+			Long id4 = rs.getLong("ID_PRODUCTOPOSTRE");
+			if(id4!=null)productos.add(id4);
+			Long id5 = rs.getLong("ID_PRODUCTOBEBIDA");
+			if(id5!=null)productos.add(id5);
+		}
+		return productos;
+	}
 
 }

@@ -293,4 +293,24 @@ public class RestauranteResource {
 		}
 		return Response.status(200).entity(menus).build();
 	}
+	
+	/**
+	 * Metodo que expone servicio REST usando GET que da todos los usuarios de la base de datos.
+	 * <b>URL: </b> http://"ip o nombre de host":8080/RotondAndes/rest/usuarios
+	 * @return Json con todos los usuarios de la base de datos o json con 
+     * el error que se produjo
+	 */
+	@POST
+	@Path("servido/{id: \\d+}")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public Response marcarServido(@PathParam("id")Long id) {
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		String res;
+		try {
+			res = tm.marcarServido(id);
+		} catch (Exception e) {
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+		return Response.status(200).entity(res).build();
+	}
 }

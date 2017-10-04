@@ -39,6 +39,12 @@ public class PedidoCompleto {
 	private String idsMenu;
 	
 	/**
+	 * Correo electronico del usuario
+	 */
+	@JsonProperty(value = "idsProducto")
+	private String idsProducto;
+	
+	/**
 	 * Metodo constructor de la clase video
 	 * <b>post: </b> Crea el video con los valores que entran como parametro
 	 * @param id - Id del video.
@@ -46,13 +52,15 @@ public class PedidoCompleto {
 	 * @param duration - Duracion en minutos del video.
 	 */
 	public PedidoCompleto(@JsonProperty(value="id")Long id, @JsonProperty(value="fecha")String fecha, 
-			@JsonProperty(value = "servido") Long servido,@JsonProperty(value="idCliente")Long idCliente, @JsonProperty(value = "listaMenu") String idsMenu) {
+			@JsonProperty(value = "servido") Long servido,@JsonProperty(value="idCliente")Long idCliente,
+			@JsonProperty(value = "listaMenu") String idsMenu, @JsonProperty(value = "idsProducto") String idsProducto) {
 		super();
 		this.id = id;
 		this.fecha = fecha;
 		this.servido = servido;
 		this.idCliente = idCliente;
 		this.idsMenu = idsMenu;
+		this.idsProducto = idsProducto;
 	}
 
 	public Long getId() {
@@ -71,7 +79,7 @@ public class PedidoCompleto {
 		this.fecha = fecha;
 	}
 
-	public Long isServido() {
+	public Long getServido() {
 		return servido;
 	}
 
@@ -93,6 +101,14 @@ public class PedidoCompleto {
 
 	public void setIdCliente(Long idCliente) {
 		this.idCliente = idCliente;
+	}
+
+	public String getIdsProducto() {
+		return idsProducto;
+	}
+
+	public void setIdsProducto(String idsProducto) {
+		this.idsProducto = idsProducto;
 	}
 
 

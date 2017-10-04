@@ -1281,15 +1281,25 @@ public class RotondAndesTM {
 		
 		DAOTablaPedido daoPedidos = new DAOTablaPedido();
 		String menus;
+		String productos;
 		try {
 			////// transaccion
 			this.conn = darConexion();
 			daoPedidos.setConn(conn);
-			daoPedidos.addPedido(new Pedido(pedido.getFecha(), pedido.getIdCliente(), pedido.getId(), pedido.isServido()));
+			daoPedidos.addPedido(new Pedido(pedido.getFecha(), pedido.getIdCliente(), pedido.getId(), pedido.getServido()));
 			menus = pedido.getIdsMenu();
 			String[] menuIds= menus.split("-");
+			String[] info;
 			for(String idMenu : menuIds) {
-				daoPedidos.addMenuAPedido(pedido.getId(), Long.parseLong(idMenu));
+				info = idMenu.split(":");
+				daoPedidos.addMenuAPedido(pedido.getId(), Long.parseLong(info[0]),Integer.parseInt(info[1]));
+			}
+			
+			productos = pedido.getIdsProducto();
+			String[] productoIds= productos.split("-");
+			for(String idProducto : productoIds) {
+				info = idProducto.split(":");
+				daoPedidos.addProductoAPedido(pedido.getId(), Long.parseLong(info[0]),Integer.parseInt(info[1]));
 			}
 			
 		} catch (SQLException e) {
@@ -1374,5 +1384,50 @@ public class RotondAndesTM {
 			}
 		}
 		return clientes;
+	}
+
+	public String marcarServido(Long id) throws Exception {
+		List<Long> productos;
+		List<Long> menus;
+		DAOTablaPedido daoPedido = new DAOTablaPedido();
+		DAOTablaMenus daoMenus = new DAOTablaMenus();
+		DAOTablaProductos daoProductos = new DAOTablaProductos();
+		try {
+			////// transaccion
+			this.conn = darConexion();
+			daoPedido.setConn(conn);
+			daoPedido.marcarServido(id);
+			productos = daoPedido.darProductosDePedido(id);
+			menus = daoPedido.darMenusDePedido(id);
+			daoPedido.cerrarRecursos();
+			daoMenus.setConn(conn);
+			for(Long idMenu:menus)
+				productos.addAll(daoMenus.darProductodeMenu(idMenu));
+			daoMenus.cerrarRecursos();
+			daoProductos.setConn(conn);
+			for(Long idProducto:productos)
+				daoProductos.descontarProducto(idProducto);				
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoPedido.cerrarRecursos();
+
+				if (this.conn != null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		return "Se sirvio el pedido con el id : "+id;
 	}
 }

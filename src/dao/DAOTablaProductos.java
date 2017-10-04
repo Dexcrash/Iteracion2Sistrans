@@ -336,4 +336,18 @@ public class DAOTablaProductos {
 		return productos;
 	}
 
+	/**
+	 * Metodo que, usando la conexión a la base de datos, saca todos los videos de la base de datos
+	 * <b>SQL Statement:</b> SELECT * FROM VIDEOS;
+	 * @return Arraylist con los videos de la base de datos.
+	 * @throws SQLException - Cualquier error que la base de datos arroje.
+	 * @throws Exception - Cualquier error que no corresponda a la base de datos
+	 */
+	public void descontarProducto(Long id_Producto) throws SQLException, Exception {
+		String sql = "UPDATE PRODUCTO SET DISPONIBLES = DISPONIBLES - 1 WHERE ID = " + id_Producto;
+		
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		prepStmt.executeQuery();
+	}
 }
