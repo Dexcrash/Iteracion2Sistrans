@@ -1,6 +1,6 @@
 package rest;
 
-import java.util.List;
+import java.util.List; 
 
 import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
@@ -17,6 +17,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import tm.RotondAndesTM;
+import vos.Preferencia;
 import vos.Usuario;
 
 @Path("clientes")
@@ -106,5 +107,66 @@ public class ClienteResource {
 		return Response.status(200).entity(cliente).build();
 	}
 
+    /**
+     * Metodo que expone servicio REST usando DELETE que elimina el cliente que recibe en Json
+     * <b>URL: </b> http://"ip o nombre de host":8080/RotondAndes/rest/clientes
+     * @param cliente - cliente a aliminar. 
+     * @return Json con el cliente que elimino o Json con el error que se produjo
+     */
+	@GET
+	@Path("{id: \\d+}/preferencias")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getPreferencias(@PathParam("id") Long idCliente) {
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		List<Preferencia> preferencias = null;
+		try {
+			preferencias = tm.darPreferencias(idCliente);
+		} catch (Exception e) {
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+		return Response.status(200).entity(preferencias).build();
+	}
+	
+    /**
+     * Metodo que expone servicio REST usando DELETE que elimina el cliente que recibe en Json
+     * <b>URL: </b> http://"ip o nombre de host":8080/RotondAndes/rest/clientes
+     * @param cliente - cliente a aliminar. 
+     * @return Json con el cliente que elimino o Json con el error que se produjo
+     */
+	@POST
+	@Path("{id: \\d+}/preferencias")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response addPreferencia(@PathParam("id") Long idCliente, Preferencia preferencia) {
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		Preferencia prefe = null;
+		try {
+			tm.addPreferencia(idCliente, preferencia);
+		} catch (Exception e) {
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+		return Response.status(200).entity(prefe).build();
+	}
+	
+    /**
+     * Metodo que expone servicio REST usando DELETE que elimina el cliente que recibe en Json
+     * <b>URL: </b> http://"ip o nombre de host":8080/RotondAndes/rest/clientes
+     * @param cliente - cliente a aliminar. 
+     * @return Json con el cliente que elimino o Json con el error que se produjo
+     */
+	@PUT
+	@Path("{id: \\d+}/preferencias")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response updatePreferencia(@PathParam("id") Long idCliente, Preferencia preferencia) {
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		List<Preferencia> preferencias = null;
+		try {
+			tm.updatePreferencia(idCliente, preferencia);
+		} catch (Exception e) {
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+		return Response.status(200).entity(preferencias).build();
+	}
 
 }

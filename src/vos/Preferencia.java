@@ -18,16 +18,24 @@ public class Preferencia {
 	private String valor;	
 	
 	/**
+	 * Identificador del usuario
+	 */
+	@JsonProperty(value="idCliente")
+	private Long idCliente;	
+	
+	/**
 	 * Metodo constructor de la clase video
 	 * <b>post: </b> Crea el video con los valores que entran como parametro
 	 * @param id - Id del video.
 	 * @param name - Nombre del video. name != null
 	 * @param duration - Duracion en minutos del video.
 	 */
-	public Preferencia(@JsonProperty(value="tipo")String tipo, @JsonProperty(value="valor")String valor) {
+	public Preferencia(@JsonProperty(value="tipo")String tipo, @JsonProperty(value="valor")String valor,
+			@JsonProperty(value="idCliente")Long idCliente) {
 		super();
 		this.tipo = tipo;
 		this.valor = valor;
+		this.idCliente = idCliente;
 	}
 
 	public String getTipo() {
@@ -46,5 +54,14 @@ public class Preferencia {
 		this.valor = valor;
 	}
 
+	public Long getIdCliente() {
+		return idCliente;
+	}
+
+	public void setIdCliente(Long idCliente) {
+		this.idCliente = idCliente;
+	}
+
+	
 
 }

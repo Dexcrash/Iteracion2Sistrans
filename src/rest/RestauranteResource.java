@@ -197,10 +197,8 @@ public class RestauranteResource {
 		
 		RotondAndesTM tm = new RotondAndesTM(getPath());
 		List<Producto> productos;
-		Restaurante restaurante;
 		try {
-			restaurante = tm.buscarRestaurantePorId(id);
-			productos = tm.darProductosPorRestaurante(restaurante);
+			productos = tm.buscarProductosPorRestaurante(id);
 		} catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
@@ -209,19 +207,18 @@ public class RestauranteResource {
 	
 	@POST
 	@Path("{id: \\d+}/productos")
-	@Produces({ MediaType.APPLICATION_JSON })
-	public Response addProductos(@PathParam("id")Long id) {
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response addProducto(@PathParam("id")Long id, Producto producto) {
 		
 		RotondAndesTM tm = new RotondAndesTM(getPath());
-		List<Producto> productos;
-		Restaurante restaurante;
+		Producto produc;
 		try {
-			restaurante = tm.buscarRestaurantePorId(id);
-			productos = tm.darProductosPorRestaurante(restaurante);
+			produc = tm.addProductoPorRestaurante(id, producto);
 		} catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
-		return Response.status(200).entity(productos).build();
+		return Response.status(200).entity(produc).build();
 	}
 	
 	@GET
@@ -231,18 +228,27 @@ public class RestauranteResource {
 		
 		RotondAndesTM tm = new RotondAndesTM(getPath());
 		List<Ingrediente> ingredientes = null;
-		List<Producto> productos;
-		Restaurante restaurante;
+
 		try {
-			restaurante = tm.buscarRestaurantePorId(id);
-			productos = tm.darProductosPorRestaurante(restaurante);
+			ingredientes = tm.buscarIngredientesPorProductos(id,idProducto);
 			
-			for(int i =0;i<productos.size();i++) {
-				Long idActual = productos.get(i).getId();
-				if(idActual.equals(idProducto)) {
-					ingredientes = tm.buscarIngredientesPorProductos(productos.get(i));
-				}
-			}
+		} catch (Exception e) {
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+		return Response.status(200).entity(ingredientes).build();
+	}
+	
+	@POST
+	@Path("{id: \\d+}/productos/{idProducto: \\d+}/ingredientes")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response addIngrediente(@PathParam("id")Long id, @PathParam("idProducto")Long idProducto, Ingrediente ingrediente) {
+		
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		List<Ingrediente> ingredientes = null;
+
+		try {
+			ingrediente = tm.addIngredientePorProducto(id, idProducto, ingrediente);
 			
 		} catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();

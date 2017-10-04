@@ -48,6 +48,7 @@ public class AdministradorResource {
      * el error que se produjo
 	 */
 	@GET
+	@Path("clientes")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response getClientes() {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
@@ -61,10 +62,6 @@ public class AdministradorResource {
 	}
 
 
-
-
-
-
     /**
      * Metodo que expone servicio REST usando POST que agrega el cliente que recibe en Json
      * <b>URL: </b> http://"ip o nombre de host":8080/RotondAndes/rest/clientes/cliente
@@ -72,6 +69,7 @@ public class AdministradorResource {
      * @return Json con el cliente que agrego o Json con el error que se produjo
      */
 	@POST
+	@Path("clientes")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response addCliente(Usuario cliente) {
@@ -84,7 +82,6 @@ public class AdministradorResource {
 		return Response.status(200).entity(cliente).build();
 	}
 	
-
 	
     /**
      * Metodo que expone servicio REST usando DELETE que elimina el cliente que recibe en Json

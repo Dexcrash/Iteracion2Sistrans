@@ -181,16 +181,16 @@ public class DAOTablaProductos {
 
 		String sql = "INSERT INTO PRODUCTO VALUES (";
 		sql += producto.getId() + ",'";
-		sql += producto.getNombre() + "','";		
-		sql += producto.getTipo() + "','";
-		sql += producto.getTiempoPreparacion() + "',";
-		sql += producto.getDisponibles() + ",";
-		sql += producto.getPrecio() + ",";
-		sql += producto.getCosto() + ",'";
+		sql += producto.getNombre() + "','";
 		sql += producto.getDescripcion() + "','";
 		sql += producto.getTraduccion() + "',";
+		sql += producto.getTiempoPreparacion() + ",";
+		sql += producto.getCosto() + ",";
+		sql += producto.getPrecio() + ",";
+		sql += producto.getDisponibles() + ",'";
+		sql += producto.getTipo() + "',";
 		sql += producto.getIdRestaurante() + ")";
-
+		
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
 		prepStmt.executeQuery();

@@ -15,9 +15,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
-import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 
 import vos.*;
 
@@ -25,7 +24,7 @@ import vos.*;
  * Clase DAO que se conecta la base de datos usando JDBC para resolver los requerimientos de la aplicación
  * @author Monitores 2017-20
  */
-public class DAOTablaIngredientes {
+public class DAOTablaPreferencias {
 
 
 	/**
@@ -42,7 +41,7 @@ public class DAOTablaIngredientes {
 	 * Metodo constructor que crea DAOVideo
 	 * <b>post: </b> Crea la instancia del DAO e inicializa el Arraylist de recursos
 	 */
-	public DAOTablaIngredientes() {
+	public DAOTablaPreferencias() {
 		recursos = new ArrayList<Object>();
 	}
 
@@ -77,24 +76,22 @@ public class DAOTablaIngredientes {
 	 * @throws SQLException - Cualquier error que la base de datos arroje.
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
 	 */
-	public ArrayList<Ingrediente> darIngredientes() throws SQLException, Exception {
-		ArrayList<Ingrediente> ingredientes = new ArrayList<Ingrediente>();
+	public ArrayList<Preferencia> darPreferencias() throws SQLException, Exception {
+		ArrayList<Preferencia> preferencias = new ArrayList<Preferencia>();
 
-		String sql = "SELECT * FROM INGREDIENTE";
+		String sql = "SELECT * FROM PREFERENCIA";
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
 		ResultSet rs = prepStmt.executeQuery();
 
 		while (rs.next()) {
-			Long id = rs.getLong("ID");
-			String nombre = rs.getString("NOMBRE");
-			String descripcion = rs.getString("DESCRIPCION");
-			String traduccion = rs.getString("TRADUCCION");
-			
-			ingredientes.add(new Ingrediente(id, nombre, descripcion, traduccion));
+			String tipo = rs.getString("TIPO");
+			String valor = rs.getString("VALOR");
+			Long idCliente = rs.getLong("ID_CLIENTE");
+			preferencias.add(new Preferencia(tipo, valor, idCliente));
 		}
-		return ingredientes;
+		return preferencias;
 	}
 
 
@@ -105,24 +102,23 @@ public class DAOTablaIngredientes {
 	 * @throws SQLException - Cualquier error que la base de datos arroje.
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
 	 */
-	public ArrayList<Ingrediente> buscarIngredientesPorName(String pName) throws SQLException, Exception {
-		ArrayList<Ingrediente> ingredientes = new ArrayList<Ingrediente>();
+	public ArrayList<Preferencia> buscarPreferenciasPorTipo(String pTipo) throws SQLException, Exception {
+		ArrayList<Preferencia> preferencias = new ArrayList<Preferencia>();
 
-		String sql = "SELECT * FROM INGREDIENTE WHERE NOMBRE ='" + pName + "'";
+		String sql = "SELECT * FROM PREFERENCIA WHERE TIPO ='" + pTipo + "'";
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
 		ResultSet rs = prepStmt.executeQuery();
 
 		while (rs.next()) {
-			Long id = rs.getLong("ID");
-			String nombre = rs.getString("NOMBRE");
-			String descripcion = rs.getString("DESCRIPCION");
-			String traduccion = rs.getString("TRADUCCION");
-			
-			ingredientes.add(new Ingrediente(id, nombre, descripcion, traduccion));
+			String tipo = rs.getString("TIPO");
+			String valor = rs.getString("VALOR");
+			Long idCliente = rs.getLong("ID_CLIENTE");
+			preferencias.add(new Preferencia(tipo, valor, idCliente));
 		}
-		return ingredientes;
+		
+		return preferencias;
 	}
 	
 	/**
@@ -132,25 +128,24 @@ public class DAOTablaIngredientes {
 	 * @throws SQLException - Cualquier error que la base de datos arroje.
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
 	 */
-	public Ingrediente buscarIngredientePorId(Long pId) throws SQLException, Exception 
+	public List<Preferencia> buscarPreferenciaPorIdUsuario(Long pId) throws SQLException, Exception 
 	{
-		Ingrediente ingrediente = null;
+		ArrayList<Preferencia> preferencias = new ArrayList<Preferencia>();
 
-		String sql = "SELECT * FROM INGREDIENTE WHERE ID =" + pId;
+		String sql = "SELECT * FROM PREFERENCIA WHERE ID_CLIENTE =" + pId;
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
 		ResultSet rs = prepStmt.executeQuery();
 
-		if (rs.next()) {
-			Long id = rs.getLong("ID");
-			String nombre = rs.getString("NOMBRE");
-			String descripcion = rs.getString("DESCRIPCION");
-			String traduccion = rs.getString("TRADUCCION");
-			
-			ingrediente = new Ingrediente(id, nombre, descripcion, traduccion);
+		while (rs.next()) {
+			String tipo = rs.getString("TIPO");
+			String valor = rs.getString("VALOR");
+			Long idCliente = rs.getLong("ID_CLIENTE");
+			preferencias.add(new Preferencia(tipo, valor, idCliente));
 		}
-		return ingrediente;
+		
+		return preferencias;
 	}
 
 	/**
@@ -161,17 +156,17 @@ public class DAOTablaIngredientes {
 	 * @throws SQLException - Cualquier error que la base de datos arroje. No pudo agregar el video a la base de datos
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
 	 */
-	public void addIngrediente(Ingrediente ingrediente) throws SQLException, Exception {
+	public void addPreferencia(Preferencia preferencia) throws SQLException, Exception {
 
-		String sql = "INSERT INTO INGREDIENTE VALUES (";
-		sql += ingrediente.getId() + ",'";
-		sql += ingrediente.getNombre() + "','";		
-		sql += ingrediente.getDescripcion() + "','";
-		sql += ingrediente.getTraduccion() + "')";
+		String sql = "INSERT INTO PREFERENCIA VALUES ('";
+		sql += preferencia.getTipo() + "','";
+		sql += preferencia.getValor() + "',";		
+		sql += preferencia.getIdCliente() + ")";
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
 		prepStmt.executeQuery();
+
 	}
 	
 	/**
@@ -182,14 +177,11 @@ public class DAOTablaIngredientes {
 	 * @throws SQLException - Cualquier error que la base de datos arroje. No pudo actualizar el video.
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
 	 */
-	public void updateIngrediente(Ingrediente ingrediente) throws SQLException, Exception {
+	public void updatePreferencia(Preferencia preferencia) throws SQLException, Exception {
 
-		String sql = "UPDATE RESTAURANTE SET ";
-		sql += "ID='" + ingrediente.getId()+ ",";
-		sql += "NOMBRE='" + ingrediente.getNombre() + "',";
-		sql += "DESCRIPCION='" + ingrediente.getDescripcion()+ "',";
-		sql += "TRADUCCION='" + ingrediente.getTraduccion() + "',";
-		sql += " WHERE IDENTIFICACION = " + ingrediente.getId() + ")";
+		String sql = "UPDATE USUARIO SET ";
+		sql += "VALOR='" + preferencia.getValor() + "'";
+		sql += " WHERE IDENTIFICACION = " + preferencia.getIdCliente() + " AND TIPO = '"+ preferencia.getTipo() +"')";
 
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
@@ -205,59 +197,14 @@ public class DAOTablaIngredientes {
 	 * @throws SQLException - Cualquier error que la base de datos arroje. No pudo actualizar el video.
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
 	 */
-	public void deleteIngrediente(Ingrediente ingrediente) throws SQLException, Exception {
+	public void deletePreferencia(Preferencia preferencia) throws SQLException, Exception {
 
-		String sql = "DELETE FROM INGREDIENTE";
-		sql += " WHERE ID = " + ingrediente.getId();
+		String sql = "DELETE FROM USUARIO";
+		sql += " WHERE IDENTIFICACION = " + preferencia.getIdCliente() + " AND TIPO = '"+ preferencia.getTipo() +"')";
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
 		prepStmt.executeQuery();
 	}
 	
-	/**
-	 * Metodo que, usando la conexión a la base de datos, saca todos los videos de la base de datos
-	 * <b>SQL Statement:</b> SELECT * FROM VIDEOS;
-	 * @return Arraylist con los videos de la base de datos.
-	 * @throws SQLException - Cualquier error que la base de datos arroje.
-	 * @throws Exception - Cualquier error que no corresponda a la base de datos
-	 */
-	public ArrayList<Ingrediente> darIngredientesPorProductos(Long idProducto) throws SQLException, Exception {
-		ArrayList<Ingrediente> ingredientes = new ArrayList<Ingrediente>();
-
-		String sql = "SELECT * FROM INGREDIENTE WHERE ID = (SELECT ID_INGREDIENTE FROM PRODUCTO_INGREDIENTE WHERE ID_PRODUCTO = "+idProducto+")";
-
-		PreparedStatement prepStmt = conn.prepareStatement(sql);
-		recursos.add(prepStmt);
-		ResultSet rs = prepStmt.executeQuery();
-
-		while (rs.next()) {
-			Long id = rs.getLong("ID");
-			String nombre = rs.getString("NOMBRE");
-			String descripcion = rs.getString("DESCRIPCION");
-			String traduccion = rs.getString("TRADUCCION");
-			
-			ingredientes.add(new Ingrediente(id, nombre, descripcion, traduccion));
-		}
-		return ingredientes;
-	}
-	
-	/**
-	 * Metodo que, usando la conexión a la base de datos, saca todos los videos de la base de datos
-	 * <b>SQL Statement:</b> SELECT * FROM VIDEOS;
-	 * @return Arraylist con los videos de la base de datos.
-	 * @throws SQLException - Cualquier error que la base de datos arroje.
-	 * @throws Exception - Cualquier error que no corresponda a la base de datos
-	 */
-	public void relacionarIngredienteConProducto(Long idIngrediente, Long idProducto) throws SQLException, Exception {
-
-		String sql = "INSERT INTO PRODUCTO_INGREDIENTE VALUES (";
-		sql += idProducto + ",";
-		sql += idIngrediente + ")";		
-		
-		PreparedStatement prepStmt = conn.prepareStatement(sql);
-		recursos.add(prepStmt);
-		ResultSet rs = prepStmt.executeQuery();
-	}
-
 }
