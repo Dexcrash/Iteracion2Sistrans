@@ -18,6 +18,8 @@ import javax.ws.rs.core.Response;
 
 import tm.RotondAndesTM;
 import vos.PedidoCompleto;
+import vos.ConsultaCliente;
+import vos.ConsultaZona;
 import vos.Usuario;
 
 @Path("usuarios")
@@ -205,6 +207,38 @@ public class PublicResource {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
 		return Response.status(200).entity(pedido).build();
+	}
+	
+	@GET
+	@Path( "zonas/{nombre}/{orden}" )
+	@Produces( { MediaType.APPLICATION_JSON } )
+	public Response getConsultaZona( @PathParam("nombre") String name, @PathParam("orden") String orden) {
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		List<ConsultaZona> zonas;
+		try {
+			if (name == null || name.length() == 0)
+				throw new Exception("Nombre del usuario no valido");
+			zonas = tm.darConsultaZonas(name, orden);
+		} catch (Exception e) {
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+		return Response.status(200).entity(zonas).build();
+	}
+	
+	@GET
+	@Path( "clientes/{idcl}")
+	@Produces( { MediaType.APPLICATION_JSON } )
+	public Response getConsultaCliente( @PathParam("idcl") Long idcl) {
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		List<ConsultaCliente> zonas;
+		try {
+			if (idcl == null || idcl.toString().length() == 0)
+				throw new Exception("Id del usuario no valido");
+			zonas = tm.darConsultaCliente(idcl);
+		} catch (Exception e) {
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+		return Response.status(200).entity(zonas).build();
 	}
 
 }

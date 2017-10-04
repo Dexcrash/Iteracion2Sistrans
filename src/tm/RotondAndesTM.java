@@ -26,6 +26,8 @@ import dao.DAOTablaProductos;
 import dao.DAOTablaRestaurantes;
 import dao.DAOTablaUsuarios;
 import dao.DAOTablaZonas;
+import vos.ConsultaCliente;
+import vos.ConsultaZona;
 import vos.Ingrediente;
 import vos.Preferencia;
 import vos.Menu;
@@ -1095,59 +1097,59 @@ public class RotondAndesTM {
 			////// transaccion
 			this.conn = darConexion();
 			daoMenus.setConn(conn);
-			Producto entrada = null;
-			Producto acompa = null;
-			Producto platof = null;
-			Producto postre = null;
-			Producto bebida = null;
-
-			if(menu.getIdentrada()!=null)
-		    entrada = daoProductos.buscarProductoPorId(menu.getIdentrada());
-			if(menu.getIdacompañamiento()!=null)
-		    acompa = daoProductos.buscarProductoPorId(menu.getIdacompañamiento());
-			if(menu.getIdplatoFuerte()!=null)
-		    platof = daoProductos.buscarProductoPorId(menu.getIdplatoFuerte());
-			if(menu.getIdpostre()!=null)
-		    postre = daoProductos.buscarProductoPorId(menu.getIdpostre());
-			if(menu.getIdbebida()!=null)
-			bebida = daoProductos.buscarProductoPorId(menu.getIdbebida());
-			Long idres = menu.getIdrestaurante();
-
-		    if(entrada!=null)
-		    {
-		    	if(entrada.getIdRestaurante()!=idres)
-		    	{
-		    		throw new Exception("El restaurante no tiene al producto con id " + menu.getIdentrada());
-		    	}
-		    }
-		    if(acompa!=null)
-		    {
-		    	if(acompa.getIdRestaurante()!=idres)
-		    	{
-		    		throw new Exception("El restaurante no tiene al producto con id " + menu.getIdacompañamiento());
-		    	}
-		    }
-		    if(platof!=null)
-		    {
-		    	if(platof.getIdRestaurante()!=idres)
-		    	{
-		    		throw new Exception("El restaurante no tiene al producto con id " + menu.getIdplatoFuerte());
-		    	}
-		    }
-		    if(postre!=null)
-		    {
-		    	if(postre.getIdRestaurante()!=idres)
-		    	{
-		    		throw new Exception("El restaurante no tiene al producto con id " + menu.getIdpostre());
-		    	}
-		    }
-		    if(bebida!=null)
-		    {
-		    	if(bebida.getIdRestaurante()!=idres)
-		    	{
-		    		throw new Exception("El restaurante no tiene al producto con id " + menu.getIdbebida());
-		    	}
-		    }
+//			Producto entrada = null;
+//			Producto acompa = null;
+//			Producto platof = null;
+//			Producto postre = null;
+//			Producto bebida = null;
+//
+//			if(menu.getIdentrada()!=null)
+//		    entrada = daoProductos.buscarProductoPorId(menu.getIdentrada());
+//			if(menu.getIdacompañamiento()!=null)
+//		    acompa = daoProductos.buscarProductoPorId(menu.getIdacompañamiento());
+//			if(menu.getIdplatoFuerte()!=null)
+//		    platof = daoProductos.buscarProductoPorId(menu.getIdplatoFuerte());
+//			if(menu.getIdpostre()!=null)
+//		    postre = daoProductos.buscarProductoPorId(menu.getIdpostre());
+//			if(menu.getIdbebida()!=null)
+//			bebida = daoProductos.buscarProductoPorId(menu.getIdbebida());
+//			Long idres = menu.getIdrestaurante();
+//
+//		    if(entrada!=null)
+//		    {
+//		    	if(entrada.getIdRestaurante()!=idres)
+//		    	{
+//		    		throw new Exception("El restaurante no tiene al producto con id " + menu.getIdentrada());
+//		    	}
+//		    }
+//		    if(acompa!=null)
+//		    {
+//		    	if(acompa.getIdRestaurante()!=idres)
+//		    	{
+//		    		throw new Exception("El restaurante no tiene al producto con id " + menu.getIdacompañamiento());
+//		    	}
+//		    }
+//		    if(platof!=null)
+//		    {
+//		    	if(platof.getIdRestaurante()!=idres)
+//		    	{
+//		    		throw new Exception("El restaurante no tiene al producto con id " + menu.getIdplatoFuerte());
+//		    	}
+//		    }
+//		    if(postre!=null)
+//		    {
+//		    	if(postre.getIdRestaurante()!=idres)
+//		    	{
+//		    		throw new Exception("El restaurante no tiene al producto con id " + menu.getIdpostre());
+//		    	}
+//		    }
+//		    if(bebida!=null)
+//		    {
+//		    	if(bebida.getIdRestaurante()!=idres)
+//		    	{
+//		    		throw new Exception("El restaurante no tiene al producto con id " + menu.getIdbebida());
+//		    	}
+//		    }
 
 			daoMenus.addMenu(menu);
 			conn.commit();
@@ -1243,6 +1245,7 @@ public class RotondAndesTM {
 		return preferencia;
 	}
 
+
 	public List<Producto> buscarProductosMasOfrecidos()throws Exception {
 			
 		DAOTablaProductos daoProductos = new DAOTablaProductos();
@@ -1311,4 +1314,66 @@ public class RotondAndesTM {
 		}
 	}
 
+	public List<ConsultaZona> darConsultaZonas(String nombrezona, String orden) throws Exception {
+		List<ConsultaZona> zonas;
+		DAOTablaZonas daoZonas = new DAOTablaZonas();
+		try {
+			////// transaccion
+			this.conn = darConexion();
+			daoZonas.setConn(conn);
+			zonas = daoZonas.darInformacionZona(nombrezona, orden);
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoZonas.cerrarRecursos();
+
+				if (this.conn != null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		return zonas;
+	}
+	
+	public List<ConsultaCliente> darConsultaCliente(Long idcl) throws Exception {
+		List<ConsultaCliente> clientes;
+		DAOTablaUsuarios daoClientes = new DAOTablaUsuarios();
+		try {
+			////// transaccion
+			this.conn = darConexion();
+			daoClientes.setConn(conn);
+			clientes = daoClientes.darInformacionCliente(idcl);
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoClientes.cerrarRecursos();
+
+				if (this.conn != null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		return clientes;
+	}
 }

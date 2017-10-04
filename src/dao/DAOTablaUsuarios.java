@@ -16,6 +16,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import vos.*;
 
@@ -239,6 +240,34 @@ public class DAOTablaUsuarios {
 			usuarios.add(new Usuario(rol, name, identificacion, correo, contraseña));
 		}
 		return usuarios;
+	}
+	
+	public ArrayList<ConsultaCliente> darInformacionCliente(Long idCliente) throws SQLException, Exception {
+		ArrayList<ConsultaCliente> clients = new ArrayList<ConsultaCliente>();
+
+		String sql = "SELECT * FROM (SELECT * FROM (SELECT * FROM (SELECT  ID_CLIENTE, DIA, COUNT(FECHAHORA) AS COMPRASENDIA FROM (select to_char(FECHAHORA, 'Dy') AS DIA, FECHAHORA, ID_CLIENTE, ID, SERVIDO FROM (SELECT * FROM PEDIDO WHERE ID_CLIENTE = ";
+		sql+= idCliente + ")) GROUP BY DIA, ID_CLIENTE) NATURAL JOIN (SELECT ID AS ID_PEDIDO, FECHAHORA AS FECHAHORAPEDIDO, SERVIDO AS PEDIDOSERVIDO, ID_CLIENTE FROM PEDIDO)) NATURAL JOIN (SELECT TIPO AS TIPOPREF, VALOR AS VALORPREF, ID_CLIENTE FROM PREFERENCIA)) NATURAL JOIN (SELECT IDENTIFICACION AS ID_CLIENTE, NOMBRE AS NOMBRE_CLIENTE, CORREOELECTRONICO AS CORREO, ROL AS ROL FROM USUARIO WHERE ROL = 'Cliente')";
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+
+		while (rs.next()) {
+			Long idcliente = rs.getLong("ID_CLIENTE");
+			String dia = rs.getString("DIA");
+			Long comprasd = rs.getLong("COMPRASENDIA");
+			Long idpedi = rs.getLong("ID_PEDIDO");
+			Date fechaped= rs.getDate("FECHAHORAPEDIDO");
+			Long pedidoservido = rs.getLong("PEDIDOSERVIDO");
+			String tipopre = rs.getString("TIPOPREF");
+			String valorpre = rs.getString("VALORPREF");
+			String nombrecl = rs.getString("NOMBRE_CLIENTE");
+			String correo = rs.getString("CORREO");
+			String rol = rs.getString("ROL");
+			
+
+			clients.add(new ConsultaCliente(idcliente.toString(), dia, comprasd, idpedi, fechaped, pedidoservido, tipopre, valorpre, nombrecl, correo, rol));
+		}
+		return clients;
 	}
 
 }
