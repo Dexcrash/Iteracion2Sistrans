@@ -115,7 +115,7 @@ public class DAOTablaZonas {
 	public Zona buscarZonaPorNombre(String nombre) throws SQLException, Exception {
 		Zona zona = null;
 
-		String sql = "SELECT * FROM ZONA WHERE NOMBRE =" + nombre;
+		String sql = "SELECT * FROM ZONA WHERE NOMBRE = '" + nombre+"'";
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);

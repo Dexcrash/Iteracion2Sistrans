@@ -1320,6 +1320,10 @@ public class RotondAndesTM {
 			////// transaccion
 			this.conn = darConexion();
 			daoZonas.setConn(conn);
+			if(daoZonas.buscarZonaPorNombre(nombrezona)==null)
+			{
+				throw new Exception("La zona no existe");
+			}
 			zonas = daoZonas.darInformacionZona(nombrezona, orden);
 		} catch (SQLException e) {
 			System.err.println("SQLException:" + e.getMessage());
@@ -1351,6 +1355,12 @@ public class RotondAndesTM {
 			////// transaccion
 			this.conn = darConexion();
 			daoClientes.setConn(conn);
+			Usuario c = daoClientes.buscarUsuarioPorId(idcl.toString());
+			if(c==null)
+				throw new Exception("El usuario no existe");
+			if(!c.getRol().equals("Cliente"))
+				throw new Exception("El usuario no es un cliente");
+			
 			clientes = daoClientes.darInformacionCliente(idcl);
 
 		} catch (SQLException e) {

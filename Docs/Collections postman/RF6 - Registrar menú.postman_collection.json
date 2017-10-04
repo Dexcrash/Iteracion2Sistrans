@@ -1,0 +1,166 @@
+{
+	"variables": [],
+	"info": {
+		"name": "RF6 - Registrar menú",
+		"_postman_id": "37426e7d-7ab0-3875-3dde-8e0ff6c2d9d0",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Agregar menú FK Existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:8080/RotondAndes/rest/restaurantes/menus",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"id\": \"11\",\n        \"nombre\": \"Burritox\",\n        \"costo\": 90000,\n        \"precio\": 130000,\n        \"idrestaurante\": 5,\n        \"idplatoFuerte\": 6\n\n    }"
+				},
+				"description": "Agregar un nuevo menú, con una FK que si existe en la tabla"
+			},
+			"response": []
+		},
+		{
+			"name": "Agregar menú que ya existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 500\"] = responseCode.code === 500;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:8080/RotondAndes/rest/restaurantes/menus",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n        \"id\": \"1\",\n        \"nombre\": \"Ajiaquito\",\n        \"costo\": 10000,\n        \"precio\": 25000,\n        \"idrestaurante\": 2,\n        \"identrada\": 0,\n        \"idacompañamiento\": 0,\n        \"idplatoFuerte\": 9,\n        \"idpostre\": 0,\n        \"idbebida\": 0\n    }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Agregar menú FK No existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 500\"] = responseCode.code === 500;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:8080/RotondAndes/rest/restaurantes/menus",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"id\": \"17\",\n        \"nombre\": \"Burritoss\",\n        \"costo\": 90000,\n        \"precio\": 130000,\n        \"idrestaurante\": 5,\n        \"idplatoFuerte\": 24\n\n    }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Agregar el mismo menú que ya se agregó",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 500\"] = responseCode.code === 500;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:8080/RotondAndes/rest/restaurantes/menus",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"id\": \"11\",\n        \"nombre\": \"Burritox\",\n        \"costo\": 90000,\n        \"precio\": 130000,\n        \"idrestaurante\": 5,\n        \"idplatoFuerte\": 6\n\n    }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Agregar menú con producto de otro restaurante",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 500\"] = responseCode.code === 500;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:8080/RotondAndes/rest/restaurantes/menus",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"id\": \"25\",\n        \"nombre\": \"Burro carne\",\n        \"costo\": 90000,\n        \"precio\": 130000,\n        \"idrestaurante\": 5,\n        \"idplatoFuerte\": 4\n\n    }"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

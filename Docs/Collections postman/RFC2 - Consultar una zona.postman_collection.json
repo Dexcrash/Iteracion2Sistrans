@@ -1,0 +1,86 @@
+{
+	"variables": [],
+	"info": {
+		"name": "RFC2 - Consultar una zona",
+		"_postman_id": "4c9cfa50-7b77-c660-3c1e-349a2b5ad9fc",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Consultar una zona existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:8080/RotondAndes/rest/usuarios/zonas/Oriental/NOMBRE_PRODUCTO_SERVIDO",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"id\": \"8\",\n        \"nombre\": \"Burritox\",\n        \"costo\": 90000,\n        \"precio\": 130000,\n        \"idrestaurante\": 5,\n        \"idplatoFuerte\": 6\n\n    }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar una zona con parámetro de ordenamiento inválido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 500\"] = responseCode.code === 500;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:8080/RotondAndes/rest/usuarios/zonas/Occidental/Numero",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar una zona que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 500\"] = responseCode.code === 500;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:8080/RotondAndes/rest/usuarios/zonas/Suroriental/NOMBRE_PRODUCTO_SERVIDO",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
