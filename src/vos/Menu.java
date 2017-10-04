@@ -10,64 +10,87 @@ public class Menu {
 	 * Nombre del usuario
 	 */
 	@JsonProperty(value = "id")
-	private Long id;
+	private String id;
 
 	/**
 	 * Identificador del usuario
 	 */
 	@JsonProperty(value = "nombre")
 	private String nombre;
+
+	@JsonProperty(value = "costo")
+	private Long costo;
+
+	/**
+	 * Rol del usuario
+	 */
+	@JsonProperty(value = "precio")
+	private Long precio;
+
 	
 	/**
 	 * Identificador del usuario
 	 */
-	@JsonProperty(value = "entrada")
+	@JsonProperty(value = "identrada")
 	private Long entrada;
-	
+
 	/**
 	 * Identificador del usuario
 	 */
-	@JsonProperty(value = "platoFuerte")
+	@JsonProperty(value = "idplatoFuerte")
 	private Long platoFuerte;
-	
+
 	/**
 	 * Identificador del usuario
 	 */
-	@JsonProperty(value = "acompañamiento")
+	@JsonProperty(value = "idacompañamiento")
 	private Long acompañamiento;
-	
+
 	/**
 	 * Identificador del usuario
 	 */
-	@JsonProperty(value = "postre")
+	@JsonProperty(value = "idpostre")
 	private Long postre;
 
 	/**
 	 * Correo electronico del usuario
 	 */
-	@JsonProperty(value = "bebida")
+	@JsonProperty(value = "idbebida")
 	private Long bebida;
 
 	/**
 	 * Rol del usuario
 	 */
-	@JsonProperty(value = "restaurante")
-	private Long restaurate;
+	@JsonProperty(value = "idrestaurante")
+	private Long idrestaurante;
 
-	
 	/**
-	 * Metodo constructor de la clase video
-	 * <b>post: </b> Crea el video con los valores que entran como parametro
-	 * @param id - Id del video.
-	 * @param name - Nombre del video. name != null
-	 * @param duration - Duracion en minutos del video.
+	 * Rol del usuario
 	 */
-	public Menu(@JsonProperty(value="id")Long id, @JsonProperty(value="nombre")String nombre, @JsonProperty(value = "entrada") Long entrada,
-			@JsonProperty(value="platoFuerte")Long platoFuerte, @JsonProperty(value="acompañamiento")Long acompañamiento, 
-			@JsonProperty(value="postre")Long postre, @JsonProperty(value="bebida")Long bebida){
+
+	/**
+	 * Metodo constructor de la clase video <b>post: </b> Crea el video con los
+	 * valores que entran como parametro
+	 * 
+	 * @param id
+	 *            - Id del video.
+	 * @param name
+	 *            - Nombre del video. name != null
+	 * @param duration
+	 *            - Duracion en minutos del video.
+	 */
+	public Menu(@JsonProperty(value = "id") String id, @JsonProperty(value = "nombre") String nombre,
+			@JsonProperty(value = "costo") Long costo, @JsonProperty(value = "precio") Long precio,
+			@JsonProperty(value = "idrestaurante") Long idrestaurante, @JsonProperty(value = "identrada") Long entrada,
+			@JsonProperty(value = "idacompañamiento") Long acompañamiento,
+			@JsonProperty(value = "idplatoFuerte") Long platoFuerte, @JsonProperty(value = "idpostre") Long postre,
+			@JsonProperty(value = "idbebida") Long bebida) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
+		this.precio = precio;
+		this.costo = costo;
+		this.idrestaurante = idrestaurante;
 		this.entrada = entrada;
 		this.platoFuerte = platoFuerte;
 		this.acompañamiento = acompañamiento;
@@ -75,11 +98,11 @@ public class Menu {
 		this.bebida = bebida;
 	}
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -132,14 +155,35 @@ public class Menu {
 	}
 
 	public Long getRestaurate() {
-		return restaurate;
+		return idrestaurante;
 	}
 
 	public void setRestaurate(Long restaurate) {
-		this.restaurate = restaurate;
+		this.idrestaurante = restaurate;
+	}
+	public Long getCosto() {
+		return costo;
+	}
+
+	public void setCosto(Long costo) {
+		this.costo = costo;
+	}
+
+	public Long getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(Long precio) {
+		this.precio = precio;
+	}
+
+	public Long getIdrestaurante() {
+		return idrestaurante;
+	}
+
+	public void setIdrestaurante(Long idrestaurante) {
+		this.idrestaurante = idrestaurante;
 	}
 
 
-	
-	
 }

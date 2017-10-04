@@ -129,7 +129,7 @@ public class DAOTablaZonas {
 	 */
 	public void addZona(Zona zona) throws SQLException, Exception {
 
-		String sql = "INSERT INTO ZONA VALUES (";
+		String sql = "INSERT INTO ZONA VALUES ('";
 		sql += zona.getName()  + "')";
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
@@ -150,7 +150,7 @@ public class DAOTablaZonas {
 	public void deleteZona(Zona zona) throws SQLException, Exception {
 
 		String sql = "DELETE FROM ZONA";
-		sql += " WHERE NOMBRE = " + zona.getName();
+		sql += " WHERE NOMBRE = '" + zona.getName() + "'";
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
