@@ -21,6 +21,7 @@ import java.util.Properties;
 import dao.DAOTablaIngredientes;
 import dao.DAOTablaPreferencias;
 import dao.DAOTablaMenus;
+import dao.DAOTablaPedido;
 import dao.DAOTablaProductos;
 import dao.DAOTablaRestaurantes;
 import dao.DAOTablaUsuarios;
@@ -28,6 +29,8 @@ import dao.DAOTablaZonas;
 import vos.Ingrediente;
 import vos.Preferencia;
 import vos.Menu;
+import vos.Pedido;
+import vos.PedidoCompleto;
 import vos.Producto;
 import vos.Restaurante;
 import vos.Usuario;
@@ -1240,5 +1243,72 @@ public class RotondAndesTM {
 		return preferencia;
 	}
 
+	public List<Producto> buscarProductosMasOfrecidos()throws Exception {
+			
+		DAOTablaProductos daoProductos = new DAOTablaProductos();
+		List<Producto> productos;
+		try {
+			////// transaccion
+			this.conn = darConexion();
+			daoProductos.setConn(conn);
+			productos = daoProductos.buscarProductosMasOfrecidos();
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoProductos.cerrarRecursos();
+				if (this.conn != null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		return productos;
+	}
+
+	public void realizarPedido(PedidoCompleto pedido)throws Exception {
+		
+		DAOTablaPedido daoPedidos = new DAOTablaPedido();
+		String menus;
+		try {
+			////// transaccion
+			this.conn = darConexion();
+			daoPedidos.setConn(conn);
+			daoPedidos.addPedido(new Pedido(pedido.getId(), pedido.getFecha(), pedido.isServido(),pedido.getIdCliente()));
+			menus = pedido.getIdsMenu();
+			String[] menuIds= menus.split("-");
+			for(String idMenu : menuIds) {
+				daoPedidos.addMenuAPedido(pedido.getId(), Long.parseLong(idMenu));
+			}
+			
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoPedidos.cerrarRecursos();
+				if (this.conn != null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+	}
 
 }

@@ -16,6 +16,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import vos.*;
 
@@ -255,6 +256,64 @@ public class DAOTablaProductos {
 		ArrayList<Producto> productos = new ArrayList<Producto>();
 
 		String sql = "SELECT * FROM PRODUCTO WHERE ID_RESTAURANTE = " + id_Restaurante +"";
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+
+		while (rs.next()) {
+			Long id = rs.getLong("ID");
+			String nombre = rs.getString("NOMBRE");
+			String descripcion = rs.getString("DESCRIPCION");
+			String traduccion = rs.getString("TRADUCCION");
+			Long tiempoPreparacion = rs.getLong("TIEMPOPREPARACION");
+			Double costo = rs.getDouble("COSTO");
+			Double precio = rs.getDouble("PRECIO");
+			Integer disponibles = rs.getInt("DISPONIBLES");
+			String tipo = rs.getString("TIPO");
+			Long idRestaurante = rs.getLong("ID_RESTAURANTE");
+			
+			productos.add(new Producto(id, nombre, tipo, disponibles, tiempoPreparacion, precio, costo, descripcion, traduccion, idRestaurante));
+		}
+		return productos;
+	}
+
+	/**
+	 * Metodo que, usando la conexi√≥n a la base de datos, saca todos los videos de la base de datos
+	 * <b>SQL Statement:</b> SELECT * FROM VIDEOS;
+	 * @return Arraylist con los videos de la base de datos.
+	 * @throws SQLException - Cualquier error que la base de datos arroje.
+	 * @throws Exception - Cualquier error que no corresponda a la base de datos
+	 */
+	public ArrayList<Producto> buscarProductosMasOfrecidos() throws SQLException, Exception {
+		ArrayList<Producto> productos = new ArrayList<Producto>();
+
+		String sql = "SELECT * FROM PRODUCTO JOIN " + 
+				"(SELECT X.ID, COUNT(X.ID)AS CUENTA FROM " + 
+				"(SELECT PRODUCTO.ID, PRODUCTO.NOMBRE, MENU.ID AS IDM " + 
+				"FROM (PRODUCTO JOIN MENU ON PRODUCTO.ID = MENU.ID_PRODUCTOENTRADA) " + 
+				"UNION SELECT PRODUCTO.ID, PRODUCTO.NOMBRE, MENU.ID AS IDM " + 
+				"FROM (PRODUCTO JOIN MENU ON PRODUCTO.ID = MENU.ID_PRODUCTOACOMPA—AMIENTO) " + 
+				"UNION SELECT PRODUCTO.ID, PRODUCTO.NOMBRE, MENU.ID AS IDM " + 
+				"FROM (PRODUCTO JOIN MENU ON PRODUCTO.ID = MENU.ID_PRODUCTOPLATOFUERTE) " + 
+				"UNION SELECT PRODUCTO.ID, PRODUCTO.NOMBRE, MENU.ID AS IDM " + 
+				"FROM (PRODUCTO JOIN MENU ON PRODUCTO.ID = MENU.ID_PRODUCTOPOSTRE) " + 
+				"UNION SELECT PRODUCTO.ID, PRODUCTO.NOMBRE, MENU.ID AS IDM " + 
+				"FROM (PRODUCTO JOIN MENU ON PRODUCTO.ID = MENU.ID_PRODUCTOBEBIDA))X " + 
+				"GROUP BY X.ID)Z ON PRODUCTO.ID = Z.ID " + 
+				"WHERE CUENTA IN (SELECT MAX(CUENTA) AS MAXIMO FROM " + 
+				"(SELECT X.ID, COUNT(X.ID)AS CUENTA FROM " + 
+				"(SELECT PRODUCTO.ID, PRODUCTO.NOMBRE, MENU.ID AS IDM " + 
+				"FROM (PRODUCTO JOIN MENU ON PRODUCTO.ID = MENU.ID_PRODUCTOENTRADA)" + 
+				"UNION SELECT PRODUCTO.ID, PRODUCTO.NOMBRE, MENU.ID AS IDM " + 
+				"FROM (PRODUCTO JOIN MENU ON PRODUCTO.ID = MENU.ID_PRODUCTOACOMPA—AMIENTO) " + 
+				"UNION SELECT PRODUCTO.ID, PRODUCTO.NOMBRE, MENU.ID AS IDM " + 
+				"FROM (PRODUCTO JOIN MENU ON PRODUCTO.ID = MENU.ID_PRODUCTOPLATOFUERTE) " + 
+				"UNION SELECT PRODUCTO.ID, PRODUCTO.NOMBRE, MENU.ID AS IDM " + 
+				"FROM (PRODUCTO JOIN MENU ON PRODUCTO.ID = MENU.ID_PRODUCTOPOSTRE) " + 
+				"UNION SELECT PRODUCTO.ID, PRODUCTO.NOMBRE, MENU.ID AS IDM " + 
+				"FROM (PRODUCTO JOIN MENU ON PRODUCTO.ID = MENU.ID_PRODUCTOBEBIDA))X " + 
+				"GROUP BY X.ID))";
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);

@@ -18,6 +18,7 @@ import javax.ws.rs.core.Response;
 
 import tm.RotondAndesTM;
 import vos.Preferencia;
+import vos.Producto;
 import vos.Usuario;
 
 @Path("clientes")
@@ -169,4 +170,23 @@ public class ClienteResource {
 		return Response.status(200).entity(preferencias).build();
 	}
 
+    /**
+     * Metodo que expone servicio REST usando DELETE que elimina el cliente que recibe en Json
+     * <b>URL: </b> http://"ip o nombre de host":8080/RotondAndes/rest/clientes
+     * @param cliente - cliente a aliminar. 
+     * @return Json con el cliente que elimino o Json con el error que se produjo
+     */
+	@GET
+	@Path("productosMasOfrecidos")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getProductosMasOfrecidos() {
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		List<Producto> productos = null;
+		try {
+			productos = tm.buscarProductosMasOfrecidos();
+		} catch (Exception e) {
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+		return Response.status(200).entity(productos).build();
+	}
 }

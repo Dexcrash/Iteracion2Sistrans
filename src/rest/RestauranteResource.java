@@ -252,22 +252,6 @@ public class RestauranteResource {
 		}
 		return Response.status(200).entity(ingredientes).build();
 	}
-
-	private boolean checkUsuario(String id, String contraseña){
-		
-		RotondAndesTM tm = new RotondAndesTM(getPath());
-		Usuario usu;
-		boolean respuesta = false;
-		try {
-			usu = tm.buscarUsuarioPorId(id);
-			if(usu.getContraseña().equals(contraseña))respuesta = true;
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return respuesta;
-	}
 	
 	   /**
      * Metodo que expone servicio REST usando POST que agrega el usuario que recibe en Json
