@@ -1,0 +1,86 @@
+{
+	"variables": [],
+	"info": {
+		"name": "RFC3 - Consultar los clientes",
+		"_postman_id": "8bdb2a4a-758d-ba3e-b05f-93da84b563b7",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Consultar un cliente con id existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:8080/RotondAndes/rest/usuarios/clientes/1",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"id\": \"8\",\n        \"nombre\": \"Burritox\",\n        \"costo\": 90000,\n        \"precio\": 130000,\n        \"idrestaurante\": 5,\n        \"idplatoFuerte\": 6\n\n    }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar un usuario que no es cliente y existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 500\"] = responseCode.code === 500;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:8080/RotondAndes/rest/usuarios/clientes/12",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar un usuario inexistente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 500\"] = responseCode.code === 500;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:8080/RotondAndes/rest/usuarios/clientes/88",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

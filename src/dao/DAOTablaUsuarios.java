@@ -135,7 +135,7 @@ public class DAOTablaUsuarios {
 	{
 		Usuario usuario = null;
 
-		String sql = "SELECT * FROM USUARIO WHERE ID =" + pId;
+		String sql = "SELECT * FROM USUARIO WHERE IDENTIFICACION = '" + pId + "'";
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);

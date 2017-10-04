@@ -1,0 +1,104 @@
+{
+	"variables": [],
+	"info": {
+		"name": "RF7 - Registrar zona",
+		"_postman_id": "c7c008b4-3d11-3d85-9c4f-381e80a70d84",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear una nueva zona ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:8080/RotondAndes/rest/administradores/zonas",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"name\": \"De prueba 3\"\n    }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Crear una zona conocida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 500\"] = responseCode.code === 500;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:8080/RotondAndes/rest/administradores/zonas",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"name\": \"Oriental\"\n    }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Crear la misma zona ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 500\"] = responseCode.code === 500;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:8080/RotondAndes/rest/administradores/zonas",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"name\": \"De prueba 3\"\n    }"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
