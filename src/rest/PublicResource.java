@@ -18,7 +18,9 @@ import javax.ws.rs.core.Response;
 
 import tm.RotondAndesTM;
 import vos.PedidoCompleto;
+import vos.Producto;
 import vos.ConsultaCliente;
+import vos.ConsultaFiltros;
 import vos.ConsultaZona;
 import vos.Usuario;
 
@@ -241,4 +243,24 @@ public class PublicResource {
 		return Response.status(200).entity(zonas).build();
 	}
 
+    /**
+     * Metodo que expone servicio REST usando DELETE que elimina el usuario que recibe en Json
+     * <b>URL: </b> http://"ip o nombre de host":8080/RotondAndes/rest/usuarios
+     * @param usuario - usuario a aliminar. 
+     * @return Json con el usuario que elimino o Json con el error que se produjo
+     */
+	@POST
+	@Path("productos")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response realizarConsultaFiltro(ConsultaFiltros pedido) {
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		List<Producto> productos;
+		try {
+			productos = tm.consultarProductosFiltros(pedido);
+		} catch (Exception e) {
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+		return Response.status(200).entity(productos).build();
+	}
 }

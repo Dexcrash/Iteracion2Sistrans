@@ -15,6 +15,7 @@ import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
@@ -27,6 +28,7 @@ import dao.DAOTablaRestaurantes;
 import dao.DAOTablaUsuarios;
 import dao.DAOTablaZonas;
 import vos.ConsultaCliente;
+import vos.ConsultaFiltros;
 import vos.ConsultaZona;
 import vos.Ingrediente;
 import vos.Preferencia;
@@ -986,9 +988,7 @@ public class RotondAndesTM {
 		return preferencias;
 	}
 
-
-
-	public Preferencia addPreferencia(Long idCLiente, Preferencia preferencia)throws Exception {
+	public Preferencia addPreferencia(Long idCLiente, Preferencia preferencia) throws Exception {
 		DAOTablaPreferencias daoPreferencias = new DAOTablaPreferencias();
 		try {
 			////// transaccion
@@ -1017,7 +1017,6 @@ public class RotondAndesTM {
 		}
 		return preferencia;
 	}
-
 
 	/**
 	 * Metodo que modela la transaccion que retorna todas las zonas de la base de
@@ -1059,7 +1058,7 @@ public class RotondAndesTM {
 		}
 		return zonas;
 	}
-	
+
 	public void deleteZona(Zona zona) throws Exception {
 		DAOTablaZonas daoZonas = new DAOTablaZonas();
 		try {
@@ -1088,7 +1087,7 @@ public class RotondAndesTM {
 			}
 		}
 	}
-	
+
 	public void addMenu(Menu menu) throws Exception {
 		DAOTablaMenus daoMenus = new DAOTablaMenus();
 
@@ -1102,53 +1101,48 @@ public class RotondAndesTM {
 			Producto postre = null;
 			Producto bebida = null;
 
-			if(menu.getIdentrada()!=null)
-		    entrada = daoMenus.buscarProductoPorId(menu.getIdentrada());
-			if(menu.getIdacompañamiento()!=null)
-		    acompa = daoMenus.buscarProductoPorId(menu.getIdacompañamiento());
-			if(menu.getIdplatoFuerte()!=null)
-		    platof = daoMenus.buscarProductoPorId(menu.getIdplatoFuerte());
-			if(menu.getIdpostre()!=null)
-		    postre = daoMenus.buscarProductoPorId(menu.getIdpostre());
-			if(menu.getIdbebida()!=null)
-			bebida = daoMenus.buscarProductoPorId(menu.getIdbebida());
+			if (menu.getIdentrada() != null)
+				entrada = daoMenus.buscarProductoPorId(menu.getIdentrada());
+			if (menu.getIdacompañamiento() != null)
+				acompa = daoMenus.buscarProductoPorId(menu.getIdacompañamiento());
+			if (menu.getIdplatoFuerte() != null)
+				platof = daoMenus.buscarProductoPorId(menu.getIdplatoFuerte());
+			if (menu.getIdpostre() != null)
+				postre = daoMenus.buscarProductoPorId(menu.getIdpostre());
+			if (menu.getIdbebida() != null)
+				bebida = daoMenus.buscarProductoPorId(menu.getIdbebida());
 			Long idres = menu.getIdrestaurante();
 
-		    if(entrada!=null)
-		    {
-		    	if(entrada.getIdRestaurante()!=idres)
-		    	{
-		    		throw new Exception("El restaurante " +idres+ " no tiene al producto con id " + menu.getIdentrada());
-		    	}
-		    }
-		    if(acompa!=null)
-		    {
-		    	if(acompa.getIdRestaurante()!=idres)
-		    	{
-		    		throw new Exception("El restaurante " +idres+ "  no tiene al producto con id " + menu.getIdacompañamiento());
-		    	}
-		    }
-		    if(platof!=null)
-		    {
-		    	if(platof.getIdRestaurante()!=idres)
-		    	{
-		    		throw new Exception("El restaurante " +idres+ "  no tiene al producto con id " + menu.getIdplatoFuerte());
-		    	}
-		    }
-		    if(postre!=null)
-		    {
-		    	if(postre.getIdRestaurante()!=idres)
-		    	{
-		    		throw new Exception("El restaurante " +idres+ "  no tiene al producto con id " + menu.getIdpostre());
-		    	}
-		    }
-		    if(bebida!=null)
-		    {
-		    	if(bebida.getIdRestaurante()!=idres)
-		    	{
-		    		throw new Exception("El restaurante " +idres+ "  no tiene al producto con id " + menu.getIdbebida());
-		    	}
-		    }
+			if (entrada != null) {
+				if (entrada.getIdRestaurante() != idres) {
+					throw new Exception(
+							"El restaurante " + idres + " no tiene al producto con id " + menu.getIdentrada());
+				}
+			}
+			if (acompa != null) {
+				if (acompa.getIdRestaurante() != idres) {
+					throw new Exception(
+							"El restaurante " + idres + "  no tiene al producto con id " + menu.getIdacompañamiento());
+				}
+			}
+			if (platof != null) {
+				if (platof.getIdRestaurante() != idres) {
+					throw new Exception(
+							"El restaurante " + idres + "  no tiene al producto con id " + menu.getIdplatoFuerte());
+				}
+			}
+			if (postre != null) {
+				if (postre.getIdRestaurante() != idres) {
+					throw new Exception(
+							"El restaurante " + idres + "  no tiene al producto con id " + menu.getIdpostre());
+				}
+			}
+			if (bebida != null) {
+				if (bebida.getIdRestaurante() != idres) {
+					throw new Exception(
+							"El restaurante " + idres + "  no tiene al producto con id " + menu.getIdbebida());
+				}
+			}
 
 			daoMenus.addMenu(menu);
 			conn.commit();
@@ -1244,9 +1238,8 @@ public class RotondAndesTM {
 		return preferencia;
 	}
 
+	public List<Producto> buscarProductosMasOfrecidos() throws Exception {
 
-	public List<Producto> buscarProductosMasOfrecidos()throws Exception {
-			
 		DAOTablaProductos daoProductos = new DAOTablaProductos();
 		List<Producto> productos;
 		try {
@@ -1277,8 +1270,8 @@ public class RotondAndesTM {
 		return productos;
 	}
 
-	public void realizarPedido(PedidoCompleto pedido)throws Exception {
-		
+	public void realizarPedido(PedidoCompleto pedido) throws Exception {
+
 		DAOTablaPedido daoPedidos = new DAOTablaPedido();
 		String menus;
 		String productos;
@@ -1286,22 +1279,23 @@ public class RotondAndesTM {
 			////// transaccion
 			this.conn = darConexion();
 			daoPedidos.setConn(conn);
-			daoPedidos.addPedido(new Pedido(pedido.getFecha(), pedido.getIdCliente(), pedido.getId(), pedido.getServido()));
+			daoPedidos.addPedido(
+					new Pedido(pedido.getFecha(), pedido.getIdCliente(), pedido.getId(), pedido.getServido()));
 			menus = pedido.getIdsMenu();
-			String[] menuIds= menus.split("-");
+			String[] menuIds = menus.split("-");
 			String[] info;
-			for(String idMenu : menuIds) {
+			for (String idMenu : menuIds) {
 				info = idMenu.split(":");
-				daoPedidos.addMenuAPedido(pedido.getId(), Long.parseLong(info[0]),Integer.parseInt(info[1]));
+				daoPedidos.addMenuAPedido(pedido.getId(), Long.parseLong(info[0]), Integer.parseInt(info[1]));
 			}
-			
+
 			productos = pedido.getIdsProducto();
-			String[] productoIds= productos.split("-");
-			for(String idProducto : productoIds) {
+			String[] productoIds = productos.split("-");
+			for (String idProducto : productoIds) {
 				info = idProducto.split(":");
-				daoPedidos.addProductoAPedido(pedido.getId(), Long.parseLong(info[0]),Integer.parseInt(info[1]));
+				daoPedidos.addProductoAPedido(pedido.getId(), Long.parseLong(info[0]), Integer.parseInt(info[1]));
 			}
-			
+
 		} catch (SQLException e) {
 			System.err.println("SQLException:" + e.getMessage());
 			e.printStackTrace();
@@ -1330,8 +1324,7 @@ public class RotondAndesTM {
 			////// transaccion
 			this.conn = darConexion();
 			daoZonas.setConn(conn);
-			if(daoZonas.buscarZonaPorNombre(nombrezona)==null)
-			{
+			if (daoZonas.buscarZonaPorNombre(nombrezona) == null) {
 				throw new Exception("La zona no existe");
 			}
 			zonas = daoZonas.darInformacionZona(nombrezona, orden);
@@ -1357,7 +1350,7 @@ public class RotondAndesTM {
 		}
 		return zonas;
 	}
-	
+
 	public List<ConsultaCliente> darConsultaCliente(Long idcl) throws Exception {
 		List<ConsultaCliente> clientes;
 		DAOTablaUsuarios daoClientes = new DAOTablaUsuarios();
@@ -1366,11 +1359,11 @@ public class RotondAndesTM {
 			this.conn = darConexion();
 			daoClientes.setConn(conn);
 			Usuario c = daoClientes.buscarUsuarioPorId(idcl.toString());
-			if(c==null)
+			if (c == null)
 				throw new Exception("El usuario no existe");
-			if(!c.getRol().equals("Cliente"))
+			if (!c.getRol().equals("Cliente"))
 				throw new Exception("El usuario no es un cliente");
-			
+
 			clientes = daoClientes.darInformacionCliente(idcl);
 
 		} catch (SQLException e) {
@@ -1411,12 +1404,12 @@ public class RotondAndesTM {
 			menus = daoPedido.darMenusDePedido(id);
 			daoPedido.cerrarRecursos();
 			daoMenus.setConn(conn);
-			for(Long idMenu:menus)
+			for (Long idMenu : menus)
 				productos.addAll(daoMenus.darProductodeMenu(idMenu));
 			daoMenus.cerrarRecursos();
 			daoProductos.setConn(conn);
-			for(Long idProducto:productos)
-				daoProductos.descontarProducto(idProducto);				
+			for (Long idProducto : productos)
+				daoProductos.descontarProducto(idProducto);
 
 		} catch (SQLException e) {
 			System.err.println("SQLException:" + e.getMessage());
@@ -1428,7 +1421,7 @@ public class RotondAndesTM {
 			throw e;
 		} finally {
 			try {
-				daoPedido.cerrarRecursos();
+				daoProductos.cerrarRecursos();
 
 				if (this.conn != null)
 					this.conn.close();
@@ -1438,6 +1431,92 @@ public class RotondAndesTM {
 				throw exception;
 			}
 		}
-		return "Se sirvio el pedido con el id : "+id;
+		return "Se sirvio el pedido con el id : " + id;
+	}
+
+	public List<Producto> consultarProductosFiltros(ConsultaFiltros consulta)
+			throws Exception {
+		Long idRestaurante = consulta.getIdRestaurante();
+		String categoria = consulta.getCategoria(); 
+		String fechas = consulta.getFechas();
+		String precios = consulta.getPrecios();
+		ArrayList<Producto> filtro = new ArrayList<>();
+		List<Long> pedidos = new ArrayList<>();
+		List<Long> productosPedidos = new ArrayList<>();
+		List<Long> menus = new ArrayList<>();
+		ArrayList<Producto> productos = new ArrayList<>();
+		DAOTablaPedido daoPedido = new DAOTablaPedido();
+		DAOTablaMenus daoMenus = new DAOTablaMenus();
+		DAOTablaProductos daoProductos = new DAOTablaProductos();
+		try {
+			////// transaccion
+			this.conn = darConexion();
+			if (fechas != null) {
+				daoPedido.setConn(conn);
+				pedidos = daoPedido.darPedidosPorFecha(fechas);
+				for (Long idPedido : pedidos) {
+					productosPedidos.addAll(daoPedido.darProductosDePedido(idPedido));
+					menus.addAll(daoPedido.darMenusDePedido(idPedido));
+				}
+				daoPedido.cerrarRecursos();
+				daoMenus.setConn(conn);
+				for (Long idMenu : menus) {
+					productosPedidos.addAll(daoMenus.darProductodeMenu(idMenu));
+				}
+				daoMenus.cerrarRecursos();
+			}
+
+			daoProductos.setConn(conn);
+			productos = daoProductos.darProductos();
+			if (idRestaurante != null) {
+				filtro = daoProductos.darProductosPorRestaurante(idRestaurante);
+				productos = unir(productos, filtro);
+			}
+			if (categoria != null) {
+				filtro = daoProductos.darProductosPorCategoria(categoria);
+				productos = unir(productos, filtro);
+			}
+			if (precios != null) {
+				filtro = daoProductos.darProductosPorRangoPrecio(precios);
+				productos = unir(productos, filtro);
+			}
+			if (fechas != null) {
+				for (Long idProducto : productosPedidos)
+					filtro.add(daoProductos.buscarProductoPorId(idProducto));
+				productos = unir(productos, filtro);
+			}
+			
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoProductos.cerrarRecursos();
+
+				if (this.conn != null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		return productos;
+	}
+	
+	private ArrayList<Producto> unir(ArrayList<Producto> l1,ArrayList<Producto> l2){
+		ArrayList<Producto> union = new ArrayList<>();
+		for(Producto p1 :l1) {
+			for(Producto p2 :l2) {
+				if(p1.getId().equals(p2.getId()))union.add(p1);
+			}
+		}
+		return union;
 	}
 }

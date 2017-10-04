@@ -210,6 +210,30 @@ public class DAOTablaPedido {
 		}
 		return productos;
 	}
+	
+	/**
+	 * Metodo que, usando la conexión a la base de datos, saca todos los videos de la base de datos
+	 * <b>SQL Statement:</b> SELECT * FROM VIDEOS;
+	 * @return Arraylist con los videos de la base de datos.
+	 * @throws SQLException - Cualquier error que la base de datos arroje.
+	 * @throws Exception - Cualquier error que no corresponda a la base de datos
+	 */
+	public ArrayList<Long> darPedidosPorFecha(String rangoFechas) throws SQLException, Exception {
+		ArrayList<Long> pedidos = new ArrayList<Long>();
+
+		String[] fechas = rangoFechas.split("|");
+		String sql = "SELECT ID FROM PEDIDO WHERE FECHAHORA > (TO_DATE('" + fechas[0] 
+				+ "', 'YYYY-MM-DD HH24:MI:SS') ADN FECHAHORA < (TO_DATE('" + fechas[1] +"', 'YYYY-MM-DD HH24:MI:SS')";
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+
+		while (rs.next()) {
+			pedidos.add(rs.getLong("ID"));
+		}
+		return pedidos;
+	}	
 
 	
 }

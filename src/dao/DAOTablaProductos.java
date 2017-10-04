@@ -169,6 +169,8 @@ public class DAOTablaProductos {
 		}
 		return producto;
 	}
+	
+
 
 	/**
 	 * Metodo que agrega el video que entra como parametro a la base de datos.
@@ -349,5 +351,73 @@ public class DAOTablaProductos {
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
 		prepStmt.executeQuery();
+	}
+	
+	/**
+	 * Metodo que, usando la conexión a la base de datos, saca todos los videos de la base de datos
+	 * <b>SQL Statement:</b> SELECT * FROM VIDEOS;
+	 * @return Arraylist con los videos de la base de datos.
+	 * @throws SQLException - Cualquier error que la base de datos arroje.
+	 * @throws Exception - Cualquier error que no corresponda a la base de datos
+	 */
+	public ArrayList<Producto> darProductosPorCategoria(String categoria) throws SQLException, Exception {
+		ArrayList<Producto> productos = new ArrayList<Producto>();
+
+		String sql = "SELECT * FROM PRODUCTO JOIN CATEGORIA ON PRODUCTO.ID = CATEGORIA.ID_PRODUCTO WHERE CATEGORIA.NOMBRE = '" + categoria+"'";
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+
+		while (rs.next()) {
+			Long id = rs.getLong("ID");
+			String nombre = rs.getString("NOMBRE");
+			String descripcion = rs.getString("DESCRIPCION");
+			String traduccion = rs.getString("TRADUCCION");
+			Long tiempoPreparacion = rs.getLong("TIEMPOPREPARACION");
+			Double costo = rs.getDouble("COSTO");
+			Double precio = rs.getDouble("PRECIO");
+			Integer disponibles = rs.getInt("DISPONIBLES");
+			String tipo = rs.getString("TIPO");
+			Long idRestaurante = rs.getLong("ID_RESTAURANTE");
+			
+			productos.add(new Producto(id, nombre, tipo, disponibles, tiempoPreparacion, precio, costo, descripcion, traduccion, idRestaurante));
+		}
+		return productos;
+	}
+	
+	/**
+	 * Metodo que, usando la conexión a la base de datos, saca todos los videos de la base de datos
+	 * <b>SQL Statement:</b> SELECT * FROM VIDEOS;
+	 * @return Arraylist con los videos de la base de datos.
+	 * @throws SQLException - Cualquier error que la base de datos arroje.
+	 * @throws Exception - Cualquier error que no corresponda a la base de datos
+	 */
+	public ArrayList<Producto> darProductosPorRangoPrecio(String rangoPrecios) throws SQLException, Exception {
+		ArrayList<Producto> productos = new ArrayList<Producto>();
+
+		String [] precios= rangoPrecios.split(":");
+		
+		String sql = "SELECT * FROM PRODUCTO WHERE PRECIO > " + precios[0] + "AND PRECIO < "+ precios[1] ;
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+
+		while (rs.next()) {
+			Long id = rs.getLong("ID");
+			String nombre = rs.getString("NOMBRE");
+			String descripcion = rs.getString("DESCRIPCION");
+			String traduccion = rs.getString("TRADUCCION");
+			Long tiempoPreparacion = rs.getLong("TIEMPOPREPARACION");
+			Double costo = rs.getDouble("COSTO");
+			Double precio = rs.getDouble("PRECIO");
+			Integer disponibles = rs.getInt("DISPONIBLES");
+			String tipo = rs.getString("TIPO");
+			Long idRestaurante = rs.getLong("ID_RESTAURANTE");
+			
+			productos.add(new Producto(id, nombre, tipo, disponibles, tiempoPreparacion, precio, costo, descripcion, traduccion, idRestaurante));
+		}
+		return productos;
 	}
 }

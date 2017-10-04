@@ -53,7 +53,7 @@ public class PedidoCompleto {
 	 */
 	public PedidoCompleto(@JsonProperty(value="id")Long id, @JsonProperty(value="fecha")String fecha, 
 			@JsonProperty(value = "servido") Long servido,@JsonProperty(value="idCliente")Long idCliente,
-			@JsonProperty(value = "listaMenu") String idsMenu, @JsonProperty(value = "idsProducto") String idsProducto) {
+			@JsonProperty(value = "idsMenu") String idsMenu, @JsonProperty(value = "idsProducto") String idsProducto) {
 		super();
 		this.id = id;
 		this.fecha = fecha;
