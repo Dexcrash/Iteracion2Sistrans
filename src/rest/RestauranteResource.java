@@ -42,12 +42,7 @@ public class RestauranteResource {
 	}
 	
 
-	/**
-	 * Metodo que expone servicio REST usando GET que da todos los usuarios de la base de datos.
-	 * <b>URL: </b> http://"ip o nombre de host":8080/RotondAndes/rest/usuarios
-	 * @return Json con todos los usuarios de la base de datos o json con 
-     * el error que se produjo
-	 */
+
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response getRestaurantes() {
@@ -62,13 +57,7 @@ public class RestauranteResource {
 		return Response.status(200).entity(restaurantes).build();
 	}
 
-	 /**
-     * Metodo que expone servicio REST usando GET que busca el usuario con el id que entra como parametro
-     * <b>URL: </b> http://"ip o nombre de host":8080/RotondAndes/rest/usuarios/<<id>>" para la busqueda"
-     * @param name - Nombre del usuario a buscar que entra en la URL como parametro 
-     * @return Json con el/los usuarios encontrados con el nombre que entra como parametro o json con 
-     * el error que se produjo
-     */
+
 	@GET
 	@Path( "{id: \\d+}" )
 	@Produces( { MediaType.APPLICATION_JSON } )
@@ -86,13 +75,7 @@ public class RestauranteResource {
 		}
 	}
 
-    /**
-     * Metodo que expone servicio REST usando GET que busca el usuario con el nombre que entra como parametro
-     * <b>URL: </b> http://"ip o nombre de host":8080/RotondAndes/rest/usuarios/nombre/nombre?nombre=<<nombre>>" para la busqueda"
-     * @param name - Nombre del usuario a buscar que entra en la URL como parametro 
-     * @return Json con el/los usuarios encontrados con el nombre que entra como parametro o json con 
-     * el error que se produjo
-     */
+	
 	@GET
 	@Path( "{nombre}" )
 	@Produces( { MediaType.APPLICATION_JSON } )
@@ -110,12 +93,7 @@ public class RestauranteResource {
 	}
 
 
-    /**
-     * Metodo que expone servicio REST usando POST que agrega el usuario que recibe en Json
-     * <b>URL: </b> http://"ip o nombre de host":8080/RotondAndes/rest/usuarios/usuario
-     * @param usuario - usuario a agregar
-     * @return Json con el usuario que agrego o Json con el error que se produjo
-     */
+
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -129,12 +107,8 @@ public class RestauranteResource {
 		return Response.status(200).entity(usuario).build();
 	}
 	
-    /**
-     * Metodo que expone servicio REST usando POST que agrega los usuarios que recibe en Json
-     * <b>URL: </b> http://"ip o nombre de host":8080/RotondAndes/rest/usuarios/varios
-     * @param usuarios - usuarios a agregar. 
-     * @return Json con el usuario que agrego o Json con el error que se produjo
-     */
+
+	
 	@POST
 	@Path("/varios")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -149,12 +123,7 @@ public class RestauranteResource {
 		return Response.status(200).entity(usuarios).build();
 	}
 	
-    /**
-     * Metodo que expone servicio REST usando PUT que actualiza el usuario que recibe en Json
-     * <b>URL: </b> http://"ip o nombre de host":8080/RotondAndes/rest/usuarios
-     * @param usuario - usuario a actualizar. 
-     * @return Json con el usuario que actualizo o Json con el error que se produjo
-     */
+
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -168,12 +137,7 @@ public class RestauranteResource {
 		return Response.status(200).entity(usuario).build();
 	}
 	
-    /**
-     * Metodo que expone servicio REST usando DELETE que elimina el usuario que recibe en Json
-     * <b>URL: </b> http://"ip o nombre de host":8080/RotondAndes/rest/usuarios
-     * @param usuario - usuario a aliminar. 
-     * @return Json con el usuario que elimino o Json con el error que se produjo
-     */
+
 	@DELETE
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -253,12 +217,7 @@ public class RestauranteResource {
 		return Response.status(200).entity(ingredientes).build();
 	}
 	
-	   /**
-     * Metodo que expone servicio REST usando POST que agrega el usuario que recibe en Json
-     * <b>URL: </b> http://"ip o nombre de host":8080/RotondAndes/rest/usuarios/usuario
-     * @param usuario - usuario a agregar
-     * @return Json con el usuario que agrego o Json con el error que se produjo
-     */
+
 	@POST
     @Path("menus")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -273,12 +232,7 @@ public class RestauranteResource {
 		return Response.status(200).entity(menu).build();
 	}
 	
-	/**
-	 * Metodo que expone servicio REST usando GET que da todos los usuarios de la base de datos.
-	 * <b>URL: </b> http://"ip o nombre de host":8080/RotondAndes/rest/usuarios
-	 * @return Json con todos los usuarios de la base de datos o json con 
-     * el error que se produjo
-	 */
+
 	@GET
 	@Path("menus")
 	@Produces({ MediaType.APPLICATION_JSON })
@@ -294,12 +248,8 @@ public class RestauranteResource {
 		return Response.status(200).entity(menus).build();
 	}
 	
-	/**
-	 * Metodo que expone servicio REST usando GET que da todos los usuarios de la base de datos.
-	 * <b>URL: </b> http://"ip o nombre de host":8080/RotondAndes/rest/usuarios
-	 * @return Json con todos los usuarios de la base de datos o json con 
-     * el error que se produjo
-	 */
+
+	
 	@POST
 	@Path("servido/{id: \\d+}")
 	@Produces({ MediaType.APPLICATION_JSON })

@@ -1,0 +1,42 @@
+{
+	"variables": [],
+	"info": {
+		"name": "RFC4 - Consultar Productos Mas Ofrecidos",
+		"_postman_id": "187c8710-6297-b48a-c574-9774af701331",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "RFC4 - Consulta Productos Más Ofrecidos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:8080/RotondAndes/rest/clientes/productosMasOfrecidos",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"idRestaurante\": null,\n\t\"categoria\":null,\n\t\"fechas\":\"2017-10-01 00:00:00|2017-10-03 24:00:00\",\n\t\"precios\":null\n}"
+				},
+				"description": "localhost:8080/RotondAndes/rest/clientes/0/preferencias"
+			},
+			"response": []
+		}
+	]
+}

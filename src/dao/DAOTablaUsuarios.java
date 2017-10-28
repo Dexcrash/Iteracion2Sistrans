@@ -169,7 +169,7 @@ public class DAOTablaUsuarios {
 		sql += usuario.getCorreoEletronico() + "','";
 		sql += usuario.getRol() + "','";
 		sql += usuario.getContraseña() + "')";
-
+		
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
 		prepStmt.executeQuery();

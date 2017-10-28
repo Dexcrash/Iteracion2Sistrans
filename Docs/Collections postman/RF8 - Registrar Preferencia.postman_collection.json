@@ -1,0 +1,104 @@
+{
+	"variables": [],
+	"info": {
+		"name": "RF8 - Registrar Preferencia",
+		"_postman_id": "6d922ef8-aad6-1baf-7989-4cbfe724b7de",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get preferencais de un usuario en general",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:8080/RotondAndes/rest/clientes/0/preferencias",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"id\": 15,\n        \"nombre\": \"Gaseosa Gigante\",\n        \"tipo\": \"Bebida\",\n        \"disponibles\": 10,\n        \"tiempoPreparacion\": 1,\n        \"precio\": 5000,\n        \"costo\": 3000,\n        \"descripcion\": \"Con hielo\",\n        \"idRestaurante\": 1,\n        \"traduccion\": \"With ice\"\n    }"
+				},
+				"description": "localhost:8080/RotondAndes/rest/clientes/0/preferencias"
+			},
+			"response": []
+		},
+		{
+			"name": "RF8 - Agregar una preferencia no existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:8080/RotondAndes/rest/clientes/0/preferencias",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"tipo\": \"Condicion\",\n        \"valor\": \"Tarjeta de credito\",\n        \"idCliente\": 2\n    }"
+				},
+				"description": "localhost:8080/RotondAndes/rest/clientes/0/preferencias"
+			},
+			"response": []
+		},
+		{
+			"name": "RF8 - Agregar una preferencia  existente copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 500\"] = responseCode.code === 500;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:8080/RotondAndes/rest/clientes/0/preferencias",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"tipo\": \"Condicion\",\n        \"valor\": \"Tarjeta de credito\",\n        \"idCliente\": 2\n    }"
+				},
+				"description": "localhost:8080/RotondAndes/rest/clientes/0/preferencias"
+			},
+			"response": []
+		}
+	]
+}

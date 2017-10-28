@@ -1,0 +1,104 @@
+{
+	"variables": [],
+	"info": {
+		"name": "RF4 - Registrar Producto",
+		"_postman_id": "708fdac0-4e1f-1b24-fd2d-f91e1a2fb930",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get productos de un Restaurante en general",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:8080/RotondAndes/rest/restaurantes/1/productos",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"id\":8,\n        \"nombre\": \"Chick And Chips\",\n        \"tipo\": null,\n        \"representante\": \"Camilo Sánchez\",\n        \"paginaWeb\": \"chic&chips.com\",\n        \"balancePrecio\": 400000,\n        \"balanceCosto\": 20000,\n        \"usuario\": 17,\n        \"nombreZona\": \"Oriental\"\n    }"
+				},
+				"description": "localhost:8080/RotondAndes/rest/restaurantes/1/productos"
+			},
+			"response": []
+		},
+		{
+			"name": "RF4 - Agregar un Producto no existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:8080/RotondAndes/rest/restaurantes/1/productos",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"id\": 14,\n        \"nombre\": \"Hamburguesa Gigante\",\n        \"tipo\": \"Plato fuerte\",\n        \"disponibles\": 10,\n        \"tiempoPreparacion\": 18,\n        \"precio\": 25000,\n        \"costo\": 14000,\n        \"descripcion\": \"Con carne\",\n        \"idRestaurante\": 1,\n        \"traduccion\": \"With meat\"\n    }"
+				},
+				"description": "localhost:8080/RotondAndes/rest/restaurantes/1/productos"
+			},
+			"response": []
+		},
+		{
+			"name": "RF4 - Agregar un Producto existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 500\"] = responseCode.code === 500;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:8080/RotondAndes/rest/restaurantes/1/productos",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"id\": 2,\n        \"nombre\": \"Hamburguesa Gigante\",\n        \"tipo\": \"Plato fuerte\",\n        \"disponibles\": 10,\n        \"tiempoPreparacion\": 18,\n        \"precio\": 25000,\n        \"costo\": 14000,\n        \"descripcion\": \"Con carne\",\n        \"idRestaurante\": 1,\n        \"traduccion\": \"With meat\"\n    }"
+				},
+				"description": "localhost:8080/RotondAndes/rest/restaurantes/1/productos"
+			},
+			"response": []
+		}
+	]
+}

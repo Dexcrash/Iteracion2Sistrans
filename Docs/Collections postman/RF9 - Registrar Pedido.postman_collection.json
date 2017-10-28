@@ -1,0 +1,73 @@
+{
+	"variables": [],
+	"info": {
+		"name": "RF9 - Registrar Pedido",
+		"_postman_id": "5782d10f-44ad-cc59-98ca-1a10b5bc4614",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "RF9 - Agregar un Pedido no existente a un cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:8080/RotondAndes/rest/usuarios/pedido",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\r\n        \"fecha\": \"2017-10-04 09:26:00\",\r\n        \"idCliente\" : 2,\r\n        \"id\": 24,\r\n        \"servido\": 0,\r\n        \"idsMenu\": \"1:1-2:1\",\r\n        \"idsProducto\": \"11:2-12:1\"\r\n    }"
+				},
+				"description": "localhost:8080/RotondAndes/rest/clientes/0/preferencias"
+			},
+			"response": []
+		},
+		{
+			"name": "RF9 - Agregar un Pedido existente a un cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 500\"] = responseCode.code === 500;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:8080/RotondAndes/rest/usuarios/pedido",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\r\n        \"fecha\": \"2017-10-04 09:26:00\",\r\n        \"idCliente\" : 2,\r\n        \"id\": 24,\r\n        \"servido\": 0,\r\n        \"idsMenu\": \"1:1-2:1\",\r\n        \"idsProducto\": \"11:2-12:1\"\r\n    }"
+				},
+				"description": "localhost:8080/RotondAndes/rest/clientes/0/preferencias"
+			},
+			"response": []
+		}
+	]
+}

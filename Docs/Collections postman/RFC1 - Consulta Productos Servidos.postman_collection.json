@@ -1,0 +1,166 @@
+{
+	"variables": [],
+	"info": {
+		"name": "RFC1 - Consulta Productos Servidos",
+		"_postman_id": "a9f30770-4ef3-113a-e4ae-8b62257b42ca",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "RFC1 - Consulta Productos Servidos Con Filtro Restaurante",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:8080/RotondAndes/rest/usuarios/productos",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"idRestaurante\": 1,\n\t\"categoria\":null,\n\t\"fechas\":null,\n\t\"precios\":null\n}"
+				},
+				"description": "localhost:8080/RotondAndes/rest/clientes/0/preferencias"
+			},
+			"response": []
+		},
+		{
+			"name": "RFC1 - Consulta Productos Servidos Con Filtro Precio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:8080/RotondAndes/rest/usuarios/productos",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"idRestaurante\": null,\n\t\"categoria\":null,\n\t\"fechas\":null,\n\t\"precios\":\"5000:8000\"\n}"
+				},
+				"description": "localhost:8080/RotondAndes/rest/clientes/0/preferencias"
+			},
+			"response": []
+		},
+		{
+			"name": "RFC1 - Consulta Productos Servidos Con Filtro Categoria",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:8080/RotondAndes/rest/usuarios/productos",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"idRestaurante\": null,\n\t\"categoria\":\"Comida rapida\",\n\t\"fechas\":null,\n\t\"precios\":null\n}"
+				},
+				"description": "localhost:8080/RotondAndes/rest/clientes/0/preferencias"
+			},
+			"response": []
+		},
+		{
+			"name": "RFC1 - Consulta Productos Servidos Con Filtro Fecha",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:8080/RotondAndes/rest/usuarios/productos",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"idRestaurante\": null,\n\t\"categoria\":null,\n\t\"fechas\":\"2017-10-01 00:00:00|2017-10-03 24:00:00\",\n\t\"precios\":null\n}"
+				},
+				"description": "localhost:8080/RotondAndes/rest/clientes/0/preferencias"
+			},
+			"response": []
+		},
+		{
+			"name": "RFC1 - Consulta Productos Servidos Sin filtros",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:8080/RotondAndes/rest/usuarios/productos",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"idRestaurante\":null,\n\t\"categoria\":null,\n\t\"fechas\":null,\n\t\"precios\":null\n}"
+				},
+				"description": "localhost:8080/RotondAndes/rest/clientes/0/preferencias"
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,104 @@
+{
+	"variables": [],
+	"info": {
+		"name": "RF3 - Registrar Restaurante",
+		"_postman_id": "78060db8-589a-fb94-b17e-39a4c8081fe5",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get de restaurantes en general",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:8080/RotondAndes/rest/restaurantes",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"rol\": \"No registrado\",\n        \"name\": \"Andres Camilo\" ,\n        \"identificacion\": \"37\",\n        \"contraseña\": null,\n        \"correoEletronico\": \"andresca@hotmail.com\"\n    }"
+				},
+				"description": "localhost:8080/RotondAndes/rest/restaurantes"
+			},
+			"response": []
+		},
+		{
+			"name": "RF3 - Agregar un Restaurante no existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:8080/RotondAndes/rest/administradores/restaurantes",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"id\":8,\n        \"nombre\": \"Chick And Chips\",\n        \"tipo\": null,\n        \"representante\": \"Camilo Sánchez\",\n        \"paginaWeb\": \"chic&chips.com\",\n        \"balancePrecio\": 400000,\n        \"balanceCosto\": 200000,\n        \"usuario\": 17,\n        \"nombreZona\": \"Oriental\"\n    }"
+				},
+				"description": "localhost:8080/RotondAndes/rest/administradores/restaurantes"
+			},
+			"response": []
+		},
+		{
+			"name": "RF3 - Agregar un Restaurante existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 500\"] = responseCode.code === 500;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:8080/RotondAndes/rest/administradores/restaurantes",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"id\":5,\n        \"nombre\": \"Chick And Chips\",\n        \"tipo\": null,\n        \"representante\": \"Camilo Sánchez\",\n        \"paginaWeb\": \"chic&chips.com\",\n        \"balancePrecio\": 400000,\n        \"balanceCosto\": 20000,\n        \"usuario\": 17,\n        \"nombreZona\": \"Oriental\"\n    }"
+				},
+				"description": "localhost:8080/RotondAndes/rest/administradores/restaurantes"
+			},
+			"response": []
+		}
+	]
+}

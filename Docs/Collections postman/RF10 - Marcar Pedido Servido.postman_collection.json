@@ -1,0 +1,73 @@
+{
+	"variables": [],
+	"info": {
+		"name": "RF10 - Marcar Pedido Servido",
+		"_postman_id": "0f2fdae9-e2d4-5d6b-6fc8-a430c424ac18",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "RF10 - Marcar un pedido como servido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:8080/RotondAndes/rest/restaurantes/servido/24",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": "localhost:8080/RotondAndes/rest/clientes/0/preferencias"
+			},
+			"response": []
+		},
+		{
+			"name": "RF10 - Marcar un pedido no existente como servido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 500\"] = responseCode.code === 500;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:8080/RotondAndes/rest/restaurantes/servido/355",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": "localhost:8080/RotondAndes/rest/clientes/0/preferencias"
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,104 @@
+{
+	"variables": [],
+	"info": {
+		"name": "RF5 - Registrar Ingrediente",
+		"_postman_id": "8b069bda-d4c8-815c-e6ca-b3d34a29c1dc",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get de los Ingredientes de Un producto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:8080/RotondAndes/rest/restaurantes/1/productos/3/ingredientes",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"id\": 14,\n        \"nombre\": \"Hamburguesa Gigante\",\n        \"tipo\": \"Plato fuerte\",\n        \"disponibles\": 10,\n        \"tiempoPreparacion\": 18,\n        \"precio\": 25000,\n        \"costo\": 14000,\n        \"descripcion\": \"Con carne\",\n        \"idRestaurante\": 1,\n        \"traduccion\": \"With meat\"\n    }"
+				},
+				"description": "localhost:8080/RotondAndes/rest/restaurantes/1/productos/3/ingredientes"
+			},
+			"response": []
+		},
+		{
+			"name": "RF5 - Agregar un Ingrediente no existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:8080/RotondAndes/rest/restaurantes/1/productos/14/ingredientes",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"id\": 11,\n        \"nombre\": \"Frijoles\",\n        \"descripcion\": \"Rojos\",\n        \"traduccion\": \"Red\"\n    }"
+				},
+				"description": "localhost:8080/RotondAndes/rest/restaurantes/1/productos/14/ingredientes"
+			},
+			"response": []
+		},
+		{
+			"name": "RF5 - Agregar un Ingrediente existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 500\"] = responseCode.code === 500;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:8080/RotondAndes/rest/restaurantes/1/productos/14/ingredientes",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"id\": 5,\n        \"nombre\": \"Frijoles\",\n        \"descripcion\": \"Rojos\",\n        \"traduccion\": \"Red\"\n    }"
+				},
+				"description": "localhost:8080/RotondAndes/rest/restaurantes/1/productos/14/ingredientes"
+			},
+			"response": []
+		}
+	]
+}

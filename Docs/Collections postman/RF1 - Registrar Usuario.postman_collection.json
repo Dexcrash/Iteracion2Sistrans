@@ -1,0 +1,105 @@
+{
+	"variables": [],
+	"info": {
+		"name": "RF1 - Registrar Usuario",
+		"_postman_id": "dab0e5ab-8f99-a3fa-379e-bac52cbbfd2b",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get de los usuarios en general",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:8080/RotondAndes/rest/usuarios",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\r\n        \"idRestaurante\" : null,\r\n        \"categoria\": null,\r\n        \"precios\": \"5000:8000\",\r\n        \"fechas\" :null\r\n    }"
+				},
+				"description": "localhost:8080/RotondAndes/rest/usuarios"
+			},
+			"response": []
+		},
+		{
+			"name": "RF1 - Agregar un Usuario no existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 500\"] = responseCode.code === 500;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:8080/RotondAndes/rest/usuarios",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"rol\": \"No registrado\",\n        \"name\": \"Andres Camilo\" ,\n        \"identificacion\": \"39\",\n        \"contraseña\": null,\n        \"correoEletronico\": \"andresca@hotmail.com\"\n    }"
+				},
+				"description": "localhost:8080/RotondAndes/rest/usuarios"
+			},
+			"response": []
+		},
+		{
+			"name": "RF1 - Agregar un Usuario existente copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 500\"] = responseCode.code === 500;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:8080/RotondAndes/rest/usuarios",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"rol\": \"No registrado\",\n        \"name\": \"Andres Camilo\" ,\n        \"identificacion\": \"37\",\n        \"contraseña\": null,\n        \"correoEletronico\": \"andresca@hotmail.com\"\n    }"
+				},
+				"description": "localhost:8080/RotondAndes/rest/usuarios"
+			},
+			"response": []
+		}
+	]
+}
