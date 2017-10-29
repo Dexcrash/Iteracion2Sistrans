@@ -1547,6 +1547,106 @@ public class RotondAndesTM {
 		return productos;
 	}
 	
+	public boolean agregarEquivalenciaProducto(Long id1, Long id2) throws Exception{
+		DAOTablaProductos daoProductos = new DAOTablaProductos();
+		try {
+			////// transaccion
+			this.conn = darConexion();
+			daoProductos.setConn(conn);
+			daoProductos.agragarEquivalencia(id1, id2);
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoProductos.cerrarRecursos();
+				if (this.conn != null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		return true;
+		
+		
+	}
+	
+	public boolean agregarEquivalenciaIngredientes(Long id1, Long id2) throws Exception{
+		DAOTablaIngredientes daoIngredientes = new DAOTablaIngredientes();
+		try {
+			////// transaccion
+			this.conn = darConexion();
+			daoIngredientes.setConn(conn);
+			daoIngredientes.agragarEquivalencia(id1, id2);
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoIngredientes.cerrarRecursos();
+				if (this.conn != null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		return true;
+	}
+	
+	
+	public boolean surtirRestaurante(Long id) throws Exception{
+		DAOTablaProductos daoProductos = new DAOTablaProductos();
+		try {
+			////// transaccion
+			this.conn = darConexion();
+			daoProductos.setConn(conn);
+			daoProductos.surtirProductosDeRestaurante(id);
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoProductos.cerrarRecursos();
+				if (this.conn != null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		return true;
+	}
+	
+	/**
+	 * Crea un arraylist dond euniamente esten los elementos
+	 * que se encuentran tanto en la primera lista como en la segunda. 
+	 * @param l1 Lista base
+	 * @param l2 Lista de comparacion
+	 * @return Lista con los elementos que estan en l1 y tambien en l2
+	 */
 	private ArrayList<Producto> unir(ArrayList<Producto> l1,ArrayList<Producto> l2){
 		ArrayList<Producto> union = new ArrayList<>();
 		for(Producto p1 :l1) {

@@ -263,4 +263,33 @@ public class RestauranteResource {
 		}
 		return Response.status(200).entity(res).build();
 	}
+	
+	@POST
+	@Path("{id1: \\d+}/equivalencia/{id2: \\\\d+}")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public Response ingresarEquivalenciaProducto(@PathParam("id1")Long id1, @PathParam("id2")Long id2) {
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		String res;
+		try {
+			res = tm.marcarServido(id);
+		} catch (Exception e) {
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+		return Response.status(200).entity(res).build();
+	}
+
+	@POST
+	@Path("servido/{id: \\d+}")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public Response ingresarEquivalenciaIngrediente(@PathParam("id")Long id) {
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		String res;
+		try {
+			res = tm.marcarServido(id);
+		} catch (Exception e) {
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+		return Response.status(200).entity(res).build();
+	}
+
 }

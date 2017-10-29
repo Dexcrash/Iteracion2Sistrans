@@ -420,4 +420,26 @@ public class DAOTablaProductos {
 		}
 		return productos;
 	}
+	
+	
+	public void agragarEquivalencia(Long id1, Long id2) throws SQLException, Exception {
+
+		String sql = "INSERT INTO EQUIVALENCIAPRODUCTOS VALUES (";
+		sql += id1 + ",";
+		sql += id2 + ")";
+		
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		prepStmt.executeQuery();
+	}
+
+	public void surtirProductosDeRestaurante(Long id) throws SQLException, Exception{
+		
+		String sql = "UPDATE RESTAURANTE SET DISPONIBLES = MAXIMOPRODUCTOS";
+		
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		prepStmt.executeQuery();
+		
+	}
 }
