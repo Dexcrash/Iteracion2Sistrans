@@ -1562,6 +1562,67 @@ public class RotondAndesTM {
 		return true;
 
 	}
+	
+	public boolean darEquivalenciaProducto(Long id) throws Exception {
+		DAOTablaProductos daoProductos = new DAOTablaProductos();
+		try {
+			////// transaccion
+			this.conn = darConexion();
+			daoProductos.setConn(conn);
+			daoProductos.darEquivalencias(id);
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoProductos.cerrarRecursos();
+				if (this.conn != null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		return true;
+	}
+	
+	public boolean darEquivalenciaIngrediente(Long id) throws Exception {
+		DAOTablaIngredientes daoIngredientes= new DAOTablaIngredientes();
+		try {
+			////// transaccion
+			this.conn = darConexion();
+			daoIngredientes.setConn(conn);
+			daoIngredientes.darEquivalencias(id);
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoIngredientes.cerrarRecursos();
+				if (this.conn != null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		return true;
+
+	}
 
 	public boolean agregarEquivalenciaIngredientes(Long id1, Long id2) throws Exception {
 		DAOTablaIngredientes daoIngredientes = new DAOTablaIngredientes();
@@ -1729,4 +1790,75 @@ public class RotondAndesTM {
 		}
 		return pedidos;
 	}
+	
+	public String marcarServidosMesa(Long idMesa) throws Exception {
+		List<Long> pedidos;
+		DAOTablaPedido daoPedido = new DAOTablaPedido();
+		try {
+			////// transaccion
+			this.conn = darConexion();
+			daoPedido.setConn(conn);
+			pedidos = daoPedido.darPedidosDeMesa(idMesa);
+			for(Long id: pedidos) {
+				marcarServido(id);
+			}
+			
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoPedido.cerrarRecursos();
+
+				if (this.conn != null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		return "Se sirvieron todos los pedidos de la mesa " + idMesa;
+	}
+	
+	public String cancelarPedido(Long idMesa) throws Exception {
+		DAOTablaPedido daoPedido = new DAOTablaPedido();
+		try {
+			////// transaccion
+			this.conn = darConexion();
+			daoPedido.setConn(conn);
+			if(daoPedido.darServidos(idMesa)== null)return "Ya hay pedidos servidos.";
+			for(Long id :daoPedido.darPedidosDeMesa(idMesa)) {
+				daoPedido.eliminarMenusDePedido(id);
+				daoPedido.eliminarProductosDePedido(id);
+			}
+			daoPedido.eliminarPedidoDeMesa(idMesa);
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoPedido.cerrarRecursos();
+
+				if (this.conn != null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		return "Se cancelaron los pedidos de la mesa "+idMesa;
+	}
+	
 }

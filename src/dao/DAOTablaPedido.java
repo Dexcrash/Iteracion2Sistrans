@@ -234,6 +234,58 @@ public class DAOTablaPedido {
 		}
 		return pedidos;
 	}	
+	
+	public ArrayList<Long> darPedidosDeMesa(Long idMesa) throws SQLException, Exception{
+		ArrayList<Long> pedidos = new ArrayList<Long>();
 
+		String sql = "SELECT ID FROM PEDIDO WHERE MESA =" +idMesa;
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+
+		while (rs.next()) {
+			pedidos.add(rs.getLong("ID"));
+		}
+		return pedidos;
+	}
+	
+	public void eliminarPedidoDeMesa(Long idMesa) throws SQLException, Exception{
+		String sql = "DELETE FROM PEDIDO WHERE MESA =" +idMesa;
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		prepStmt.executeQuery();
+	}
+
+	public void eliminarProductosDePedido(Long idPedido) throws SQLException, Exception{
+		String sql = "DELETE FROM PEDIDO_PRODUCTOS WHERE ID_PEDIDO =" +idPedido;
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		prepStmt.executeQuery();
+	}
+	
+	public void eliminarMenusDePedido(Long idPedido) throws SQLException, Exception{
+		String sql = "DELETE FROM PEDIDO_MENUS WHERE ID_PEDIDO =" +idPedido;
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		prepStmt.executeQuery();
+	}
+	
+	public ArrayList<Long> darServidos(Long idMesa) throws SQLException, Exception {
+		ArrayList<Long> pedidos = new ArrayList<Long>();
+
+		String sql = "SELECT ID FROM PEDIDO WHERE MESA =" +idMesa + "AND SERVIDO = 1";
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+
+		while (rs.next()) {
+			pedidos.add(rs.getLong("ID"));
+		}
+		if(pedidos.size()==0)return null;
+		
+		return pedidos;
+	}
 	
 }

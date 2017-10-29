@@ -442,4 +442,21 @@ public class DAOTablaProductos {
 		prepStmt.executeQuery();
 		
 	}
+
+	public ArrayList<Long> darEquivalencias(Long id) throws SQLException, Exception {
+		ArrayList<Long> productos = new ArrayList<Long>();
+		
+		String sql = "SELECT EQUIVALENCIA FROM EQUIVALENCIAPRODUCTOS WHERE ORIGINAL = " + id ;
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+
+		while (rs.next()) {
+			Long idEq = rs.getLong("EQUIVALENCIA");
+			productos.add(idEq);
+		}
+		return productos;
+	}
+	
 }
