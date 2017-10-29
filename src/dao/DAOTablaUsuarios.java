@@ -269,5 +269,26 @@ public class DAOTablaUsuarios {
 		}
 		return clients;
 	}
+	
+	public ArrayList<ConsultaConsumo> darInformacionConsumo(Long idCliente) throws SQLException, Exception {
+		ArrayList<ConsultaConsumo> consumos = new ArrayList<ConsultaConsumo>();
+
+		String sql = "SELECT ID_PEDIDO, NOMBRE_MENU, NOMBRE_PRODUCTO FROM (SELECT * FROM (SELECT ID AS ID_PEDIDO, ID_MENU, ID_PRODUCTO FROM ((SELECT* FROM (SELECT ID FROM PEDIDO WHERE ID_CLIENTE = ";
+		sql += idCliente
+				+ " AND SERVIDO = 1) NATURAL JOIN (SELECT ID_PEDIDO AS ID, ID_MENU FROM PEDIDO_MENUS))) NATURAL LEFT OUTER JOIN (SELECT ID_PEDIDO AS ID, ID_PRODUCTO FROM PEDIDO_PRODUCTOS)) NATURAL LEFT OUTER JOIN  (SELECT ID AS ID_MENU, NOMBRE AS NOMBRE_MENU FROM MENU)) NATURAL LEFT OUTER JOIN (SELECT ID AS ID_PRODUCTO, NOMBRE AS NOMBRE_PRODUCTO FROM PRODUCTO)";
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+
+		while (rs.next()) {
+			Long idPedido = rs.getLong("ID_PEDIDO");
+			String nombremenu = rs.getString("NOMBRE_MENU");
+			String nombreproducto = rs.getString("NOMBRE_PRODUCTO");
+			
+
+			consumos.add(new ConsultaConsumo(idPedido, nombremenu, nombreproducto));
+		}
+		return consumos;
+	}
 
 }

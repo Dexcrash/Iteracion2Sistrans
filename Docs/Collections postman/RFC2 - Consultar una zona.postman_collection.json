@@ -8,37 +8,6 @@
 	},
 	"item": [
 		{
-			"name": "Consultar una zona existente",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							"tests[\"Status code is 200\"] = responseCode.code === 200;"
-						]
-					}
-				}
-			],
-			"request": {
-				"url": "localhost:8080/RotondAndes/rest/usuarios/zonas/Oriental/NOMBRE_PRODUCTO_SERVIDO",
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"description": ""
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "    {\n        \"id\": \"8\",\n        \"nombre\": \"Burritox\",\n        \"costo\": 90000,\n        \"precio\": 130000,\n        \"idrestaurante\": 5,\n        \"idplatoFuerte\": 6\n\n    }"
-				},
-				"description": ""
-			},
-			"response": []
-		},
-		{
 			"name": "Consultar una zona con parámetro de ordenamiento inválido",
 			"event": [
 				{
@@ -78,6 +47,37 @@
 				"method": "GET",
 				"header": [],
 				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar zona existente con parámetro válido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:8080/RotondAndes/rest/usuarios/zonas/Oriental/capacidadTotal",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"id\": \"8\",\n        \"nombre\": \"Burritox\",\n        \"costo\": 90000,\n        \"precio\": 130000,\n        \"idrestaurante\": 5,\n        \"idplatoFuerte\": 6\n\n    }"
+				},
 				"description": ""
 			},
 			"response": []

@@ -8,6 +8,7 @@ import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
@@ -15,6 +16,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import tm.RotondAndesTM;
+import vos.ConsultaConsumo;
+import vos.ConsultaPedido;
 import vos.Restaurante;
 import vos.Usuario;
 import vos.Zona;
@@ -178,5 +181,42 @@ public class AdministradorResource {
 		return Response.status(200).entity(zona).build();
 	}
 	
-
+    /**
+     * Metodo que muestra la consulta de un cliente
+     */
+	@GET
+	@Path("consumo/{id: \\d+}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getConsumo(@PathParam("id") Long idCliente) {
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		List<ConsultaConsumo> consumo;
+		try {
+			consumo = tm.darConsumoCliente(idCliente);
+			
+		} catch (Exception e) {
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+		return Response.status(200).entity(consumo).build();
+	}
+	
+    /**
+     * Metodo que muestra la información de los restaurantes
+     */
+	@GET
+	@Path("pedidos/{tipo}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getPedidos(@PathParam("tipo") String tipoCliente) {
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		List<ConsultaPedido> consumo;
+		try {
+			consumo = tm.darInformePedidos(tipoCliente);
+			
+		} catch (Exception e) {
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+		return Response.status(200).entity(consumo).build();
+	}
 }
+	
+
+
