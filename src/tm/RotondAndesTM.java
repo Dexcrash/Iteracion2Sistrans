@@ -1856,13 +1856,16 @@ public class RotondAndesTM {
 			////// transaccion
 			this.conn = darConexion();
 			daoPedido.setConn(conn);
-			if (daoPedido.darServidos(idMesa) == null)
+			if (daoPedido.darServidos(idMesa) != null) {
+				System.err.println("No deberia entrar");
 				return "Ya hay pedidos servidos.";
+			}
 			for (Long id : daoPedido.darPedidosDeMesa(idMesa)) {
 				daoPedido.eliminarMenusDePedido(id);
 				daoPedido.eliminarProductosDePedido(id);
 			}
 			daoPedido.eliminarPedidoDeMesa(idMesa);
+			System.err.println("Se supone que elimino");
 		} catch (SQLException e) {
 			System.err.println("SQLException:" + e.getMessage());
 			e.printStackTrace();

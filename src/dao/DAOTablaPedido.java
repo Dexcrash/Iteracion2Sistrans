@@ -262,7 +262,7 @@ public class DAOTablaPedido {
 	}
 	
 	public void eliminarPedidoDeMesa(Long idMesa) throws SQLException, Exception{
-		String sql = "DELETE FROM PEDIDO WHERE MESA =" +idMesa;
+		String sql = "DELETE FROM PEDIDO WHERE ID_MESA =" +idMesa;
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
 		prepStmt.executeQuery();
