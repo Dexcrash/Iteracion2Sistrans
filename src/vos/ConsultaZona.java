@@ -21,7 +21,7 @@ public class ConsultaZona {
 	private Long capacidadTotal;
 
 	@JsonProperty(value = "numeroespaciosParaDiscapacitados")
-	private Long numeroespaciosParaDescapacitados;
+	private Long numeroespaciosParaDiscapacitados;
 
 	@JsonProperty(value = "numeroespaciosAbiertos")
 	private Long numeroespaciosAbiertos;
@@ -52,7 +52,7 @@ public class ConsultaZona {
 	public ConsultaZona(@JsonProperty(value = "nombrezona") String nombrezona,
 			@JsonProperty(value = "numeroespacios") Long numeroespacios,
 			@JsonProperty(value = "capacidadTotal") Long capacidadTotal,
-			@JsonProperty(value = "numeroespaciosParaDiscapacitados") Long numeroespaciosParaDescapacitados,
+			@JsonProperty(value = "numeroespaciosParaDiscapacitados") Long numeroespaciosParaDiscapacitados,
 			@JsonProperty(value = "numeroespaciosAbiertos") Long numeroespaciosAbiertos,
 			@JsonProperty(value = "idPedidoServido") Long idPedidoServido,
 			@JsonProperty(value = "fechaServicio") Date fechaServicio,
@@ -61,7 +61,7 @@ public class ConsultaZona {
 		this.nombrezona = nombrezona;
 		this.numeroespacios = numeroespacios;
 		this.capacidadTotal = capacidadTotal;
-		this.numeroespaciosParaDescapacitados = numeroespaciosParaDescapacitados;
+		this.numeroespaciosParaDiscapacitados = numeroespaciosParaDiscapacitados;
 		this.numeroespaciosAbiertos = numeroespaciosAbiertos;
 		this.idPedidoServido = idPedidoServido;
 		this.fechaServicio = fechaServicio;
@@ -94,11 +94,11 @@ public class ConsultaZona {
 	}
 
 	public Long getNumeroespaciosParaDescapacitados() {
-		return numeroespaciosParaDescapacitados;
+		return numeroespaciosParaDiscapacitados;
 	}
 
-	public void setNumeroespaciosParaDescapacitados(Long numeroespaciosParaDescapacitados) {
-		this.numeroespaciosParaDescapacitados = numeroespaciosParaDescapacitados;
+	public void setNumeroespaciosParaDescapacitados(Long numeroespaciosParaDiscapacitados) {
+		this.numeroespaciosParaDiscapacitados = numeroespaciosParaDiscapacitados;
 	}
 
 	public Long getNumeroespaciosAbiertos() {

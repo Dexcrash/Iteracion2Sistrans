@@ -271,7 +271,7 @@ public class RestauranteResource {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
 		String res;
 		try {
-			res = tm.marcarServido(id);
+			res = tm.marcarServido(id2);
 		} catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}

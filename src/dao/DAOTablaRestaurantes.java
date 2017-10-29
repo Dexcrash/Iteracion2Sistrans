@@ -238,5 +238,36 @@ public class DAOTablaRestaurantes {
 		recursos.add(prepStmt);
 		prepStmt.executeQuery();
 	}
+	
+	/**
+	 * Da la información de los restaurantes
+	 * @return
+	 * @throws SQLException
+	 * @throws Exception
+	 */
+	public ArrayList<ConsultaPedido> darPedidosRestaurantes(String tipoCliente) throws SQLException, Exception {
+		ArrayList<ConsultaPedido> pedidos = new ArrayList<ConsultaPedido>();
+
+		String sql = "(SELECT DISTINCT ID_RESTAURANTE, NOMBRE_RESTAURANTE, ROL, ID_PRODUCTO, UNIDADES, INGRESO*UNIDADES AS INGRESOS  FROM (SELECT ID_PRODUCTO, SUM(CANTIDAD) AS UNIDADES FROM (SELECT * FROM (SELECT * FROM (SELECT * FROM (SELECT * FROM (SELECT ID AS ID_RESTAURANTE, NOMBRE AS NOMBRE_RESTAURANTE FROM RESTAURANTE)  NATURAL JOIN (SELECT ID AS ID_PRODUCTO, ID_RESTAURANTE, PRECIO AS INGRESO FROM PRODUCTO)) NATURAL JOIN (SELECT * FROM PEDIDO_PRODUCTOS)) NATURAL JOIN (SELECT ID AS ID_PEDIDO, ID_CLIENTE FROM PEDIDO WHERE SERVIDO = 1)) NATURAL JOIN (SELECT IDENTIFICACION AS ID_CLIENTE, ROL FROM USUARIO WHERE ROL = '";
+		sql += tipoCliente;
+		sql+= "'))  GROUP BY ID_PRODUCTO) NATURAL JOIN (SELECT * FROM (SELECT * FROM (SELECT * FROM (SELECT * FROM (SELECT ID AS ID_RESTAURANTE, NOMBRE AS NOMBRE_RESTAURANTE FROM RESTAURANTE)  NATURAL JOIN (SELECT ID AS ID_PRODUCTO, ID_RESTAURANTE, PRECIO AS INGRESO FROM PRODUCTO)) NATURAL JOIN (SELECT * FROM PEDIDO_PRODUCTOS)) NATURAL JOIN (SELECT ID AS ID_PEDIDO, ID_CLIENTE FROM PEDIDO WHERE SERVIDO = 1)) NATURAL JOIN (SELECT IDENTIFICACION AS ID_CLIENTE, ROL FROM USUARIO WHERE ROL = '";
+		sql+= tipoCliente +"'))) ORDER BY NOMBRE_RESTAURANTE";
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+
+		while (rs.next()) {
+			Long id = rs.getLong("ID_RESTAURANTE");
+			String nombre = rs.getString("NOMBRE_RESTAURANTE");
+			String rol = rs.getString("ROL");
+			Long idProducto = rs.getLong("ID_PRODUCTO");
+			Long unidades = rs.getLong("UNIDADES");
+			Long ingresos = rs.getLong("INGRESOS");
+			
+			pedidos.add(new ConsultaPedido(id, nombre, rol, idProducto, unidades, ingresos));
+		}
+		return pedidos;
+	}
 
 }
