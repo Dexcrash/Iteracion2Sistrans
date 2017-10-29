@@ -262,7 +262,7 @@ public class DAOTablaIngredientes {
 
 	public void agragarEquivalencia(Long id1, Long id2) throws SQLException, Exception {
 
-		String sql = "INSERT INTO EQUIVALENCIAPRODUCTOS VALUES (";
+		String sql = "INSERT INTO EQUIVALENCIAINGREDIENTES VALUES (";
 		sql += id1 + ",";
 		sql += id2 + ")";
 		

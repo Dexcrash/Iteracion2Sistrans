@@ -435,7 +435,7 @@ public class DAOTablaProductos {
 
 	public void surtirProductosDeRestaurante(Long id) throws SQLException, Exception{
 		
-		String sql = "UPDATE RESTAURANTE SET DISPONIBLES = MAXIMOPRODUCTOS";
+		String sql = "UPDATE PRODUCTO SET DISPONIBLES = MAXIMOPRODUCTOS WHERE ID_RESTAURANTE = "+ id;
 		
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
@@ -446,7 +446,7 @@ public class DAOTablaProductos {
 	public ArrayList<Long> darEquivalencias(Long id) throws SQLException, Exception {
 		ArrayList<Long> productos = new ArrayList<Long>();
 		
-		String sql = "SELECT EQUIVALENCIA FROM EQUIVALENCIAPRODUCTOS WHERE ORIGINAL = " + id ;
+		String sql = "SELECT ID_EQUIVALENCIA FROM EQUIVALENCIAPRODUCTOS WHERE ID_ORIGINAL = " + id ;
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
@@ -460,7 +460,7 @@ public class DAOTablaProductos {
 	}
 	
 	public boolean esEquivalente(Long id1, Long id2) throws SQLException, Exception {
-		String sql = "SELECT * FROM EQUIVALENCIAPRODUCTOS WHERE ORIGINAL = " + id1 + "AND EQUIVALENCIA = "+ id2;
+		String sql = "SELECT * FROM EQUIVALENCIAPRODUCTOS WHERE ID_ORIGINAL = " + id1 + "AND ID_EQUIVALENCIA = "+ id2;
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);

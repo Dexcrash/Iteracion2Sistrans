@@ -63,14 +63,14 @@ public class RotondAndesTM {
 	private String connectionDataPath;
 
 	/**
-	 * Atributo que guarda el usuario que se va a usar para conectarse a la base
-	 * de datos.
+	 * Atributo que guarda el usuario que se va a usar para conectarse a la base de
+	 * datos.
 	 */
 	private String user;
 
 	/**
-	 * Atributo que guarda la clave que se va a usar para conectarse a la base
-	 * de datos.
+	 * Atributo que guarda la clave que se va a usar para conectarse a la base de
+	 * datos.
 	 */
 	private String password;
 
@@ -81,8 +81,8 @@ public class RotondAndesTM {
 	private String url;
 
 	/**
-	 * Atributo que guarda el driver que se va a usar para conectarse a la base
-	 * de datos.
+	 * Atributo que guarda el driver que se va a usar para conectarse a la base de
+	 * datos.
 	 */
 	private String driver;
 
@@ -94,9 +94,9 @@ public class RotondAndesTM {
 	/**
 	 * Metodo constructor de la clase UsuarioAndesMaster, esta clase modela y
 	 * contiene cada una de las transacciones y la logica de negocios que estas
-	 * conllevan. <b>post: </b> Se crea el objeto UsuarioAndesTM, se inicializa
-	 * el path absoluto del archivo de conexion y se inicializa los atributos
-	 * que se usan par la conexion a la base de datos.
+	 * conllevan. <b>post: </b> Se crea el objeto UsuarioAndesTM, se inicializa el
+	 * path absoluto del archivo de conexion y se inicializa los atributos que se
+	 * usan par la conexion a la base de datos.
 	 * 
 	 * @param contextPathP
 	 *            - path absoluto en el servidor del contexto del deploy actual
@@ -107,9 +107,9 @@ public class RotondAndesTM {
 	}
 
 	/**
-	 * Metodo que inicializa los atributos que se usan para la conexion a la
-	 * base de datos. <b>post: </b> Se han inicializado los atributos que se
-	 * usan par la conexion a la base de datos.
+	 * Metodo que inicializa los atributos que se usan para la conexion a la base de
+	 * datos. <b>post: </b> Se han inicializado los atributos que se usan par la
+	 * conexion a la base de datos.
 	 */
 	private void initConnectionData() {
 		try {
@@ -133,8 +133,8 @@ public class RotondAndesTM {
 	 * 
 	 * @return Connection - la conexion a la base de datos
 	 * @throws SQLException
-	 *             - Cualquier error que se genere durante la conexion a la base
-	 *             de datos
+	 *             - Cualquier error que se genere durante la conexion a la base de
+	 *             datos
 	 */
 	private Connection darConexion() throws SQLException {
 		System.out.println("Connecting to: " + url + " With user: " + user);
@@ -146,8 +146,8 @@ public class RotondAndesTM {
 	////////////////////////////////////////
 
 	/**
-	 * Metodo que modela la transaccion que retorna todos los usuarios de la
-	 * base de datos.
+	 * Metodo que modela la transaccion que retorna todos los usuarios de la base de
+	 * datos.
 	 * 
 	 * @return ListaUsuarios - objeto que modela un arreglo de usuarios. este
 	 *         arreglo contiene el resultado de la busqueda
@@ -228,8 +228,8 @@ public class RotondAndesTM {
 	}
 
 	/**
-	 * Metodo que modela la transaccion que busca el usuario en la base de datos
-	 * con el id que entra como parametro.
+	 * Metodo que modela la transaccion que busca el usuario en la base de datos con
+	 * el id que entra como parametro.
 	 * 
 	 * @param name
 	 *            - Id del usuario a buscar. name != null
@@ -309,12 +309,12 @@ public class RotondAndesTM {
 
 	/**
 	 * Metodo que modela la transaccion que agrega los usuarios que entran como
-	 * parametro a la base de datos. <b> post: </b> se han agregado los usuarios
-	 * que entran como parametro
+	 * parametro a la base de datos. <b> post: </b> se han agregado los usuarios que
+	 * entran como parametro
 	 * 
 	 * @param usuarios
-	 *            - objeto que modela una lista de usuarios y se estos se
-	 *            pretenden agregar. usuarios != null
+	 *            - objeto que modela una lista de usuarios y se estos se pretenden
+	 *            agregar. usuarios != null
 	 * @throws Exception
 	 *             - cualquier error que se genera agregando los usuarios
 	 */
@@ -356,8 +356,8 @@ public class RotondAndesTM {
 
 	/**
 	 * Metodo que modela la transaccion que actualiza el usuario que entra como
-	 * parametro a la base de datos. <b> post: </b> se ha actualizado el usuario
-	 * que entra como parametro
+	 * parametro a la base de datos. <b> post: </b> se ha actualizado el usuario que
+	 * entra como parametro
 	 * 
 	 * @param usuario
 	 *            - Usuario a actualizar. usuario != null
@@ -395,8 +395,8 @@ public class RotondAndesTM {
 
 	/**
 	 * Metodo que modela la transaccion que elimina el usuario que entra como
-	 * parametro a la base de datos. <b> post: </b> se ha eliminado el usuario
-	 * que entra como parametro
+	 * parametro a la base de datos. <b> post: </b> se ha eliminado el usuario que
+	 * entra como parametro
 	 * 
 	 * @param usuario
 	 *            - Usuario a eliminar. usuario != null
@@ -433,8 +433,8 @@ public class RotondAndesTM {
 	}
 
 	/**
-	 * Metodo que modela la transaccion que retorna todos los usuarios de la
-	 * base de datos.
+	 * Metodo que modela la transaccion que retorna todos los usuarios de la base de
+	 * datos.
 	 * 
 	 * @return ListaUsuarios - objeto que modela un arreglo de usuarios. este
 	 *         arreglo contiene el resultado de la busqueda
@@ -515,8 +515,8 @@ public class RotondAndesTM {
 	}
 
 	/**
-	 * Metodo que modela la transaccion que busca el usuario en la base de datos
-	 * con el id que entra como parametro.
+	 * Metodo que modela la transaccion que busca el usuario en la base de datos con
+	 * el id que entra como parametro.
 	 * 
 	 * @param name
 	 *            - Id del usuario a buscar. name != null
@@ -596,12 +596,12 @@ public class RotondAndesTM {
 
 	/**
 	 * Metodo que modela la transaccion que agrega los usuarios que entran como
-	 * parametro a la base de datos. <b> post: </b> se han agregado los usuarios
-	 * que entran como parametro
+	 * parametro a la base de datos. <b> post: </b> se han agregado los usuarios que
+	 * entran como parametro
 	 * 
 	 * @param usuarios
-	 *            - objeto que modela una lista de usuarios y se estos se
-	 *            pretenden agregar. usuarios != null
+	 *            - objeto que modela una lista de usuarios y se estos se pretenden
+	 *            agregar. usuarios != null
 	 * @throws Exception
 	 *             - cualquier error que se genera agregando los usuarios
 	 */
@@ -643,8 +643,8 @@ public class RotondAndesTM {
 
 	/**
 	 * Metodo que modela la transaccion que actualiza el usuario que entra como
-	 * parametro a la base de datos. <b> post: </b> se ha actualizado el usuario
-	 * que entra como parametro
+	 * parametro a la base de datos. <b> post: </b> se ha actualizado el usuario que
+	 * entra como parametro
 	 * 
 	 * @param usuario
 	 *            - Usuario a actualizar. usuario != null
@@ -682,8 +682,8 @@ public class RotondAndesTM {
 
 	/**
 	 * Metodo que modela la transaccion que elimina el usuario que entra como
-	 * parametro a la base de datos. <b> post: </b> se ha eliminado el usuario
-	 * que entra como parametro
+	 * parametro a la base de datos. <b> post: </b> se ha eliminado el usuario que
+	 * entra como parametro
 	 * 
 	 * @param usuario
 	 *            - Usuario a eliminar. usuario != null
@@ -720,8 +720,8 @@ public class RotondAndesTM {
 	}
 
 	/**
-	 * Metodo que modela la transaccion que retorna todos los usuarios de la
-	 * base de datos.
+	 * Metodo que modela la transaccion que retorna todos los usuarios de la base de
+	 * datos.
 	 * 
 	 * @return ListaUsuarios - objeto que modela un arreglo de usuarios. este
 	 *         arreglo contiene el resultado de la busqueda
@@ -760,8 +760,8 @@ public class RotondAndesTM {
 	}
 
 	/**
-	 * Metodo que modela la transaccion que retorna todos los usuarios de la
-	 * base de datos.
+	 * Metodo que modela la transaccion que retorna todos los usuarios de la base de
+	 * datos.
 	 * 
 	 * @return ListaUsuarios - objeto que modela un arreglo de usuarios. este
 	 *         arreglo contiene el resultado de la busqueda
@@ -800,8 +800,8 @@ public class RotondAndesTM {
 	}
 
 	/**
-	 * Metodo que modela la transaccion que retorna todos los usuarios de la
-	 * base de datos.
+	 * Metodo que modela la transaccion que retorna todos los usuarios de la base de
+	 * datos.
 	 * 
 	 * @return ListaUsuarios - objeto que modela un arreglo de usuarios. este
 	 *         arreglo contiene el resultado de la busqueda
@@ -842,8 +842,8 @@ public class RotondAndesTM {
 	}
 
 	/**
-	 * Metodo que modela la transaccion que retorna todos los usuarios de la
-	 * base de datos.
+	 * Metodo que modela la transaccion que retorna todos los usuarios de la base de
+	 * datos.
 	 * 
 	 * @return ListaUsuarios - objeto que modela un arreglo de usuarios. este
 	 *         arreglo contiene el resultado de la busqueda
@@ -881,8 +881,8 @@ public class RotondAndesTM {
 	}
 
 	/**
-	 * Metodo que modela la transaccion que retorna todos los usuarios de la
-	 * base de datos.
+	 * Metodo que modela la transaccion que retorna todos los usuarios de la base de
+	 * datos.
 	 * 
 	 * @return ListaUsuarios - objeto que modela un arreglo de usuarios. este
 	 *         arreglo contiene el resultado de la busqueda
@@ -920,8 +920,8 @@ public class RotondAndesTM {
 	}
 
 	/**
-	 * Metodo que modela la transaccion que retorna todos los usuarios de la
-	 * base de datos.
+	 * Metodo que modela la transaccion que retorna todos los usuarios de la base de
+	 * datos.
 	 * 
 	 * @return ListaUsuarios - objeto que modela un arreglo de usuarios. este
 	 *         arreglo contiene el resultado de la busqueda
@@ -1021,8 +1021,8 @@ public class RotondAndesTM {
 	}
 
 	/**
-	 * Metodo que modela la transaccion que retorna todas las zonas de la base
-	 * de datos.
+	 * Metodo que modela la transaccion que retorna todas las zonas de la base de
+	 * datos.
 	 * 
 	 * @return ListaUsuarios - objeto que modela un arreglo de usuarios. este
 	 *         arreglo contiene el resultado de la busqueda
@@ -1171,8 +1171,8 @@ public class RotondAndesTM {
 	}
 
 	/**
-	 * Metodo que modela la transaccion que retorna todas las zonas de la base
-	 * de datos.
+	 * Metodo que modela la transaccion que retorna todas las zonas de la base de
+	 * datos.
 	 * 
 	 * @return ListaUsuarios - objeto que modela un arreglo de usuarios. este
 	 *         arreglo contiene el resultado de la busqueda
@@ -1277,14 +1277,15 @@ public class RotondAndesTM {
 		DAOTablaPedido daoPedidos = new DAOTablaPedido();
 		DAOTablaProductos daoProdutos = new DAOTablaProductos();
 		DAOTablaMenus daoMenus = new DAOTablaMenus();
-		
+
 		String menus;
 		String productos;
 		try {
 			////// transaccion
 			this.conn = darConexion();
 			daoPedidos.setConn(conn);
-			daoPedidos.addPedido(new Pedido(pedido.getFecha(), pedido.getIdCliente(), pedido.getId(), pedido.getServido(), pedido.getIdMesa()));
+			daoPedidos.addPedido(new Pedido(pedido.getFecha(), pedido.getIdCliente(), pedido.getId(),
+					pedido.getServido(), pedido.getIdMesa()));
 			daoPedidos.cerrarRecursos();
 			menus = pedido.getIdsMenu();
 			String[] menuIds = menus.split("-");
@@ -1294,20 +1295,24 @@ public class RotondAndesTM {
 			for (String idMenu : menuIds) {
 				daoMenus.setConn(conn);
 				info = idMenu.split(":");
-				platos = info[1].split("|");
+				platos = info[1].split(",");
 				platosOriginales = daoMenus.darProductodeMenu(Long.parseLong(info[0]));
 				daoMenus.cerrarRecursos();
 				daoProdutos.setConn(conn);
-				for(int i = 0;i<5;i++) {
-					if(!daoProdutos.esEquivalente(platosOriginales.get(i),Long.parseLong(platos[i+1]))) {
-						throw new Exception("Hay productos no equivalentes.");
+				for (int i = 0; i < 5; i++) {
+					if (Long.parseLong(platos[i + 1]) != 0) {
+						if (!daoProdutos.esEquivalente(platosOriginales.get(i), Long.parseLong(platos[i + 1]))) {
+							throw new Exception("Hay productos no equivalentes.");
+						}
+					}else {
+						platos[i+1]= platosOriginales.get(i).toString();
 					}
 				}
 				daoProdutos.cerrarRecursos();
 				daoPedidos.setConn(conn);
 				daoPedidos.addMenuAPedido(pedido.getId(), Long.parseLong(info[0]), Integer.parseInt(platos[0]),
-						Long.parseLong(platos[1]),Long.parseLong(platos[2]),Long.parseLong(platos[3]),
-						Long.parseLong(platos[4]),Long.parseLong(platos[5]));
+						Long.parseLong(platos[1]), Long.parseLong(platos[2]), Long.parseLong(platos[3]),
+						Long.parseLong(platos[4]), Long.parseLong(platos[5]));
 			}
 
 			productos = pedido.getIdsProducto();
@@ -1581,7 +1586,7 @@ public class RotondAndesTM {
 		return true;
 
 	}
-	
+
 	public boolean darEquivalenciaProducto(Long id) throws Exception {
 		DAOTablaProductos daoProductos = new DAOTablaProductos();
 		try {
@@ -1611,9 +1616,9 @@ public class RotondAndesTM {
 		}
 		return true;
 	}
-	
+
 	public boolean darEquivalenciaIngrediente(Long id) throws Exception {
-		DAOTablaIngredientes daoIngredientes= new DAOTablaIngredientes();
+		DAOTablaIngredientes daoIngredientes = new DAOTablaIngredientes();
 		try {
 			////// transaccion
 			this.conn = darConexion();
@@ -1704,8 +1709,8 @@ public class RotondAndesTM {
 	}
 
 	/**
-	 * Crea un arraylist dond euniamente esten los elementos que se encuentran
-	 * tanto en la primera lista como en la segunda.
+	 * Crea un arraylist dond euniamente esten los elementos que se encuentran tanto
+	 * en la primera lista como en la segunda.
 	 * 
 	 * @param l1
 	 *            Lista base
@@ -1809,7 +1814,7 @@ public class RotondAndesTM {
 		}
 		return pedidos;
 	}
-	
+
 	public String marcarServidosMesa(Long idMesa) throws Exception {
 		List<Long> pedidos;
 		DAOTablaPedido daoPedido = new DAOTablaPedido();
@@ -1818,10 +1823,10 @@ public class RotondAndesTM {
 			this.conn = darConexion();
 			daoPedido.setConn(conn);
 			pedidos = daoPedido.darPedidosDeMesa(idMesa);
-			for(Long id: pedidos) {
+			for (Long id : pedidos) {
 				marcarServido(id);
 			}
-			
+
 		} catch (SQLException e) {
 			System.err.println("SQLException:" + e.getMessage());
 			e.printStackTrace();
@@ -1844,15 +1849,16 @@ public class RotondAndesTM {
 		}
 		return "Se sirvieron todos los pedidos de la mesa " + idMesa;
 	}
-	
+
 	public String cancelarPedido(Long idMesa) throws Exception {
 		DAOTablaPedido daoPedido = new DAOTablaPedido();
 		try {
 			////// transaccion
 			this.conn = darConexion();
 			daoPedido.setConn(conn);
-			if(daoPedido.darServidos(idMesa)== null)return "Ya hay pedidos servidos.";
-			for(Long id :daoPedido.darPedidosDeMesa(idMesa)) {
+			if (daoPedido.darServidos(idMesa) == null)
+				return "Ya hay pedidos servidos.";
+			for (Long id : daoPedido.darPedidosDeMesa(idMesa)) {
 				daoPedido.eliminarMenusDePedido(id);
 				daoPedido.eliminarProductosDePedido(id);
 			}
@@ -1877,7 +1883,7 @@ public class RotondAndesTM {
 				throw exception;
 			}
 		}
-		return "Se cancelaron los pedidos de la mesa "+idMesa;
+		return "Se cancelaron los pedidos de la mesa " + idMesa;
 	}
-	
+
 }

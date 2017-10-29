@@ -265,33 +265,69 @@ public class RestauranteResource {
 	}
 	
 	@POST
-	@Path("{productos/id1: \\d+}/equivalencia/{id2: \\d+}")
+	@Path("productos/{id1: \\d+}/equivalencia/{id2: \\d+}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response ingresarEquivalenciaProducto(@PathParam("id1")Long id1, @PathParam("id2")Long id2) {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
-		String res;
 		try {
 			tm.agregarEquivalenciaProducto(id1, id2);
-			res = "Se agrego correctamente la equivalencia.";
 		} catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
-		return Response.status(200).entity(res).build();
+		return Response.status(200).build();
 	}
 
 	@POST
-	@Path("{ingredientes/id1: \\d+}/equivalencia/{id2: \\d+}")
+	@Path("ingredientes/{id1: \\d+}/equivalencia/{id2: \\d+}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response ingresarEquivalenciaIngrediente(@PathParam("id1")Long id1, @PathParam("id2")Long id2) {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
-		String res;
 		try {
 			tm.agregarEquivalenciaIngredientes(id1, id2);
-			res = "Se agrego correctamente la equivalencia.";
 		} catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
-		return Response.status(200).entity(res).build();
+		return Response.status(200).build();
+	}
+	
+	@POST
+	@Path("{id: \\d+}/surtir")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public Response surtirRestaurante(@PathParam("id")Long id) {
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		try {
+			tm.surtirRestaurante(id);
+		} catch (Exception e) {
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+		return Response.status(200).build();
 	}
 
+	@POST
+	@Path("servicio/{id: \\d+}")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public Response marcarMesaServida(@PathParam("id")Long id) {
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		try {
+			tm.marcarServidosMesa(id);
+		} catch (Exception e) {
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+		return Response.status(200).build();
+	}
+	
+	@POST
+	@Path("cancelar/{id: \\d+}")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public Response cancelarPedido(@PathParam("id")Long id) {
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		try {
+			tm.cancelarPedido(id);
+		} catch (Exception e) {
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+		return Response.status(200).build();
+	}
+	
+	
 }

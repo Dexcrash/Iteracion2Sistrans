@@ -125,12 +125,17 @@ public class DAOTablaPedido {
 		sql += idPedido + ",";
 		sql += idMenu + ",";		
 		sql += cant + ",";
-		sql += id1 + ",";
-		sql += id2 + ",";
-		sql += id3 + ",";
-		sql += id4 + ",";
-		sql += id5 + ")";
-
+		if(id1 == 0)sql += "null ,";
+		else sql += id1 + ",";
+		if(id2 == 0)sql += "null ,";
+		else sql += id2 + ",";
+		if(id3 == 0)sql += "null ,";
+		else sql += id3 + ",";
+		if(id4 == 0)sql += "null ,";
+		else sql += id4 + ",";
+		if(id5 == 0)sql += "null)";
+		else sql += id5 + ")";
+		
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
 		prepStmt.executeQuery();
@@ -244,7 +249,7 @@ public class DAOTablaPedido {
 	public ArrayList<Long> darPedidosDeMesa(Long idMesa) throws SQLException, Exception{
 		ArrayList<Long> pedidos = new ArrayList<Long>();
 
-		String sql = "SELECT ID FROM PEDIDO WHERE MESA =" +idMesa;
+		String sql = "SELECT ID FROM PEDIDO WHERE id_MESA =" +idMesa;
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
@@ -280,7 +285,7 @@ public class DAOTablaPedido {
 	public ArrayList<Long> darServidos(Long idMesa) throws SQLException, Exception {
 		ArrayList<Long> pedidos = new ArrayList<Long>();
 
-		String sql = "SELECT ID FROM PEDIDO WHERE MESA =" +idMesa + "AND SERVIDO = 1";
+		String sql = "SELECT ID FROM PEDIDO WHERE ID_MESA =" +idMesa + "AND SERVIDO = 1";
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
