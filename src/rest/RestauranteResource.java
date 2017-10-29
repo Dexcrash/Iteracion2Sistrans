@@ -265,13 +265,14 @@ public class RestauranteResource {
 	}
 	
 	@POST
-	@Path("{id1: \\d+}/equivalencia/{id2: \\\\d+}")
+	@Path("{productos/id1: \\d+}/equivalencia/{id2: \\d+}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response ingresarEquivalenciaProducto(@PathParam("id1")Long id1, @PathParam("id2")Long id2) {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
 		String res;
 		try {
-			res = tm.marcarServido(id);
+			tm.agregarEquivalenciaProducto(id1, id2);
+			res = "Se agrego correctamente la equivalencia.";
 		} catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
@@ -279,13 +280,14 @@ public class RestauranteResource {
 	}
 
 	@POST
-	@Path("servido/{id: \\d+}")
+	@Path("{ingredientes/id1: \\d+}/equivalencia/{id2: \\d+}")
 	@Produces({ MediaType.APPLICATION_JSON })
-	public Response ingresarEquivalenciaIngrediente(@PathParam("id")Long id) {
+	public Response ingresarEquivalenciaIngrediente(@PathParam("id1")Long id1, @PathParam("id2")Long id2) {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
 		String res;
 		try {
-			res = tm.marcarServido(id);
+			tm.agregarEquivalenciaIngredientes(id1, id2);
+			res = "Se agrego correctamente la equivalencia.";
 		} catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
