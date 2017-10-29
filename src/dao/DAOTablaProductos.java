@@ -459,4 +459,17 @@ public class DAOTablaProductos {
 		return productos;
 	}
 	
+	public boolean esEquivalente(Long id1, Long id2) throws SQLException, Exception {
+		String sql = "SELECT * FROM EQUIVALENCIAPRODUCTOS WHERE ORIGINAL = " + id1 + "AND EQUIVALENCIA = "+ id2;
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+
+		if(rs.next()) {
+			return true;
+		}
+		return false;
+	}
+	
 }

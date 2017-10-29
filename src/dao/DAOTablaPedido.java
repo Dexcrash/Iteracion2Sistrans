@@ -83,8 +83,9 @@ public class DAOTablaPedido {
 		String sql = "INSERT INTO PEDIDO VALUES (TO_DATE('";
 		sql += pedido.getFecha() + "', 'YYYY-MM-DD HH24:MI:SS'),'";
 		sql += pedido.getIdCliente() + "',";
-		sql += pedido.getId() + ",";		
-		sql += pedido.isServido() + ")";
+		sql += pedido.getId() + ",";
+		sql += pedido.getServido()+ ",";
+		sql += pedido.getIdMesa() + ")";
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
@@ -118,12 +119,17 @@ public class DAOTablaPedido {
 	 * @throws SQLException - Cualquier error que la base de datos arroje. No pudo agregar el video a la base de datos
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
 	 */
-	public void addMenuAPedido(Long idPedido, long idMenu, int cant) throws SQLException, Exception {
+	public void addMenuAPedido(Long idPedido, long idMenu, int cant, long id1, long id2, long id3, long id4,long id5) throws SQLException, Exception {
 
 		String sql = "INSERT INTO PEDIDO_MENUS VALUES (";
 		sql += idPedido + ",";
 		sql += idMenu + ",";		
-		sql += cant + ")";
+		sql += cant + ",";
+		sql += id1 + ",";
+		sql += id2 + ",";
+		sql += id3 + ",";
+		sql += id4 + ",";
+		sql += id5 + ")";
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);

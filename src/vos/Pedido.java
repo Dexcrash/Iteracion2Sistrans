@@ -33,6 +33,10 @@ public class Pedido {
 	@JsonProperty(value = "idCliente")
 	private Long idCliente;
 	
+
+	@JsonProperty(value = "idMesa")
+	public Long idMesa;
+	
 	/**
 	 * Metodo constructor de la clase video
 	 * <b>post: </b> Crea el video con los valores que entran como parametro
@@ -41,13 +45,15 @@ public class Pedido {
 	 * @param duration - Duracion en minutos del video.
 	 */
 	public Pedido( @JsonProperty(value="hora")String fecha,
-			 @JsonProperty(value="idCliente")Long idCliente, @JsonProperty(value="id")Long id,@JsonProperty(value = "servido") Long servido) {
-		super();
+			 @JsonProperty(value="idCliente")Long idCliente, @JsonProperty(value="id")Long id,
+			 @JsonProperty(value = "servido") Long servido ,@JsonProperty(value = "mesa") Long mesa ){
 		
+		super();	
 		this.fecha = fecha;
 		this.idCliente = idCliente;
 		this.id = id;
 		this.servido = servido;
+		this.idMesa = mesa;
 	}
 
 	public Long getId() {
@@ -66,10 +72,6 @@ public class Pedido {
 		this.fecha = fecha;
 	}
 
-	public Long isServido() {
-		return servido;
-	}
-
 	public void setServido(Long servido) {
 		this.servido = servido;
 	}
@@ -82,6 +84,19 @@ public class Pedido {
 		this.idCliente = idCliente;
 	}
 
+	public Long getIdMesa() {
+		return idMesa;
+	}
+
+	public void setIdMesa(Long idMesa) {
+		this.idMesa = idMesa;
+	}
+
+	public Long getServido() {
+		return servido;
+	}
+	
+	
 
 	
 }

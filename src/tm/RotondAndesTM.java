@@ -1275,20 +1275,39 @@ public class RotondAndesTM {
 	public void realizarPedido(PedidoCompleto pedido) throws Exception {
 
 		DAOTablaPedido daoPedidos = new DAOTablaPedido();
+		DAOTablaProductos daoProdutos = new DAOTablaProductos();
+		DAOTablaMenus daoMenus = new DAOTablaMenus();
+		
 		String menus;
 		String productos;
 		try {
 			////// transaccion
 			this.conn = darConexion();
 			daoPedidos.setConn(conn);
-			daoPedidos.addPedido(
-					new Pedido(pedido.getFecha(), pedido.getIdCliente(), pedido.getId(), pedido.getServido()));
+			daoPedidos.addPedido(new Pedido(pedido.getFecha(), pedido.getIdCliente(), pedido.getId(), pedido.getServido(), pedido.getIdMesa()));
+			daoPedidos.cerrarRecursos();
 			menus = pedido.getIdsMenu();
 			String[] menuIds = menus.split("-");
 			String[] info;
+			String[] platos;
+			ArrayList<Long> platosOriginales = new ArrayList<>();
 			for (String idMenu : menuIds) {
+				daoMenus.setConn(conn);
 				info = idMenu.split(":");
-				daoPedidos.addMenuAPedido(pedido.getId(), Long.parseLong(info[0]), Integer.parseInt(info[1]));
+				platos = info[1].split("|");
+				platosOriginales = daoMenus.darProductodeMenu(Long.parseLong(info[0]));
+				daoMenus.cerrarRecursos();
+				daoProdutos.setConn(conn);
+				for(int i = 0;i<5;i++) {
+					if(!daoProdutos.esEquivalente(platosOriginales.get(i),Long.parseLong(platos[i+1]))) {
+						throw new Exception("Hay productos no equivalentes.");
+					}
+				}
+				daoProdutos.cerrarRecursos();
+				daoPedidos.setConn(conn);
+				daoPedidos.addMenuAPedido(pedido.getId(), Long.parseLong(info[0]), Integer.parseInt(platos[0]),
+						Long.parseLong(platos[1]),Long.parseLong(platos[2]),Long.parseLong(platos[3]),
+						Long.parseLong(platos[4]),Long.parseLong(platos[5]));
 			}
 
 			productos = pedido.getIdsProducto();

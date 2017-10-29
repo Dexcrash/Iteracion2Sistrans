@@ -33,6 +33,13 @@ public class PedidoCompleto {
 	private Long idCliente;
 	
 	/**
+	 * Nombre del usuario
+	 */
+	@JsonProperty(value = "idMesa")
+	private Long idMesa;
+	
+	
+	/**
 	 * Correo electronico del usuario
 	 */
 	@JsonProperty(value = "idsMenu")
@@ -52,13 +59,14 @@ public class PedidoCompleto {
 	 * @param duration - Duracion en minutos del video.
 	 */
 	public PedidoCompleto(@JsonProperty(value="id")Long id, @JsonProperty(value="fecha")String fecha, 
-			@JsonProperty(value = "servido") Long servido,@JsonProperty(value="idCliente")Long idCliente,
+			@JsonProperty(value = "servido") Long servido,@JsonProperty(value="idCliente")Long idCliente,@JsonProperty(value = "idMesa") Long idMesa,
 			@JsonProperty(value = "idsMenu") String idsMenu, @JsonProperty(value = "idsProducto") String idsProducto) {
 		super();
 		this.id = id;
 		this.fecha = fecha;
 		this.servido = servido;
 		this.idCliente = idCliente;
+		this.idMesa = idMesa;
 		this.idsMenu = idsMenu;
 		this.idsProducto = idsProducto;
 	}
@@ -111,5 +119,12 @@ public class PedidoCompleto {
 		this.idsProducto = idsProducto;
 	}
 
+	public Long getIdMesa() {
+		return idMesa;
+	}
+
+	public void setIdMesa(Long idMesa) {
+		this.idMesa = idMesa;
+	}
 
 }
