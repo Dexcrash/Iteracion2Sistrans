@@ -2,7 +2,7 @@
 	"variables": [],
 	"info": {
 		"name": "RF5 - Registrar Ingrediente",
-		"_postman_id": "8b069bda-d4c8-815c-e6ca-b3d34a29c1dc",
+		"_postman_id": "b90aa8fe-5b11-fea9-478a-d08017284a2d",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -63,7 +63,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "    {\n        \"id\": 11,\n        \"nombre\": \"Frijoles\",\n        \"descripcion\": \"Rojos\",\n        \"traduccion\": \"Red\"\n    }"
+					"raw": "    {\n        \"id\": 21,\n        \"nombre\": \"Frijoles\",\n        \"descripcion\": \"Rojos\",\n        \"traduccion\": \"Red\"\n    }"
 				},
 				"description": "localhost:8080/RotondAndes/rest/restaurantes/1/productos/14/ingredientes"
 			},
@@ -94,7 +94,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "    {\n        \"id\": 5,\n        \"nombre\": \"Frijoles\",\n        \"descripcion\": \"Rojos\",\n        \"traduccion\": \"Red\"\n    }"
+					"raw": "    {\n        \"id\": 21,\n        \"nombre\": \"Frijoles\",\n        \"descripcion\": \"Rojos\",\n        \"traduccion\": \"Red\"\n    }"
 				},
 				"description": "localhost:8080/RotondAndes/rest/restaurantes/1/productos/14/ingredientes"
 			},

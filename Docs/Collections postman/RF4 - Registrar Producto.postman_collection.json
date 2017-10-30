@@ -2,7 +2,7 @@
 	"variables": [],
 	"info": {
 		"name": "RF4 - Registrar Producto",
-		"_postman_id": "708fdac0-4e1f-1b24-fd2d-f91e1a2fb930",
+		"_postman_id": "e96413a9-9378-17e7-f18a-f2ac0f81d6c4",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -63,7 +63,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "    {\n        \"id\": 14,\n        \"nombre\": \"Hamburguesa Gigante\",\n        \"tipo\": \"Plato fuerte\",\n        \"disponibles\": 10,\n        \"tiempoPreparacion\": 18,\n        \"precio\": 25000,\n        \"costo\": 14000,\n        \"descripcion\": \"Con carne\",\n        \"idRestaurante\": 1,\n        \"traduccion\": \"With meat\"\n    }"
+					"raw": "    {\n        \"id\": 30,\n        \"nombre\": \"Hamburguesa Gigante\",\n        \"descripcion\": \"Con carne\",\n        \"traduccion\": \"With meat\",\n        \"tiempoPreparacion\": 18,\n        \"costo\": 14000,\n        \"precio\": 25000,\n        \"disponibles\": 10,\n        \"tipo\": \"Plato fuerte\",\n        \"idRestaurante\": 1,\n        \"maximoProductos\":20\n\n    }"
 				},
 				"description": "localhost:8080/RotondAndes/rest/restaurantes/1/productos"
 			},
@@ -94,7 +94,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "    {\n        \"id\": 2,\n        \"nombre\": \"Hamburguesa Gigante\",\n        \"tipo\": \"Plato fuerte\",\n        \"disponibles\": 10,\n        \"tiempoPreparacion\": 18,\n        \"precio\": 25000,\n        \"costo\": 14000,\n        \"descripcion\": \"Con carne\",\n        \"idRestaurante\": 1,\n        \"traduccion\": \"With meat\"\n    }"
+					"raw": "    {\n        \"id\": 2,\n        \"nombre\": \"Hamburguesa Gigante\",\n        \"tipo\": \"Plato fuerte\",\n        \"disponibles\": 10,\n        \"tiempoPreparacion\": 18,\n        \"precio\": 25000,\n        \"costo\": 14000,\n        \"descripcion\": \"Con carne\",\n        \"idRestaurante\": 1,\n        \"traduccion\": \"With meat\",\n        \"maximoProductos\" : 20\n    }"
 				},
 				"description": "localhost:8080/RotondAndes/rest/restaurantes/1/productos"
 			},

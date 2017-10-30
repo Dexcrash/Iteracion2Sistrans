@@ -2,7 +2,7 @@
 	"variables": [],
 	"info": {
 		"name": "RF6 - Registrar menú",
-		"_postman_id": "37426e7d-7ab0-3875-3dde-8e0ff6c2d9d0",
+		"_postman_id": "8ef159b9-dbf0-fb52-4e4a-3c57e30f8d2f",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -32,7 +32,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "    {\n        \"id\": \"11\",\n        \"nombre\": \"Burritox\",\n        \"costo\": 90000,\n        \"precio\": 130000,\n        \"idrestaurante\": 5,\n        \"idplatoFuerte\": 6\n\n    }"
+					"raw": "    {\n        \"id\": \"20\",\n        \"nombre\": \"Burritox\",\n        \"costo\": 90000,\n        \"precio\": 130000,\n        \"idrestaurante\": 5,\n        \"idplatoFuerte\": 6\n\n    }"
 				},
 				"description": "Agregar un nuevo menú, con una FK que si existe en la tabla"
 			},
@@ -125,7 +125,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "    {\n        \"id\": \"11\",\n        \"nombre\": \"Burritox\",\n        \"costo\": 90000,\n        \"precio\": 130000,\n        \"idrestaurante\": 5,\n        \"idplatoFuerte\": 6\n\n    }"
+					"raw": "    {\n        \"id\": \"20\",\n        \"nombre\": \"Burritox\",\n        \"costo\": 90000,\n        \"precio\": 130000,\n        \"idrestaurante\": 5,\n        \"idplatoFuerte\": 6\n\n    }"
 				},
 				"description": ""
 			},

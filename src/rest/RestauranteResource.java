@@ -1,5 +1,6 @@
 package rest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -214,7 +215,7 @@ public class RestauranteResource {
 		} catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
-		return Response.status(200).entity(ingredientes).build();
+		return Response.status(200).entity(ingrediente).build();
 	}
 	
 
@@ -329,5 +330,31 @@ public class RestauranteResource {
 		return Response.status(200).build();
 	}
 	
-	
+    /**
+     * Metodo que muestra la información de los restaurantes
+     */
+	@GET
+	@Path("/{id}/pedidos/{tipo}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getPedidos(@PathParam("tipo") String tipoCliente, @PathParam("id") Long id) {
+		System.out.println(id);
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		List<ConsultaPedido> consumo;
+		List<ConsultaPedido> consumoEspecifico = new ArrayList<ConsultaPedido>();
+		try {
+			consumo = tm.darInformePedidos(tipoCliente);
+			for (ConsultaPedido consultaPedido : consumo) {
+				System.out.println(consultaPedido.getIdRestaurante());
+				if(consultaPedido.getIdRestaurante().equals(id)){
+					consumoEspecifico.add(consultaPedido);
+				}
+			}
+		} catch (Exception e) {
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+		return Response.status(200).entity(consumoEspecifico).build();
+	}
 }
+	
+	
+

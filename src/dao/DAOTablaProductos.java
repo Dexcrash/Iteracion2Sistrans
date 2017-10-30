@@ -96,8 +96,9 @@ public class DAOTablaProductos {
 			Integer disponibles = rs.getInt("DISPONIBLES");
 			String tipo = rs.getString("TIPO");
 			Long idRestaurante = rs.getLong("ID_RESTAURANTE");
+			Long max = rs.getLong("MAXIMOPRODUCTOS");
 			
-			productos.add(new Producto(id, nombre, tipo, disponibles, tiempoPreparacion, precio, costo, descripcion, traduccion, idRestaurante));
+			productos.add(new Producto(id, nombre, tipo, disponibles, tiempoPreparacion, precio, costo, descripcion, traduccion, idRestaurante,max));
 		}
 		return productos;
 	}
@@ -130,8 +131,9 @@ public class DAOTablaProductos {
 			Integer disponibles = rs.getInt("DISPONIBLES");
 			String tipo = rs.getString("TIPO");
 			Long idRestaurante = rs.getLong("ID_RESTAURANTE");
+			Long max = rs.getLong("MAXIMOPRODUCTOS");
 			
-			productos.add(new Producto(id, nombre, tipo, disponibles, tiempoPreparacion, precio, costo, descripcion, traduccion, idRestaurante));
+			productos.add(new Producto(id, nombre, tipo, disponibles, tiempoPreparacion, precio, costo, descripcion, traduccion, idRestaurante,max));
 		}
 		return productos;
 	}
@@ -164,8 +166,9 @@ public class DAOTablaProductos {
 			Integer disponibles = rs.getInt("DISPONIBLES");
 			String tipo = rs.getString("TIPO");
 			Long idRestaurante = rs.getLong("ID_RESTAURANTE");
+			Long max = rs.getLong("MAXIMOPRODUCTOS");
 			
-			producto = new Producto(id, nombre, tipo, disponibles, tiempoPreparacion, precio, costo, descripcion, traduccion, idRestaurante);
+			producto = new Producto(id, nombre, tipo, disponibles, tiempoPreparacion, precio, costo, descripcion, traduccion, idRestaurante,max);
 		}
 		return producto;
 	}
@@ -192,7 +195,8 @@ public class DAOTablaProductos {
 		sql += producto.getPrecio() + ",";
 		sql += producto.getDisponibles() + ",'";
 		sql += producto.getTipo() + "',";
-		sql += producto.getIdRestaurante() + ")";
+		sql += producto.getIdRestaurante() + ",";
+		sql += producto.getMaximoProductos()+ ")";
 		
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
@@ -274,8 +278,9 @@ public class DAOTablaProductos {
 			Integer disponibles = rs.getInt("DISPONIBLES");
 			String tipo = rs.getString("TIPO");
 			Long idRestaurante = rs.getLong("ID_RESTAURANTE");
+			Long max = rs.getLong("MAXIMOPRODUCTOS");
 			
-			productos.add(new Producto(id, nombre, tipo, disponibles, tiempoPreparacion, precio, costo, descripcion, traduccion, idRestaurante));
+			productos.add(new Producto(id, nombre, tipo, disponibles, tiempoPreparacion, precio, costo, descripcion, traduccion, idRestaurante, max));
 		}
 		return productos;
 	}
@@ -332,8 +337,9 @@ public class DAOTablaProductos {
 			Integer disponibles = rs.getInt("DISPONIBLES");
 			String tipo = rs.getString("TIPO");
 			Long idRestaurante = rs.getLong("ID_RESTAURANTE");
+			Long max = rs.getLong("MAXIMOPRODUCTOS");
 			
-			productos.add(new Producto(id, nombre, tipo, disponibles, tiempoPreparacion, precio, costo, descripcion, traduccion, idRestaurante));
+			productos.add(new Producto(id, nombre, tipo, disponibles, tiempoPreparacion, precio, costo, descripcion, traduccion, idRestaurante,max));
 		}
 		return productos;
 	}
@@ -380,8 +386,9 @@ public class DAOTablaProductos {
 			Integer disponibles = rs.getInt("DISPONIBLES");
 			String tipo = rs.getString("TIPO");
 			Long idRestaurante = rs.getLong("ID_RESTAURANTE");
+			Long max = rs.getLong("MAXIMOPRODUCTOS");
 			
-			productos.add(new Producto(id, nombre, tipo, disponibles, tiempoPreparacion, precio, costo, descripcion, traduccion, idRestaurante));
+			productos.add(new Producto(id, nombre, tipo, disponibles, tiempoPreparacion, precio, costo, descripcion, traduccion, idRestaurante,max));
 		}
 		return productos;
 	}
@@ -415,8 +422,9 @@ public class DAOTablaProductos {
 			Integer disponibles = rs.getInt("DISPONIBLES");
 			String tipo = rs.getString("TIPO");
 			Long idRestaurante = rs.getLong("ID_RESTAURANTE");
+			Long max = rs.getLong("MAXIMOPRODUCTOS");
 			
-			productos.add(new Producto(id, nombre, tipo, disponibles, tiempoPreparacion, precio, costo, descripcion, traduccion, idRestaurante));
+			productos.add(new Producto(id, nombre, tipo, disponibles, tiempoPreparacion, precio, costo, descripcion, traduccion, idRestaurante,max));
 		}
 		return productos;
 	}

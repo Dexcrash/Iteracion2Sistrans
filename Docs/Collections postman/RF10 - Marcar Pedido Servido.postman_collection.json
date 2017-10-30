@@ -2,7 +2,7 @@
 	"variables": [],
 	"info": {
 		"name": "RF10 - Marcar Pedido Servido",
-		"_postman_id": "0f2fdae9-e2d4-5d6b-6fc8-a430c424ac18",
+		"_postman_id": "8d45c65f-4da1-2da1-4335-1031b6cf0b07",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -21,7 +21,7 @@
 				}
 			],
 			"request": {
-				"url": "localhost:8080/RotondAndes/rest/restaurantes/servido/24",
+				"url": "localhost:8080/RotondAndes/rest/restaurantes/servido/3",
 				"method": "POST",
 				"header": [
 					{

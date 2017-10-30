@@ -2,13 +2,13 @@
 	"variables": [],
 	"info": {
 		"name": "RF8 - Registrar Preferencia",
-		"_postman_id": "6d922ef8-aad6-1baf-7989-4cbfe724b7de",
+		"_postman_id": "d08c0133-6443-3b44-6786-eb474074f719",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Get preferencais de un usuario en general",
+			"name": "Obtener preferencias de un usuario",
 			"event": [
 				{
 					"listen": "test",

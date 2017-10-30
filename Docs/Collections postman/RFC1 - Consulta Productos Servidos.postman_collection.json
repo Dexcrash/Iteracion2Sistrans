@@ -2,7 +2,7 @@
 	"variables": [],
 	"info": {
 		"name": "RFC1 - Consulta Productos Servidos",
-		"_postman_id": "a9f30770-4ef3-113a-e4ae-8b62257b42ca",
+		"_postman_id": "35905eef-e172-5827-2fdf-3496e77a7628",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -108,7 +108,7 @@
 					"script": {
 						"type": "text/javascript",
 						"exec": [
-							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+							"tests[\"Status code is 500\"] = responseCode.code === 500;"
 						]
 					}
 				}
@@ -125,7 +125,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"idRestaurante\": null,\n\t\"categoria\":null,\n\t\"fechas\":\"2017-10-01 00:00:00|2017-10-03 24:00:00\",\n\t\"precios\":null\n}"
+					"raw": "{\n\t\"idRestaurante\": null,\n\t\"categoria\":null,\n\t\"fechas\":\"2017-10-01 00:10:00 y 2017-10-04 23:40:00\",\n\t\"precios\":null\n}"
 				},
 				"description": "localhost:8080/RotondAndes/rest/clientes/0/preferencias"
 			},

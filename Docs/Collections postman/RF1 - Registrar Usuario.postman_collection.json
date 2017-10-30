@@ -2,7 +2,7 @@
 	"variables": [],
 	"info": {
 		"name": "RF1 - Registrar Usuario",
-		"_postman_id": "dab0e5ab-8f99-a3fa-379e-bac52cbbfd2b",
+		"_postman_id": "50ec9b94-7276-b833-f21a-ea02df416bb8",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -47,7 +47,7 @@
 					"script": {
 						"type": "text/javascript",
 						"exec": [
-							"tests[\"Status code is 500\"] = responseCode.code === 500;"
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
 						]
 					}
 				}
@@ -64,14 +64,14 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "    {\n        \"rol\": \"No registrado\",\n        \"name\": \"Andres Camilo\" ,\n        \"identificacion\": \"39\",\n        \"contraseña\": null,\n        \"correoEletronico\": \"andresca@hotmail.com\"\n    }"
+					"raw": "    {\n        \"rol\": \"No registrado\",\n        \"name\": \"Andres\" ,\n        \"identificacion\": \"40\",\n        \"contraseña\": null,\n        \"correoEletronico\": \"andresca2@hotmail.com\"\n    }"
 				},
 				"description": "localhost:8080/RotondAndes/rest/usuarios"
 			},
 			"response": []
 		},
 		{
-			"name": "RF1 - Agregar un Usuario existente copy",
+			"name": "RF1 - Agregar un Usuario existente",
 			"event": [
 				{
 					"listen": "test",
@@ -95,7 +95,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "    {\n        \"rol\": \"No registrado\",\n        \"name\": \"Andres Camilo\" ,\n        \"identificacion\": \"37\",\n        \"contraseña\": null,\n        \"correoEletronico\": \"andresca@hotmail.com\"\n    }"
+					"raw": "    {\n        \"rol\": \"No registrado\",\n        \"name\": \"Andres Camilo\" ,\n        \"identificacion\": \"39\",\n        \"contraseña\": null,\n        \"correoEletronico\": \"andresca@hotmail.com\"\n    }"
 				},
 				"description": "localhost:8080/RotondAndes/rest/usuarios"
 			},

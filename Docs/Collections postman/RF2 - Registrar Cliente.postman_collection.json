@@ -2,7 +2,7 @@
 	"variables": [],
 	"info": {
 		"name": "RF2 - Registrar Cliente",
-		"_postman_id": "672ed3bc-af93-f17d-8f8b-5c6a4fbde0ff",
+		"_postman_id": "8300c139-54e0-eecf-c74b-7f5aceaac91d",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -21,7 +21,7 @@
 				}
 			],
 			"request": {
-				"url": "localhost:8080/RotondAndes/rest/clientes",
+				"url": "localhost:8080/RotondAndes/rest/administradores/clientes",
 				"method": "GET",
 				"header": [
 					{
@@ -52,7 +52,7 @@
 				}
 			],
 			"request": {
-				"url": "localhost:8080/RotondAndes/rest/clientes",
+				"url": "localhost:8080/RotondAndes/rest/administradores/clientes",
 				"method": "POST",
 				"header": [
 					{
@@ -63,7 +63,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "    {\n        \"rol\": \"Cliente\",\n        \"name\": \"Andy\",\n        \"identificacion\": \"7\",\n        \"contraseña\": \"alzatucerveza\",\n        \"correoEletronico\": \"andy_sobrio@gmail.com\"\n    }"
+					"raw": "    {\n        \"rol\": \"Cliente\",\n        \"name\": \"Andy\",\n        \"identificacion\": \"41\",\n        \"contraseña\": \"alzatucerveza\",\n        \"correoEletronico\": \"andy_sobrio@gmail.com\"\n    }"
 				},
 				"description": "localhost:8080/RotondAndes/rest/clientes"
 			},
@@ -83,7 +83,7 @@
 				}
 			],
 			"request": {
-				"url": "localhost:8080/RotondAndes/rest/clientes",
+				"url": "localhost:8080/RotondAndes/rest/administradores/clientes",
 				"method": "POST",
 				"header": [
 					{
