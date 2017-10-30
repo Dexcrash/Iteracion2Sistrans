@@ -1,0 +1,103 @@
+{
+	"variables": [],
+	"info": {
+		"name": "RF13 - SURTIR RESTAURANTE",
+		"_postman_id": "f30af449-eb46-338d-b750-f16b37e07dd6",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Se surtio el restaurante No.2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "localhost:8080/RotondAndes/rest/restaurantes/2/surtir"
+			},
+			"response": []
+		},
+		{
+			"name": "Se surte nuevamente el restaurante No.2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "localhost:8080/RotondAndes/rest/restaurantes/2/surtir"
+			},
+			"response": []
+		},
+		{
+			"name": "Se surtio el restaurante No.159, el cual no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"url": "localhost:8080/RotondAndes/rest/restaurantes/159/surtir"
+			},
+			"response": []
+		},
+		{
+			"name": "Se surtio el restaurante No.7",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "localhost:8080/RotondAndes/rest/restaurantes/7/surtir"
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,76 @@
+{
+	"variables": [],
+	"info": {
+		"name": "RF16 - REGISTRAR EL SERVICIO DE UNA MESA",
+		"_postman_id": "fd5e79c3-e0ef-e676-b2ac-90c4451cdb33",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Registra el servicio de la mesa No.4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "localhost:8080/RotondAndes/rest/restaurantes/servicio/4"
+			},
+			"response": []
+		},
+		{
+			"name": "Registra el servicio de la mesa No.6",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"url": "localhost:8080/RotondAndes/rest/restaurantes/servicio/6"
+			},
+			"response": []
+		},
+		{
+			"name": "Registra el servicio de la mesa No.500, la cual no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"url": "localhost:8080/RotondAndes/rest/restaurantes/servicio/500"
+			},
+			"response": []
+		}
+	]
+}

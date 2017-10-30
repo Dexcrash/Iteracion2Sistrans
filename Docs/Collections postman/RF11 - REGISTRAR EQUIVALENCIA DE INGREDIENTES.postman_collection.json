@@ -1,14 +1,14 @@
 {
 	"variables": [],
 	"info": {
-		"name": "RFC7 - Consultar el consumo de un cliente registrado",
-		"_postman_id": "db422270-8195-ec69-87bc-99bc140821c2",
+		"name": "RF11 - REGISTRAR EQUIVALENCIA DE INGREDIENTES",
+		"_postman_id": "7633c087-3779-1c74-577c-aa49d7877040",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Consultar el consumo de un cliente desde administrador",
+			"name": "Crea una equivalencia de ingredientes",
 			"event": [
 				{
 					"listen": "test",
@@ -21,75 +21,24 @@
 				}
 			],
 			"request": {
-				"url": "localhost:8080/RotondAndes/rest/administradores/consumo/1",
-				"method": "GET",
+				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
-						"value": "application/json",
-						"description": ""
+						"value": "application/json"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "    {\n        \"tipo\": \"Musica\",\n        \"valor\": \"Tranquila\",\n        \"idCliente\": 1\n    }"
-				},
-				"description": ""
-			},
-			"response": []
-		},
-		{
-			"name": "Consultar un cliente que no existe",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							"tests[\"Status code is 500\"] = responseCode.code === 500;"
-						]
-					}
-				}
-			],
-			"request": {
-				"url": "localhost:8080/RotondAndes/rest/administradores/consumo/90",
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
 					"raw": ""
 				},
+				"url": "localhost:8080/RotondAndes/rest/restaurantes/ingredientes/15/equivalencia/16",
 				"description": ""
 			},
 			"response": []
 		},
 		{
-			"name": "Consultar consumo cliente que no ha consumido",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							"tests[\"Status code is 500\"] = responseCode.code === 500;"
-						]
-					}
-				}
-			],
-			"request": {
-				"url": "localhost:8080/RotondAndes/rest/administradores/consumo/3",
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"description": ""
-			},
-			"response": []
-		},
-		{
-			"name": "Consulta de un cliente de su consumo",
+			"name": "Crea una equivalencia de ingredientes del mismo ingrediente anterior",
 			"event": [
 				{
 					"listen": "test",
@@ -102,13 +51,78 @@
 				}
 			],
 			"request": {
-				"url": "localhost:8080/RotondAndes/rest/clientes/1/consumo",
-				"method": "GET",
-				"header": [],
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": ""
 				},
+				"url": "localhost:8080/RotondAndes/rest/restaurantes/ingredientes/15/equivalencia/4",
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Crea una equivalencia de ingredientes, que ya esta creada",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 500\"] = responseCode.code === 500;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "localhost:8080/RotondAndes/rest/restaurantes/ingredientes/15/equivalencia/16",
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Crea una equivalencia de ingredientes, con un ingrediente que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 500\"] = responseCode.code === 500;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "localhost:8080/RotondAndes/rest/restaurantes/ingredientes/15/equivalencia/1000",
 				"description": ""
 			},
 			"response": []

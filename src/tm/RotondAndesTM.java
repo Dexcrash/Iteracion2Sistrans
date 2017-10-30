@@ -1501,7 +1501,8 @@ public class RotondAndesTM {
 		try {
 			////// transaccion
 			this.conn = darConexion();
-			if (fechas != null) {
+			if(fechas!=null){
+			if (!fechas.equals("")) {
 				daoPedido.setConn(conn);
 				pedidos = daoPedido.darPedidosPorFecha(fechas);
 				for (Long idPedido : pedidos) {
@@ -1515,7 +1516,7 @@ public class RotondAndesTM {
 				}
 				daoMenus.cerrarRecursos();
 			}
-
+			}
 			daoProductos.setConn(conn);
 			productos = daoProductos.darProductos();
 			if (idRestaurante != null) {

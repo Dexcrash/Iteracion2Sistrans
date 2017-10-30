@@ -182,8 +182,9 @@ public class DAOTablaMenus {
 			Integer disponibles = rs.getInt("DISPONIBLES");
 			String tipo = rs.getString("TIPO");
 			Long idRestaurante = rs.getLong("ID_RESTAURANTE");
+			Long max = rs.getLong("MAXIMOPRODUCTOS");
 			
-			producto = new Producto(id, nombre, tipo, disponibles, tiempoPreparacion, precio, costo, descripcion, traduccion, idRestaurante);
+			producto = new Producto(id, nombre, tipo, disponibles, tiempoPreparacion, precio, costo, descripcion, traduccion, idRestaurante, max);
 		}
 		return producto;
 	}

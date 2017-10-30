@@ -1,0 +1,99 @@
+{
+	"variables": [],
+	"info": {
+		"name": "RF12 - REGISTRAR EQUIVALENCIA DE PRODUCTOS",
+		"_postman_id": "6aaa04d7-670d-ac1b-6383-75e1c8923d56",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear una equivalencia de productos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"url": "localhost:8080/RotondAndes/rest/restaurantes/productos/4/equivalencia/5",
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Crear una equivalencia de productos del mismo ingrediente anterior",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"url": "localhost:8080/RotondAndes/rest/restaurantes/productos/5/equivalencia/8",
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Crear una equivalencia de productos, que ya esta creada",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 500\"] = responseCode.code === 500;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"url": "localhost:8080/RotondAndes/rest/restaurantes/productos/4/equivalencia/5",
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Crear una equivalencia de productos, con un producto no existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 500\"] = responseCode.code === 500;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"url": "localhost:8080/RotondAndes/rest/restaurantes/productos/4/equivalencia/68465",
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

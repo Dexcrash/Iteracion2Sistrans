@@ -2,7 +2,7 @@
 	"variables": [],
 	"info": {
 		"name": "RFC3 - Consultar los clientes",
-		"_postman_id": "8bdb2a4a-758d-ba3e-b05f-93da84b563b7",
+		"_postman_id": "3f453726-e2dd-ed35-9f6f-602bdf4cf6bf",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -55,7 +55,10 @@
 				"url": "localhost:8080/RotondAndes/rest/usuarios/clientes/12",
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"description": ""
 			},
 			"response": []
@@ -77,7 +80,10 @@
 				"url": "localhost:8080/RotondAndes/rest/usuarios/clientes/88",
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"description": ""
 			},
 			"response": []

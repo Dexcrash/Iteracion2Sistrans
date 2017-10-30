@@ -1,14 +1,14 @@
 {
 	"variables": [],
 	"info": {
-		"name": "RFC7 - Consultar el consumo de un cliente registrado",
-		"_postman_id": "db422270-8195-ec69-87bc-99bc140821c2",
+		"name": "RFC8 - Consultar pedidos",
+		"_postman_id": "b0c0a412-1e9d-e6b9-668a-43a7d729e52f",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Consultar el consumo de un cliente desde administrador",
+			"name": "Ver pedidos hechos por usuarios no registrados desde admin",
 			"event": [
 				{
 					"listen": "test",
@@ -21,75 +21,16 @@
 				}
 			],
 			"request": {
-				"url": "localhost:8080/RotondAndes/rest/administradores/consumo/1",
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"description": ""
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "    {\n        \"tipo\": \"Musica\",\n        \"valor\": \"Tranquila\",\n        \"idCliente\": 1\n    }"
-				},
-				"description": ""
-			},
-			"response": []
-		},
-		{
-			"name": "Consultar un cliente que no existe",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							"tests[\"Status code is 500\"] = responseCode.code === 500;"
-						]
-					}
-				}
-			],
-			"request": {
-				"url": "localhost:8080/RotondAndes/rest/administradores/consumo/90",
+				"url": "localhost:8080/RotondAndes/rest/administradores/pedidos/noregistrado",
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
+				"body": {},
 				"description": ""
 			},
 			"response": []
 		},
 		{
-			"name": "Consultar consumo cliente que no ha consumido",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							"tests[\"Status code is 500\"] = responseCode.code === 500;"
-						]
-					}
-				}
-			],
-			"request": {
-				"url": "localhost:8080/RotondAndes/rest/administradores/consumo/3",
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"description": ""
-			},
-			"response": []
-		},
-		{
-			"name": "Consulta de un cliente de su consumo",
+			"name": "Ver pedidos hechos por usuarios registrados desde admin ",
 			"event": [
 				{
 					"listen": "test",
@@ -102,13 +43,54 @@
 				}
 			],
 			"request": {
-				"url": "localhost:8080/RotondAndes/rest/clientes/1/consumo",
+				"url": "localhost:8080/RotondAndes/rest/administradores/pedidos/registrado",
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Ver pedidos con parámetro no válido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 500\"] = responseCode.code === 500;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:8080/RotondAndes/rest/administradores/pedidos/noregis",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Ver pedidos hechos por usuarios desde restaurante",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:8080/RotondAndes/rest/restaurantes/7/pedidos/registrado",
+				"method": "GET",
+				"header": [],
+				"body": {},
 				"description": ""
 			},
 			"response": []

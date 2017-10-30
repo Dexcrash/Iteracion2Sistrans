@@ -1,0 +1,103 @@
+{
+	"variables": [],
+	"info": {
+		"name": "RF17 - CANCELAR PEDIDO",
+		"_postman_id": "2fd05887-3ee8-8abc-af3b-e5f6d0bb53b9",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Se cancelan los pedidos de la mesa No.2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "localhost:8080/RotondAndes/rest/restaurantes/cancelar/2"
+			},
+			"response": []
+		},
+		{
+			"name": "Se cancelan los pedidos de la mesa No.56, la cual no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "localhost:8080/RotondAndes/rest/restaurantes/cancelar/56"
+			},
+			"response": []
+		},
+		{
+			"name": "Se cancelan los pedidos de la mesa No.6",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"url": "localhost:8080/RotondAndes/rest/restaurantes/cancelar/6"
+			},
+			"response": []
+		},
+		{
+			"name": "Se cancelan los pedidos de la mesa No.11, los cuales tiene pedidos ya servidos.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "localhost:8080/RotondAndes/rest/restaurantes/cancelar/11"
+			},
+			"response": []
+		}
+	]
+}

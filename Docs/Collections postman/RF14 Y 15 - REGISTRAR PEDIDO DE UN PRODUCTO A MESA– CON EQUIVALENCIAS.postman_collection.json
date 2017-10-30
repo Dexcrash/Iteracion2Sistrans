@@ -1,0 +1,185 @@
+{
+	"variables": [],
+	"info": {
+		"name": "RF14 Y 15 - REGISTRAR PEDIDO DE UN PRODUCTO A MESA– CON EQUIVALENCIAS",
+		"_postman_id": "7f26556b-9c0c-b995-451f-ad1a4c21f38f",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Registra un nuevo pedido de menu y productos con equivalencia",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\r\n        \"fecha\": \"2017-10-04 09:26:00\",\r\n        \"idCliente\" : 2,\r\n        \"id\": 229,\r\n        \"servido\": 0,\r\n        \"idMesa\": 4,\r\n        \"idsMenu\": \"1:1,0,0,8,0,0,-2:1,0,0,0,0,0\",\r\n        \"idsProducto\": \"17:2-12:1\"\r\n  }"
+				},
+				"url": "localhost:8080/RotondAndes/rest/usuarios/pedido"
+			},
+			"response": []
+		},
+		{
+			"name": "Registra un nuevo pedido de menu y productos con equivalencia con un cliente que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 500\"] = responseCode.code === 500;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\r\n        \"fecha\": \"2017-10-04 09:26:00\",\r\n        \"idCliente\" : 789,\r\n        \"id\": 229,\r\n        \"servido\": 0,\r\n        \"idMesa\": 4,\r\n        \"idsMenu\": \"1:1,0,0,8,0,0,-2:1,0,0,0,0,0\",\r\n        \"idsProducto\": \"17:2-12:1\"\r\n  }"
+				},
+				"url": "localhost:8080/RotondAndes/rest/usuarios/pedido"
+			},
+			"response": []
+		},
+		{
+			"name": "Registra un nuevo pedido de menu y productos con equivalencia a un cliente inexistente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 500\"] = responseCode.code === 500;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\r\n        \"fecha\": \"2017-10-04 09:26:00\",\r\n        \"idCliente\" : 6548,\r\n        \"id\": 19,\r\n        \"servido\": 0,\r\n        \"idMesa\": 4,\r\n        \"idsMenu\": \"1:1,0,0,8,0,0,-2:1,0,0,0,0,0\",\r\n        \"idsProducto\": \"17:2-12:1\"\r\n  }"
+				},
+				"url": "localhost:8080/RotondAndes/rest/usuarios/pedido"
+			},
+			"response": []
+		},
+		{
+			"name": "Registra un nuevo pedido productos con equivalencia",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\r\n        \"fecha\": \"2017-10-04 09:26:00\",\r\n        \"idCliente\" : 2,\r\n        \"id\": 157,\r\n        \"servido\": 0,\r\n        \"idMesa\": 4,\r\n        \"idsProducto\": \"14:2-12:1\"\r\n  }"
+				},
+				"url": "localhost:8080/RotondAndes/rest/usuarios/pedido"
+			},
+			"response": []
+		},
+		{
+			"name": "Registra un nuevo pedido productos con equivalencia, con productos que no existen",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 500\"] = responseCode.code === 500;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\r\n        \"fecha\": \"2017-10-04 09:26:00\",\r\n        \"idCliente\" : 2,\r\n        \"id\": 157,\r\n        \"servido\": 0,\r\n        \"idMesa\": 4,\r\n        \"idsProducto\": \"1644:2-1552:1\"\r\n  }"
+				},
+				"url": "localhost:8080/RotondAndes/rest/usuarios/pedido"
+			},
+			"response": []
+		},
+		{
+			"name": "Registra un nuevo pedido productos con equivalencia, a un cliente que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 00\"] = responseCode.code === 500;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\r\n        \"fecha\": \"2017-10-04 09:26:00\",\r\n        \"idCliente\" : 8965,\r\n        \"id\": 157,\r\n        \"servido\": 0,\r\n        \"idMesa\": 4,\r\n        \"idsProducto\": \"1644:2-1552:1\"\r\n  }"
+				},
+				"url": "localhost:8080/RotondAndes/rest/usuarios/pedido"
+			},
+			"response": []
+		}
+	]
+}

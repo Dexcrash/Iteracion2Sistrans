@@ -174,7 +174,9 @@ public class DAOTablaUsuarios {
 		recursos.add(prepStmt);
 		prepStmt.executeQuery();
 
+
 	}
+	
 	
 	/**
 	 * Metodo que actualiza el video que entra como parametro en la base de datos.

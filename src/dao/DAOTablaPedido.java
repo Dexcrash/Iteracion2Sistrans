@@ -231,10 +231,11 @@ public class DAOTablaPedido {
 	 */
 	public ArrayList<Long> darPedidosPorFecha(String rangoFechas) throws SQLException, Exception {
 		ArrayList<Long> pedidos = new ArrayList<Long>();
-
-		String[] fechas = rangoFechas.split("|");
+		String[] fechas = rangoFechas.split("y");
+       System.out.println(fechas[0]);
+       System.out.println(fechas[1]);
 		String sql = "SELECT ID FROM PEDIDO WHERE FECHAHORA > (TO_DATE('" + fechas[0] 
-				+ "', 'YYYY-MM-DD HH24:MI:SS') ADN FECHAHORA < (TO_DATE('" + fechas[1] +"', 'YYYY-MM-DD HH24:MI:SS')";
+				+ "', 'YYYY-MM-DD HH24:MI:SS')) AND FECHAHORA < (TO_DATE('" + fechas[1] +"', 'YYYY-MM-DD HH24:MI:SS'))";
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
