@@ -1,22 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html ng-app = "mainApp">
 <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
-	<script src="http://code.jquery.com/jquery-2.0.1.min.js"></script>
-	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.16/vue.js"></script>
+<script src="app.js"></script>
+<link rel="stylesheet" type="text/css" href="styles.css" />
 <meta charset="UTF-8">
 <title>RotondAndesHome</title>
 </head>
 <body>
-	<h2 id="heading-1" class="ui-bar ui-bar-a ui-corner-all">RotondAndes REST</h2>
 
-<div data-role="navbar" id="navbar-1">
-	<ul>
-		<li><a href="#">Usuarios</a></li>
-		<li><a href="#">Restaurantes</a></li>
-		<li><a href="#">Administrador</a></li>
-	</ul>
+
+<div id="main">
+    
+        <!-- The navigation menu will get the value of the "active" variable as a class. -->
+    
+        <!-- To stops the page from jumping when a link is clicked 
+        we use the "prevent" modifier (short for preventDefault). -->
+
+    <nav v-bind:class="active" v-on:click.prevent>
+
+        <!-- When a link in the menu is clicked, we call the makeActive method, 
+        defined in the JavaScript Vue instance. It will change the value of "active". -->
+
+        <a href="#" class="Usuarios" v-on:click="makeActive('home')">Publico</a>
+        <a href="#" class="Publico" v-on:click="makeActive('projects')">Usuarios</a>
+        <a href="#" class="Restaurantes" v-on:click="makeActive('services')">Restaurantes</a>
+        <a href="#" class="Administrador" v-on:click="makeActive('contact')">Administrador</a>
+    </nav>
+
+     <!-- The mustache expression will be replaced with the value of "active".
+          It will automatically update to reflect any changes. -->
+
+    <p>You chose <b>{{active}}</b></p>
 </div>
 </body>
 </html>

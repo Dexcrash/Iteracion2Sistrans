@@ -1,0 +1,12 @@
+<div class="container-fluid">
+    <ul class="list-group" ng-repeat="elem in elements">
+        <li class="list-group-item">
+            <h4>[{{elem.id}}] Usuario: {{elem.name}}</h4>
+            <div ng-show='collapse'>
+                Correo: {{elem.correoElectronico}}
+            </div>
+            <input id='{{elem.id}}' type="checkbox" ng-model='collapse' style='display: none;'>
+                <label for='{{elem.id}}' class="btn btn-primary">Detail</label>            
+        </li>
+    </ul>
+</div>

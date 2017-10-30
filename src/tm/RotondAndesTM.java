@@ -1288,31 +1288,34 @@ public class RotondAndesTM {
 					pedido.getServido(), pedido.getIdMesa()));
 			daoPedidos.cerrarRecursos();
 			menus = pedido.getIdsMenu();
-			String[] menuIds = menus.split("-");
 			String[] info;
 			String[] platos;
-			ArrayList<Long> platosOriginales = new ArrayList<>();
-			for (String idMenu : menuIds) {
-				daoMenus.setConn(conn);
-				info = idMenu.split(":");
-				platos = info[1].split(",");
-				platosOriginales = daoMenus.darProductodeMenu(Long.parseLong(info[0]));
-				daoMenus.cerrarRecursos();
-				daoProdutos.setConn(conn);
-				for (int i = 0; i < 5; i++) {
-					if (Long.parseLong(platos[i + 1]) != 0) {
-						if (!daoProdutos.esEquivalente(platosOriginales.get(i), Long.parseLong(platos[i + 1]))) {
-							throw new Exception("Hay productos no equivalentes.");
+			if (menus != "" && menus!=null) {
+				String[] menuIds = menus.split("-");
+
+				ArrayList<Long> platosOriginales = new ArrayList<>();
+				for (String idMenu : menuIds) {
+					daoMenus.setConn(conn);
+					info = idMenu.split(":");
+					platos = info[1].split(",");
+					platosOriginales = daoMenus.darProductodeMenu(Long.parseLong(info[0]));
+					daoMenus.cerrarRecursos();
+					daoProdutos.setConn(conn);
+					for (int i = 0; i < 5; i++) {
+						if (Long.parseLong(platos[i + 1]) != 0) {
+							if (!daoProdutos.esEquivalente(platosOriginales.get(i), Long.parseLong(platos[i + 1]))) {
+								throw new Exception("Hay productos no equivalentes.");
+							}
+						} else {
+							platos[i + 1] = platosOriginales.get(i).toString();
 						}
-					}else {
-						platos[i+1]= platosOriginales.get(i).toString();
 					}
+					daoProdutos.cerrarRecursos();
+					daoPedidos.setConn(conn);
+					daoPedidos.addMenuAPedido(pedido.getId(), Long.parseLong(info[0]), Integer.parseInt(platos[0]),
+							Long.parseLong(platos[1]), Long.parseLong(platos[2]), Long.parseLong(platos[3]),
+							Long.parseLong(platos[4]), Long.parseLong(platos[5]));
 				}
-				daoProdutos.cerrarRecursos();
-				daoPedidos.setConn(conn);
-				daoPedidos.addMenuAPedido(pedido.getId(), Long.parseLong(info[0]), Integer.parseInt(platos[0]),
-						Long.parseLong(platos[1]), Long.parseLong(platos[2]), Long.parseLong(platos[3]),
-						Long.parseLong(platos[4]), Long.parseLong(platos[5]));
 			}
 
 			productos = pedido.getIdsProducto();
