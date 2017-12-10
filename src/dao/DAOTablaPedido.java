@@ -18,6 +18,7 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Date;
 
 import vos.*;
 
@@ -298,6 +299,30 @@ public class DAOTablaPedido {
 		if(pedidos.size()==0)return null;
 		
 		return pedidos;
+	}
+	
+	public ConsultaRentabilidadLocal darRentabilidad(String fecha1, String fecha2, Long idres) throws SQLException, Exception {
+		ConsultaRentabilidadLocal renta = null;
+
+		String sql = "SELECT PERDIDAST, GANANCIAST, GANANCIAST-PERDIDAST AS BALANCE FROM (SELECT SUM(PERDIDAS) AS PERDIDAST, SUM(GANANCIAS) AS GANANCIAST FROM (SELECT  CANTIDAD*COSTO AS PERDIDAS, CANTIDAD*PRECIO AS GANANCIAS FROM (SELECT * FROM (SELECT *  FROM PEDIDO WHERE FECHAHORA BETWEEN TO_DATE('";
+		sql += fecha1;
+		sql+= "', 'YYYY-MM-DD')  AND TO_DATE('";
+		sql+= fecha2;
+		sql+= "', 'YYYY-MM-DD') AND SERVIDO = 1)";
+		sql+= "NATURAL JOIN (SELECT ID_PEDIDO AS ID, ID_PRODUCTO, CANTIDAD FROM PEDIDO_PRODUCTOS)) NATURAL JOIN (SELECT ID AS ID_PRODUCTO, COSTO, PRECIO  FROM PRODUCTO WHERE ID_RESTAURANTE =";
+		sql+=  idres + ")))";
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+
+		while (rs.next()) {
+			
+			Long perd = rs.getLong("PERDIDAST");
+			Long gan = rs.getLong("GANANCIAST");
+			Long tot = rs.getLong("BALANCE");
+			renta = new ConsultaRentabilidadLocal(perd, gan, tot);
+		}
+		return renta;
 	}
 	
 }

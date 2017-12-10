@@ -92,7 +92,7 @@ public class DAOTablaRestaurantes {
 			Double balancePrecio = rs.getDouble("BALANCEPRECIO");
 			Double balanceCosto = rs.getDouble("BALANCECOSTO");
 			String tipo = rs.getString("TIPO");
-			Long idUsuario = rs.getLong("ID_USUARIO");
+			String idUsuario = rs.getString("ID_USUARIO");
 			String nombreZona = rs.getString("NOMBRE_ZONA");
 			
 			restaurantes.add(new Restaurante(id, nombre, tipo, representante, paginaWeb, balancePrecio, balanceCosto, idUsuario, nombreZona));
@@ -125,7 +125,7 @@ public class DAOTablaRestaurantes {
 			Double balancePrecio = rs.getDouble("BALANCEPRECIO");
 			Double balanceCosto = rs.getDouble("BALANCECOSTO");
 			String tipo = rs.getString("TIPO");
-			Long idUsuario = rs.getLong("ID_USUARIO");
+			String idUsuario = rs.getString("ID_USUARIO");
 			String nombreZona = rs.getString("NOMBRE_ZONA");
 			
 			restaurantes.add(new Restaurante(id, nombre, tipo, representante, paginaWeb, balancePrecio, balanceCosto, idUsuario, nombreZona));
@@ -158,7 +158,7 @@ public class DAOTablaRestaurantes {
 			Double balancePrecio = rs.getDouble("BALANCEPRECIO");
 			Double balanceCosto = rs.getDouble("BALANCECOSTO");
 			String tipo = rs.getString("TIPO");
-			Long idUsuario = rs.getLong("ID_USUARIO");
+			String idUsuario = rs.getString("ID_USUARIO");
 			String nombreZona = rs.getString("NOMBRE_ZONA");
 			
 			restaurante = new Restaurante(id, nombre, tipo, representante, paginaWeb, balancePrecio, balanceCosto, idUsuario,nombreZona);
@@ -238,6 +238,44 @@ public class DAOTablaRestaurantes {
 		recursos.add(prepStmt);
 		prepStmt.executeQuery();
 	}
+	
+	
+	public void nullProds(Long idres) throws SQLException, Exception {
+
+		String sql = "UPDATE PRODUCTO SET ID_RESTAURANTE = NULL ";
+		sql += "WHERE ID_RESTAURANTE = " +  idres;
+
+		
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		prepStmt.executeQuery();
+
+	}
+	
+	public void eliminarProdsDisponibles(Long idres) throws SQLException, Exception {
+
+		String sql = "UPDATE PRODUCTO SET DISPONIBLES = 0, MAXIMOPRODUCTOS = 0 ";
+		sql += "WHERE ID_RESTAURANTE = "+ idres;
+
+        System.out.println(sql);
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		prepStmt.executeQuery();
+	}
+	
+	public void nullMenus(Long idres) throws SQLException, Exception {
+
+		String sql = "UPDATE MENU SET ID_RESTAURANTE = NULL ";
+		sql += "WHERE ID_RESTAURANTE =" +  idres;
+
+		
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		prepStmt.executeQuery();
+
+	}
+	
 	
 	/**
 	 * Da la información de los restaurantes

@@ -18,6 +18,8 @@ import javax.ws.rs.core.Response;
 import tm.RotondAndesTM;
 import vos.ConsultaConsumo;
 import vos.ConsultaPedido;
+import vos.ConsultaRentabilidadLocal;
+import vos.Producto;
 import vos.Restaurante;
 import vos.Usuario;
 import vos.Zona;
@@ -263,6 +265,37 @@ public class AdministradorResource {
 		}
 		return Response.status(200).entity(consumo).build();
 	}
+	
+	@DELETE
+	@Path("restaurantes/{id: \\d+}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response deleteRestaurante(@PathParam("id") Long idCliente) {
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		Restaurante borrado = null;
+		try {
+			borrado = tm.deleteRestauranteLocal(idCliente);
+		} catch (Exception e) {
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+		return Response.status(200).entity(borrado).build();
+	}
+	
+	@GET
+	@Path("rentabilidad/{idres: \\d+}/{fecha1}/{fecha2}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getRentabilidad(@PathParam("fecha1") String fecha1, @PathParam("fecha2") String fecha2, @PathParam("idres") Long idres) {
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		ConsultaRentabilidadLocal cons = null;
+		try {
+			cons = tm.darRentabilidad(fecha1, fecha2, idres);
+			
+		} catch (Exception e) {
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+		return Response.status(200).entity(cons).build();
+	}
+	
+	
 	
 }
 	

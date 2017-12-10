@@ -52,7 +52,7 @@ public class Restaurante {
 	 * Pass del usuario
 	 */
 	@JsonProperty(value = "usuario")
-	private Long usuario;
+	private String usuario;
 	
 	/**
 	 * Pass del usuario
@@ -71,7 +71,7 @@ public class Restaurante {
 	public Restaurante(@JsonProperty(value="id")Long id, @JsonProperty(value="nombre")String nombre,@JsonProperty(value="tipo")String tipo, 
 			@JsonProperty(value = "representante") String representante, @JsonProperty(value="paginaWeb")String paginaWeb, 
 			@JsonProperty(value="balancePrecio")Double balancePrecio, @JsonProperty(value="balanceCosto")Double balanceCosto,
-			@JsonProperty(value="usuario")Long usuario, @JsonProperty(value="nombreZona")String nombreZona ) {
+			@JsonProperty(value="usuario")String usuario, @JsonProperty(value="nombreZona")String nombreZona ) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -139,11 +139,11 @@ public class Restaurante {
 		this.balanceCosto = balanceCosto;
 	}
 
-	public Long getUsuario() {
+	public String getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(Long usuario) {
+	public void setUsuario(String usuario) {
 		this.usuario = usuario;
 	}
 

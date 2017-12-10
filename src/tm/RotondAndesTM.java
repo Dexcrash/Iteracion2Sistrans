@@ -27,12 +27,16 @@ import dao.DAOTablaProductos;
 import dao.DAOTablaRestaurantes;
 import dao.DAOTablaUsuarios;
 import dao.DAOTablaZonas;
+import dtm.RotondAndesDistributed;
+import jms.NonReplyException;
 import vos.ConsultaCliente;
 import vos.ConsultaConsumo;
 import vos.ConsultaFiltros;
 import vos.ConsultaPedido;
+import vos.ConsultaRentabilidadLocal;
 import vos.ConsultaZona;
 import vos.Ingrediente;
+import vos.ListaProductos;
 import vos.Preferencia;
 import vos.Menu;
 import vos.Pedido;
@@ -90,6 +94,8 @@ public class RotondAndesTM {
 	 * conexion a la base de datos
 	 */
 	private Connection conn;
+	
+	private RotondAndesDistributed dtm;
 
 	/**
 	 * Metodo constructor de la clase UsuarioAndesMaster, esta clase modela y
@@ -690,14 +696,29 @@ public class RotondAndesTM {
 	 * @throws Exception
 	 *             - cualquier error que se genera actualizando los usuarios
 	 */
-	public void deleteRestaurante(Restaurante restaurante) throws Exception {
+	public Restaurante deleteRestauranteLocal(Long idRes) throws Exception {
 		DAOTablaRestaurantes daoRestaurantes = new DAOTablaRestaurantes();
+		Restaurante aborrar = null;
 		try {
 			////// transaccion
 			this.conn = darConexion();
 			daoRestaurantes.setConn(conn);
-			daoRestaurantes.deleteRestaurante(restaurante);
+			aborrar = daoRestaurantes.buscarRestaurantePorId(idRes);
+			//Poner en null el restaurante de los productos y los menus
+			
+  
+			daoRestaurantes.eliminarProdsDisponibles(idRes);
 
+			daoRestaurantes.setConn(conn);
+			daoRestaurantes.nullMenus(idRes);
+			
+			daoRestaurantes.setConn(conn);		
+			daoRestaurantes.nullProds(idRes);
+			
+			daoRestaurantes.setConn(conn);	
+			daoRestaurantes.deleteRestaurante(aborrar);
+			
+            
 		} catch (SQLException e) {
 			System.err.println("SQLException:" + e.getMessage());
 			e.printStackTrace();
@@ -717,6 +738,7 @@ public class RotondAndesTM {
 				throw exception;
 			}
 		}
+		return aborrar;
 	}
 
 	/**
@@ -1987,5 +2009,97 @@ public class RotondAndesTM {
 		return clientes;
 	}	
 	
+	//
+	/**
+	 * Metodo que modela la transaccion que retorna todas las zonas de la base de
+	 * datos.
+	 * 
+	 * @return ListaUsuarios - objeto que modela un arreglo de usuarios. este
+	 *         arreglo contiene el resultado de la busqueda
+	 * @throws Exception
+	 *             - cualquier error que se genere durante la transaccion
+	 */
+	public ListaProductos darProductosLocal() throws Exception {
+		List<Producto> productos;
+		DAOTablaProductos daoProductos = new DAOTablaProductos();
+		try {
+			////// transaccion
+			this.conn = darConexion();
+			daoProductos.setConn(conn);
+			productos = daoProductos.darProductos();
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoProductos.cerrarRecursos();
+
+				if (this.conn != null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		return new ListaProductos(productos);
+	}
 	
+	/**
+	 * Método que modela la transacci�n que retorna todos los productos
+	 * @return ListaProductos - objeto que modela  un arreglo de videos. este arreglo contiene el resultado de la búsqueda
+	 * @throws Exception -  cualquier error que se genere durante la transacción
+	 */
+	public ListaProductos darProductos() throws Exception {
+		ListaProductos remL = darProductosLocal();
+		try
+		{
+			ListaProductos resp = dtm.getRemoteProductos();
+			System.out.println(resp.getProductos().size());
+			remL.getProductos().addAll(resp.getProductos());
+		}
+		catch(Exception e)
+		{
+			
+		}
+		return remL;
+	}
+	
+	public ConsultaRentabilidadLocal darRentabilidad(String fecha1, String fecha2, Long idres) throws Exception {
+		DAOTablaPedido daoPedido = new DAOTablaPedido();
+		ConsultaRentabilidadLocal renta = null;
+		try {
+			////// transaccion
+			this.conn = darConexion();
+			daoPedido.setConn(conn);
+			renta = daoPedido.darRentabilidad(fecha1, fecha2, idres);
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoPedido.cerrarRecursos();
+
+				if (this.conn != null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		return renta;
+	}
+
 }
