@@ -292,5 +292,83 @@ public class DAOTablaUsuarios {
 		}
 		return consumos;
 	}
+	
+	public ArrayList<Usuario> darConsumo(String res, String fecha1, String fecha2, String filtro) throws SQLException, Exception {
+		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+		
+		if(filtro.equals("NOMBRE")||filtro.equals("CORREOELECTRONICO")||filtro.equals("IDENTIFICACION")||filtro.equals("ROL")){
+
+			String sql = "SELECT IDENTIFICACION, NOMBRE, ROL , CORREOELECTRONICO, PASS FROM USUARIO WHERE ROL = 'Cliente' AND IDENTIFICACION IN (SELECT DISTINCT PEDIDO.ID_CLIENTE FROM PEDIDO INNER JOIN (SELECT PEDIDO_PRODUCTOS.ID_PEDIDO, PEDIDO_PRODUCTOS.ID_PRODUCTO, PRODUCTO.TIPO, PRODUCTO.ID_RESTAURANTE FROM PEDIDO_PRODUCTOS INNER JOIN PRODUCTO ON PEDIDO_PRODUCTOS.ID_PRODUCTO = PRODUCTO.ID ) TABLA ON PEDIDO.ID = TABLA.ID_PRODUCTO WHERE FECHAHORA BETWEEN "; 
+					sql += fecha1 + "AND";
+					sql += fecha2 + "AND TABLA.ID_RESTAURANTE = " + res +")ORDER BY " + filtro;
+			PreparedStatement prepStmt = conn.prepareStatement(sql);
+			recursos.add(prepStmt);
+			ResultSet rs = prepStmt.executeQuery();
+
+			while (rs.next()) {
+				String name = rs.getString("NOMBRE");
+				String correo = rs.getString("CORREOELECTRONICO");
+				String rol = rs.getString("ROL");
+				String identificacion = rs.getString("IDENTIFICACION");
+				String contraseña = rs.getString("PASS");
+				usuarios.add(new Usuario(rol, name, identificacion, correo, contraseña));			
+			}
+			return usuarios;
+
+		}
+		
+		return null;
+	}
+	
+	public ArrayList<Usuario> darNoConsumo(String res, String fecha1, String fecha2, String filtro) throws SQLException, Exception {
+		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+		
+		if(filtro.equals("NOMBRE")||filtro.equals("CORREOELECTRONICO")||filtro.equals("IDENTIFICACION")||filtro.equals("ROL")){
+
+			String sql = "SELECT IDENTIFICACION, NOMBRE, ROL , CORREOELECTRONICO, PASS FROM USUARIO WHERE IDENTIFICACION NOT IN (SELECT DISTINCT PEDIDO.ID_CLIENTE FROM PEDIDO INNER JOIN (SELECT PEDIDO_PRODUCTOS.ID_PEDIDO, PEDIDO_PRODUCTOS.ID_PRODUCTO, PRODUCTO.TIPO, PRODUCTO.ID_RESTAURANTE FROM PEDIDO_PRODUCTOS INNER JOIN PRODUCTO ON PEDIDO_PRODUCTOS.ID_PRODUCTO = PRODUCTO.ID ) TABLA ON PEDIDO.ID = TABLA.ID_PRODUCTO WHERE FECHAHORA BETWEEN "; 
+					sql += fecha1 + "AND";
+					sql += fecha2 + "AND TABLA.ID_RESTAURANTE = "+res+")ORDER BY " + filtro;
+			PreparedStatement prepStmt = conn.prepareStatement(sql);
+			recursos.add(prepStmt);
+			ResultSet rs = prepStmt.executeQuery();
+
+			while (rs.next()) {
+				String name = rs.getString("NOMBRE");
+				String correo = rs.getString("CORREOELECTRONICO");
+				String rol = rs.getString("ROL");
+				String identificacion = rs.getString("IDENTIFICACION");
+				String contraseña = rs.getString("PASS");
+				usuarios.add(new Usuario(rol, name, identificacion, correo, contraseña));			
+			}
+			return usuarios;
+
+		}
+		
+		return null;
+	}
+	
+	public ArrayList<Usuario> darBuenosClientes() throws SQLException, Exception {
+		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+		
+			String sql = "SELECT USUARIO.NOMBRE FROM USUARIO WHERE ROL= 'Cliente' AND IDENTIFICACION IN (SELECT IDENTIFICACION FROM USUARIO WHERE IDENTIFICACION NOT IN (SELECT DISTINCT ID_CLIENTE FROM PEDIDO JOIN PEDIDO_MENUS ON PEDIDO.ID = PEDIDO_MENUS.ID_MENU)";
+				   sql += "UNION";
+				   sql += "(SELECT IDENTIFICACION  FROM USUARIO WHERE IDENTIFICACION NOT IN (SELECT PEDIDO.ID_CLIENTE FROM PEDIDO INNER JOIN PEDIDO_PRODUCTOS ON PEDIDO.ID = PEDIDO_PRODUCTOS.ID_PEDIDO INNER JOIN PRODUCTO ON PEDIDO_PRODUCTOS.ID_PRODUCTO = PRODUCTO.IDWHERE PRODUCTO.PRECIO < 25000))";
+				   sql += "UNION";
+				   sql += "(SELECT ID_CLIENTE FROM (SELECT ID_CLIENTE,COUNT( ANO ) AS B  from(SELECT DISTINCT COUNT(TO_CHAR(FECHAHORA,'WW')) as A, TO_CHAR(FECHAHORA,'YYYY') as ANO , id_clienteFROM PEDIDO group by  id_cliente,TO_CHAR(FECHAHORA,'YYYY')) where A=52 GROUP BY ID_CLIENTE)WHERE B=17))";
+					
+			PreparedStatement prepStmt = conn.prepareStatement(sql);
+			recursos.add(prepStmt);
+			ResultSet rs = prepStmt.executeQuery();
+
+			while (rs.next()) {
+				String name = rs.getString("NOMBRE");
+				String correo = rs.getString("CORREOELECTRONICO");
+				String rol = rs.getString("ROL");
+				String identificacion = rs.getString("IDENTIFICACION");
+				String contraseña = rs.getString("PASS");
+				usuarios.add(new Usuario(rol, name, identificacion, correo, contraseña));			
+			}
+			return usuarios;
+	}
 
 }

@@ -216,6 +216,54 @@ public class AdministradorResource {
 		}
 		return Response.status(200).entity(consumo).build();
 	}
+	
+	/**
+     * Metodo que muestra la información de los restaurantes
+     */
+	@GET
+	@Path("consumo/{res}/{fecha1}/{fecha2}/{filtro}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getConsumo(@PathParam("res") String res,@PathParam("fecha1") String fecha1, @PathParam("fecha2") String fecha2, @PathParam("filtro") String filtro) {
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		List<Usuario> consumo;
+		try {
+			consumo = tm.darConsumo(res,fecha1, fecha2, filtro);
+			
+		} catch (Exception e) {
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+		return Response.status(200).entity(consumo).build();
+	}
+	@GET
+	@Path("noConsumo/{res}/{fecha1}/{fecha2}/{filtro}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getNoConsumo(@PathParam("res") String res,@PathParam("fecha1") String fecha1, @PathParam("fecha2") String fecha2, @PathParam("filtro") String filtro) {
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		List<Usuario> consumo;
+		try {
+			consumo = tm.darConsumo(res,fecha1, fecha2, filtro);
+			
+		} catch (Exception e) {
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+		return Response.status(200).entity(consumo).build();
+	}
+	
+	@GET
+	@Path("buenosClientes")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getBuenosCLientes() {
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		List<Usuario> consumo;
+		try {
+			consumo = tm.darBuenosClientes();
+			
+		} catch (Exception e) {
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+		return Response.status(200).entity(consumo).build();
+	}
+	
 }
 	
 

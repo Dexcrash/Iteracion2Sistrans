@@ -6,17 +6,6 @@ Para ejecutar el proyecto siga los siguientes pasos:
 -Una vez allí puede correr cada una de las colecciones para probar los requerimientos funcionales. Si desea probar solo un ejemplo en específico, en el documento adjunto encuentra las URLs usadas para cada prueba, así como su JSON (si lo requiere) y lo que esta representa.
 
 
-******************* NOTA ***********************
-Recuerde que antes de ejecutar las pruebas debe
-ejecutar el archivo DB.sql que encuentra en la
-carpeta de DOCS. Para esto, ábralo en Eclipse,
-copie y pegue el contenido del archivo en un
-script en sqldeveloper y córralo como script.
-Esto con el fin de reiniciar los datos en la
-base de datos.
-***********************************************
-
-
 A continuación se presenta un ejemplo de ejecución:
 1. Seleccione la colección RF1 - Registrar Usuario
 2. Seleccione el item "Get de los usuarios en general"

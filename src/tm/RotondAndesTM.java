@@ -1893,4 +1893,99 @@ public class RotondAndesTM {
 		return "Se cancelaron los pedidos de la mesa " + idMesa;
 	}
 
+	
+	public List<Usuario> darConsumo(String res, String fecha1, String fecha2, String filtro) throws Exception {		
+			List<Usuario> clientes;
+			DAOTablaUsuarios daoRestaurante = new DAOTablaUsuarios();
+			try {
+				////// transaccion
+				this.conn = darConexion();
+				daoRestaurante.setConn(conn);
+				clientes = daoRestaurante.darConsumo(res, fecha1, fecha2, filtro);
+
+			} catch (SQLException e) {
+				System.err.println("SQLException:" + e.getMessage());
+				e.printStackTrace();
+				throw e;
+			} catch (Exception e) {
+				System.err.println("GeneralException:" + e.getMessage());
+				e.printStackTrace();
+				throw e;
+			} finally {
+				try {
+					daoRestaurante.cerrarRecursos();
+					if (this.conn != null)
+						this.conn.close();
+				} catch (SQLException exception) {
+					System.err.println("SQLException closing resources:" + exception.getMessage());
+					exception.printStackTrace();
+					throw exception;
+				}
+			}
+			return clientes;
+		}	
+	
+	public List<Usuario> darNoConsumo(String res, String fecha1, String fecha2, String filtro) throws Exception {		
+		List<Usuario> clientes;
+		DAOTablaUsuarios daoRestaurante = new DAOTablaUsuarios();
+		try {
+			////// transaccion
+			this.conn = darConexion();
+			daoRestaurante.setConn(conn);
+			clientes = daoRestaurante.darNoConsumo(res, fecha1, fecha2, filtro);
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoRestaurante.cerrarRecursos();
+				if (this.conn != null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		return clientes;
+	}
+	
+	public List<Usuario> darBuenosClientes() throws Exception {		
+		List<Usuario> clientes;
+		DAOTablaUsuarios daoRestaurante = new DAOTablaUsuarios();
+		try {
+			////// transaccion
+			this.conn = darConexion();
+			daoRestaurante.setConn(conn);
+			clientes = daoRestaurante.darBuenosClientes();
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoRestaurante.cerrarRecursos();
+				if (this.conn != null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		return clientes;
+	}	
+	
+	
 }
