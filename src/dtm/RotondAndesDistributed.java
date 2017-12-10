@@ -110,10 +110,10 @@ public class RotondAndesDistributed
 		return getInstance(tm);
 	}
 	
-	public ListaProductos getLocalProductos() throws Exception
-	{
-		return tm.darProductosLocal();
-	}
+//	public ListaProductos getLocalProductos() throws Exception
+//	{
+//		return tm.darProductosLocal();
+//	}
 	
 	public ListaProductos getRemoteProductos() throws JsonGenerationException, JsonMappingException, JMSException, IOException, NonReplyException, InterruptedException, NoSuchAlgorithmException
 	{

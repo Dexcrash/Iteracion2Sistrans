@@ -47,10 +47,10 @@ import vos.Producto;
 public class AllProductosMDB implements MessageListener, ExceptionListener 
 {
 	public final static int TIME_OUT = 5;
-	private final static String APP = "app1";
+	private final static String APP = "app3";
 	
-	private final static String GLOBAL_TOPIC_NAME = "java:global/RMQTopicAllProductos";
-	private final static String LOCAL_TOPIC_NAME = "java:global/RMQAllProductosLocal";
+	private final static String GLOBAL_TOPIC_NAME = "java:global/RF19.1";
+	private final static String LOCAL_TOPIC_NAME = "java:global/RF19.2";
 	
 	private final static String REQUEST = "REQUEST";
 	private final static String REQUEST_ANSWER = "REQUEST_ANSWER";
@@ -68,7 +68,7 @@ public class AllProductosMDB implements MessageListener, ExceptionListener
 		topicSession = topicConnection.createTopicSession(false, Session.AUTO_ACKNOWLEDGE);
 		globalTopic = (RMQDestination) ctx.lookup(GLOBAL_TOPIC_NAME);
 		TopicSubscriber topicSubscriber =  topicSession.createSubscriber(globalTopic);
-		topicSubscriber.setMessageListener(this);
+		//topicSubscriber.setMessageListener(this);
 		localTopic = (RMQDestination) ctx.lookup(LOCAL_TOPIC_NAME);
 		topicSubscriber =  topicSession.createSubscriber(localTopic);
 		topicSubscriber.setMessageListener(this);
@@ -121,7 +121,7 @@ public class AllProductosMDB implements MessageListener, ExceptionListener
 	{
 		ObjectMapper mapper = new ObjectMapper();
 		System.out.println(id);
-		ExchangeMsg msg = new ExchangeMsg("productos.general.app1", APP, payload, status, id);
+		ExchangeMsg msg = new ExchangeMsg("videos.general.app3", APP, payload, status, id);
 		TopicPublisher topicPublisher = topicSession.createPublisher(dest);
 		topicPublisher.setDeliveryMode(DeliveryMode.PERSISTENT);
 		TextMessage txtMsg = topicSession.createTextMessage();
@@ -145,22 +145,22 @@ public class AllProductosMDB implements MessageListener, ExceptionListener
 			String id = ex.getMsgId();
 			System.out.println(ex.getSender());
 			System.out.println(ex.getStatus());
-			if(!ex.getSender().equals(APP))
-			{
-				if(ex.getStatus().equals(REQUEST))
-				{
-					RotondAndesDistributed dtm = RotondAndesDistributed.getInstance();
-					ListaProductos videos = dtm.getLocalProductos();
-					String payload = mapper.writeValueAsString(videos);
-					Topic t = new RMQDestination("", "productos.test", ex.getRoutingKey(), "", false);
-					sendMessage(payload, REQUEST_ANSWER, t, id);
-				}
-				else if(ex.getStatus().equals(REQUEST_ANSWER))
-				{
-					ListaProductos v = mapper.readValue(ex.getPayload(), ListaProductos.class);
-					answer.addAll(v.getProductos());
-				}
-			}
+//			if(!ex.getSender().equals(APP))
+//			{
+//				if(ex.getStatus().equals(REQUEST))
+//				{
+//					RotondAndesDistributed dtm = RotondAndesDistributed.getInstance();
+//					ListaProductos videos = dtm.getLocalProductos();
+//					String payload = mapper.writeValueAsString(videos);
+//					Topic t = new RMQDestination("", "videos.test", ex.getRoutingKey(), "", false);
+//					sendMessage(payload, REQUEST_ANSWER, t, id);
+//				}
+//				else if(ex.getStatus().equals(REQUEST_ANSWER))
+//				{
+//					ListaProductos v = mapper.readValue(ex.getPayload(), ListaProductos.class);
+//					answer.addAll(v.getProductos());
+//				}
+//			}
 			
 		} catch (JMSException e) {
 			// TODO Auto-generated catch block

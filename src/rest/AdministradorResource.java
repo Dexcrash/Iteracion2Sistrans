@@ -19,6 +19,7 @@ import tm.RotondAndesTM;
 import vos.ConsultaConsumo;
 import vos.ConsultaPedido;
 import vos.ConsultaRentabilidadLocal;
+import vos.ListaProductos;
 import vos.Producto;
 import vos.Restaurante;
 import vos.Usuario;
@@ -295,8 +296,21 @@ public class AdministradorResource {
 		return Response.status(200).entity(cons).build();
 	}
 	
-	
-	
+	@GET
+	@Path("productosA")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public Response getProductos() {
+		System.out.println("Estoy entrando");
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		ListaProductos prods;
+		try {
+			prods = tm.darProductos();
+		} catch (Exception e) {
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+		return Response.status(200).entity(prods).build();
+	}
+
 }
 	
 

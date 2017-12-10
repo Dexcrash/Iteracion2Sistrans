@@ -2060,9 +2060,9 @@ public class RotondAndesTM {
 		ListaProductos remL = darProductosLocal();
 		try
 		{
-			ListaProductos resp = dtm.getRemoteProductos();
-			System.out.println(resp.getProductos().size());
-			remL.getProductos().addAll(resp.getProductos());
+//			ListaProductos resp = dtm.getRemoteProductos();
+//			System.out.println(resp.getProductos().size());
+//			remL.getProductos().addAll(resp.getProductos());
 		}
 		catch(Exception e)
 		{

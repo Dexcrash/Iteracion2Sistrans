@@ -265,23 +265,5 @@ public class PublicResource {
 		return Response.status(200).entity(productos).build();
 	}
 	
-	/**
-	 * Método que expone servicio REST usando GET que da todos los videos de la base de datos.
-	 * <b>URL: </b> http://"ip o nombre de host":8080/VideoAndes/rest/videos
-	 * @return Json con todos los videos de la base de datos O json con 
-     * el error que se produjo
-	 */
-	@GET
-	@Path("productosA")
-	@Produces({ MediaType.APPLICATION_JSON })
-	public Response getProductos() {
-		RotondAndesTM tm = new RotondAndesTM(getPath());
-		ListaProductos prods;
-		try {
-			prods = tm.darProductos();
-		} catch (Exception e) {
-			return Response.status(500).entity(doErrorMessage(e)).build();
-		}
-		return Response.status(200).entity(prods).build();
-	}
 }
+
