@@ -39,18 +39,19 @@ import com.rabbitmq.jms.admin.RMQConnectionFactory;
 import com.rabbitmq.jms.admin.RMQDestination;
 
 import dtm.RotondAndesDistributed;
+import vos.ConsultaRentabilidadLocal;
 import vos.ExchangeMsg;
 import vos.ListaProductos;
 import vos.Producto;
 
 
-public class AllProductosMDB implements MessageListener, ExceptionListener 
+public class RentabilidadMDB implements MessageListener, ExceptionListener 
 {
 	public final static int TIME_OUT = 5;
 	private final static String APP = "app3";
 	
-	private final static String GLOBAL_TOPIC_NAME = "java:global/RMQTopicAllProductos";
-	private final static String LOCAL_TOPIC_NAME = "java:global/RMQAllProductosLocal";
+	private final static String GLOBAL_TOPIC_NAME = "java:global/RMQTopicRentabilidad";
+	private final static String LOCAL_TOPIC_NAME = "java:global/RMQTopicRentabilidadLocal";
 	
 	private final static String REQUEST = "REQUEST";
 	private final static String REQUEST_ANSWER = "REQUEST_ANSWER";
@@ -62,7 +63,7 @@ public class AllProductosMDB implements MessageListener, ExceptionListener
 	
 	private List<Producto> answer = new ArrayList<Producto>();
 	
-	public AllProductosMDB(TopicConnectionFactory factory, InitialContext ctx) throws JMSException, NamingException 
+	public RentabilidadMDB(TopicConnectionFactory factory, InitialContext ctx) throws JMSException, NamingException 
 	{	
 		topicConnection = factory.createTopicConnection();
 		topicSession = topicConnection.createTopicSession(false, Session.AUTO_ACKNOWLEDGE);
@@ -86,7 +87,7 @@ public class AllProductosMDB implements MessageListener, ExceptionListener
 		topicConnection.close();
 	}
 	
-	public ListaProductos getRemoteProductos() throws JsonGenerationException, JsonMappingException, JMSException, IOException, NonReplyException, InterruptedException, NoSuchAlgorithmException
+	public List<ConsultaRentabilidadLocal> getRemoteProductos() throws JsonGenerationException, JsonMappingException, JMSException, IOException, NonReplyException, InterruptedException, NoSuchAlgorithmException
 	{
 		answer.clear();
 		String id = APP+""+System.currentTimeMillis();
@@ -112,8 +113,20 @@ public class AllProductosMDB implements MessageListener, ExceptionListener
 		
 		if(answer.isEmpty())
 			throw new NonReplyException("Non Response");
-		ListaProductos res = new ListaProductos(answer);
-        return  res;
+		String renta = answer.toString();
+		String div[] = renta.split(":");
+		List<ConsultaRentabilidadLocal> lista = new ArrayList<ConsultaRentabilidadLocal>();
+		Long p1 = Long.parseLong(div[0]);
+		Long g1 = Long.parseLong(div[1]);
+		Long t1 = Long.parseLong(div[2]);
+		Long p2 = Long.parseLong(div[3]);
+		Long g2 = Long.parseLong(div[4]);
+		Long t2 = Long.parseLong(div[5]);
+		ConsultaRentabilidadLocal pri = new ConsultaRentabilidadLocal(p1, g1, t1);
+		ConsultaRentabilidadLocal seg = new ConsultaRentabilidadLocal(p2, g2, t2);
+		lista.add(pri);
+		lista.add(seg);
+        return lista;
 	}
 	
 	
@@ -121,7 +134,7 @@ public class AllProductosMDB implements MessageListener, ExceptionListener
 	{
 		ObjectMapper mapper = new ObjectMapper();
 		System.out.println(id);
-		ExchangeMsg msg = new ExchangeMsg("productos.general.app3", APP, payload, status, id);
+		ExchangeMsg msg = new ExchangeMsg("rentabilidad.general.app3", APP, payload, status, id);
 		TopicPublisher topicPublisher = topicSession.createPublisher(dest);
 		topicPublisher.setDeliveryMode(DeliveryMode.PERSISTENT);
 		TextMessage txtMsg = topicSession.createTextMessage();
@@ -152,7 +165,7 @@ public class AllProductosMDB implements MessageListener, ExceptionListener
 					RotondAndesDistributed dtm = RotondAndesDistributed.getInstance();
 					ListaProductos productos = dtm.getLocalProductos();
 					String payload = mapper.writeValueAsString(productos);
-					Topic t = new RMQDestination("", "productos.test", ex.getRoutingKey(), "", false);
+					Topic t = new RMQDestination("", "rentabilidad.test", ex.getRoutingKey(), "", false);
 					sendMessage(payload, REQUEST_ANSWER, t, id);
 				}
 				else if(ex.getStatus().equals(REQUEST_ANSWER))

@@ -184,6 +184,7 @@ public class AdministradorResource {
 		return Response.status(200).entity(zona).build();
 	}
 	
+	
     /**
      * Metodo que muestra la consulta de un cliente
      */

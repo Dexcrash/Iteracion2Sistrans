@@ -110,13 +110,13 @@ public class RotondAndesDistributed
 		return getInstance(tm);
 	}
 	
-//	public ListaProductos getLocalProductos() throws Exception
-//	{
-//		return tm.darProductosLocal();
-//	}
-	
-	public ListaProductos getRemoteProductos() throws JsonGenerationException, JsonMappingException, JMSException, IOException, NonReplyException, InterruptedException, NoSuchAlgorithmException
+	public ListaProductos getLocalProductos() throws Exception
 	{
-		return allProductosMQ.getRemoteProductos();
+		return tm.darProductosLocal();
 	}
+	
+//	public ListaProductos getRemoteProductos() throws JsonGenerationException, JsonMappingException, JMSException, IOException, NonReplyException, InterruptedException, NoSuchAlgorithmException
+//	{
+//		return allProductosMQ.getRemoteProductos();
+//	}
 }

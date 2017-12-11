@@ -41,16 +41,17 @@ import com.rabbitmq.jms.admin.RMQDestination;
 import dtm.RotondAndesDistributed;
 import vos.ExchangeMsg;
 import vos.ListaProductos;
+import vos.Pedido;
 import vos.Producto;
 
 
-public class AllProductosMDB implements MessageListener, ExceptionListener 
+public class PedidoMDB implements MessageListener, ExceptionListener 
 {
 	public final static int TIME_OUT = 5;
 	private final static String APP = "app3";
 	
-	private final static String GLOBAL_TOPIC_NAME = "java:global/RMQTopicAllProductos";
-	private final static String LOCAL_TOPIC_NAME = "java:global/RMQAllProductosLocal";
+	private final static String GLOBAL_TOPIC_NAME = "java:global/RMQTopicPedido";
+	private final static String LOCAL_TOPIC_NAME = "java:global/RMQTopicPedidoLocal";
 	
 	private final static String REQUEST = "REQUEST";
 	private final static String REQUEST_ANSWER = "REQUEST_ANSWER";
@@ -62,7 +63,7 @@ public class AllProductosMDB implements MessageListener, ExceptionListener
 	
 	private List<Producto> answer = new ArrayList<Producto>();
 	
-	public AllProductosMDB(TopicConnectionFactory factory, InitialContext ctx) throws JMSException, NamingException 
+	public PedidoMDB(TopicConnectionFactory factory, InitialContext ctx) throws JMSException, NamingException 
 	{	
 		topicConnection = factory.createTopicConnection();
 		topicSession = topicConnection.createTopicSession(false, Session.AUTO_ACKNOWLEDGE);
@@ -86,7 +87,7 @@ public class AllProductosMDB implements MessageListener, ExceptionListener
 		topicConnection.close();
 	}
 	
-	public ListaProductos getRemoteProductos() throws JsonGenerationException, JsonMappingException, JMSException, IOException, NonReplyException, InterruptedException, NoSuchAlgorithmException
+	public Pedido getRemotePedido() throws JsonGenerationException, JsonMappingException, JMSException, IOException, NonReplyException, InterruptedException, NoSuchAlgorithmException
 	{
 		answer.clear();
 		String id = APP+""+System.currentTimeMillis();
@@ -112,8 +113,10 @@ public class AllProductosMDB implements MessageListener, ExceptionListener
 		
 		if(answer.isEmpty())
 			throw new NonReplyException("Non Response");
-		ListaProductos res = new ListaProductos(answer);
-        return  res;
+		String f = answer.toString();
+		String x[] = f.split(":");
+		Pedido res = new Pedido(x[0], Long.parseLong(x[1]) ,Long.parseLong(x[2]), Long.parseLong(x[3]), Long.parseLong(x[4]));
+		return res;
 	}
 	
 	
@@ -121,7 +124,7 @@ public class AllProductosMDB implements MessageListener, ExceptionListener
 	{
 		ObjectMapper mapper = new ObjectMapper();
 		System.out.println(id);
-		ExchangeMsg msg = new ExchangeMsg("productos.general.app3", APP, payload, status, id);
+		ExchangeMsg msg = new ExchangeMsg("pedido.general.app3", APP, payload, status, id);
 		TopicPublisher topicPublisher = topicSession.createPublisher(dest);
 		topicPublisher.setDeliveryMode(DeliveryMode.PERSISTENT);
 		TextMessage txtMsg = topicSession.createTextMessage();
@@ -152,7 +155,7 @@ public class AllProductosMDB implements MessageListener, ExceptionListener
 					RotondAndesDistributed dtm = RotondAndesDistributed.getInstance();
 					ListaProductos productos = dtm.getLocalProductos();
 					String payload = mapper.writeValueAsString(productos);
-					Topic t = new RMQDestination("", "productos.test", ex.getRoutingKey(), "", false);
+					Topic t = new RMQDestination("", "pedidos.test", ex.getRoutingKey(), "", false);
 					sendMessage(payload, REQUEST_ANSWER, t, id);
 				}
 				else if(ex.getStatus().equals(REQUEST_ANSWER))
