@@ -1,0 +1,33 @@
+{
+	"variables": [],
+	"info": {
+		"name": "RF19",
+		"_postman_id": "bf4bd6b5-b7e3-af21-dcfd-c087776823f3",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Eliminar un restaurante",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:8081/RotondAndes/rest/administradores/restaurantes/90",
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

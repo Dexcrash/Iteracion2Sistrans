@@ -1,0 +1,33 @@
+{
+	"variables": [],
+	"info": {
+		"name": "RFC14",
+		"_postman_id": "09e82518-5ef0-ba19-8221-89e47211ee33",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Rentabilidad de un restaurante local",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8081/RotondAndes/rest/administradores/rentabilidad/5/2010-01-01/2015-10-01",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

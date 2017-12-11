@@ -1,0 +1,33 @@
+{
+	"variables": [],
+	"info": {
+		"name": "RFC13",
+		"_postman_id": "dbddf3d9-981c-0beb-eec4-3d0450633008",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Obtener los productos locales",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8081/VideoAndes/rest/administradores/productos",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
